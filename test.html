@@ -67,33 +67,132 @@
     </main>
 
 
-    <script>
+<script>
 
-        let question = 1;
+const questions = [
 
-        function answer(choice) {
+    {
+        base: "#3A9D8F",
+        different: "#3A9B8F",
+        position: 2
+    },
 
-            question++;
+    {
+        base: "#3A9D8F",
+        different: "#3A998F",
+        position: 4
+    },
 
-            if (question > 10) {
+    {
+        base: "#3A9D8F",
+        different: "#3A958F",
+        position: 1
+    },
 
-                alert("Test complete!");
+    {
+        base: "#3A9D8F",
+        different: "#3A918F",
+        position: 5
+    },
 
-                window.location.href = "index.html";
+    {
+        base: "#3A9D8F",
+        different: "#3A8D8F",
+        position: 3
+    }
 
-                return;
-            }
+];
 
-            document.getElementById("question-number").innerText =
-                "Question " + question;
 
-            document.getElementById("progress").innerText =
-                "Question " + question + " of 10";
+let question = 0;
+let score = 0;
+
+
+function showQuestion() {
+
+    document.getElementById("question-number").innerText =
+        "Question " + (question + 1);
+
+    document.getElementById("progress").innerText =
+        "Question " + (question + 1) + " of " + questions.length;
+
+
+    const grid = document.getElementById("colour-grid");
+
+    grid.innerHTML = "";
+
+
+    const current = questions[question];
+
+
+    for (let i = 0; i < 6; i++) {
+
+        const circle = document.createElement("div");
+
+        circle.className = "colour-circle-test";
+
+        if (i === current.position) {
+
+            circle.style.backgroundColor =
+                current.different;
+
+        } else {
+
+            circle.style.backgroundColor =
+                current.base;
 
         }
 
-    </script>
+        grid.appendChild(circle);
 
+    }
+
+}
+
+
+function answer(choice) {
+
+    const current = questions[question];
+
+
+    if (choice === current.position) {
+
+        score++;
+
+    }
+
+
+    question++;
+
+
+    if (question >= questions.length) {
+
+        document.getElementById("colour-grid").innerHTML = "";
+
+        document.getElementById("instruction").innerText =
+            "Test complete!";
+
+        document.getElementById("question-number").innerText =
+            "Your score: " + score + "/" + questions.length;
+
+        document.querySelector(".answers").innerHTML = "";
+
+        document.getElementById("progress").innerText =
+            "Well done!";
+
+        return;
+
+    }
+
+
+    showQuestion();
+
+}
+
+
+showQuestion();
+
+</script>
 </body>
 
 </html>
