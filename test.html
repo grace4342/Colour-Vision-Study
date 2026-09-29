@@ -12,62 +12,155 @@
 
 <body>
 
-    <header>
-        <nav>
-            <div class="logo">Colour Vision Study</div>
+<header>
+    <nav>
+        <div class="logo">Colour Vision Study</div>
+        <a href="index.html">← Home</a>
+    </nav>
+</header>
 
-            <a href="index.html">← Home</a>
-        </nav>
-    </header>
+<main>
 
+<section class="test-page">
 
-    <main>
+    <!-- PARTICIPANT INFORMATION -->
 
-        <section class="test-page">
+    <div id="participant-info">
 
-            <p class="small-title">
-                COLOUR VISION TEST
-            </p>
+        <p class="small-title">COLOUR VISION STUDY</p>
 
-            <h1 id="question-number">
-                Question 1
-            </h1>
+        <h1>Before we begin</h1>
 
-            <p id="instruction">
-                Look carefully at the image and select the answer you see.
-            </p>
+        <p>
+            This anonymous experiment investigates colour discrimination.
+            It is not a medical diagnosis.
+        </p>
 
+        <label for="ageGroup">Age group</label>
 
-            <!-- TEST IMAGE WILL GO HERE -->
-
-          <div id="colour-grid" class="colour-grid">
-</div>
-
-            </div>
-
-
-           <div class="answers">
-
-    <button onclick="answer(0)">1</button>
-    <button onclick="answer(1)">2</button>
-    <button onclick="answer(2)">3</button>
-    <button onclick="answer(3)">4</button>
-    <button onclick="answer(4)">5</button>
-    <button onclick="answer(5)">6</button>
-
-</div>
+        <select id="ageGroup">
+            <option value="">Select an age group</option>
+            <option value="12-15">12–15</option>
+            <option value="16-18">16–18</option>
+            <option value="19-25">19–25</option>
+            <option value="26-40">26–40</option>
+            <option value="41+">41+</option>
+        </select>
 
 
-            <p id="progress">
-                Question 1 of 10
-            </p>
+        <label for="sex">Sex</label>
 
-        </section>
+        <select id="sex">
+            <option value="">Select an option</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Prefer not to say">Prefer not to say</option>
+        </select>
 
-    </main>
+
+        <label for="diagnosis">
+            Have you previously been diagnosed with colour vision deficiency?
+        </label>
+
+        <select id="diagnosis">
+            <option value="">Select an option</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+            <option value="Don't know">Don't know</option>
+        </select>
+
+
+        <button onclick="startTest()">
+            Start Test
+        </button>
+
+        <p id="info-error"></p>
+
+    </div>
+
+
+    <!-- COLOUR TEST -->
+
+    <div id="colour-test" style="display:none;">
+
+        <p class="small-title">
+            COLOUR VISION TEST
+        </p>
+
+        <h1 id="question-number">
+            Question 1
+        </h1>
+
+        <p id="instruction">
+            Look carefully at the circles and select the one that looks different.
+        </p>
+
+
+        <div id="colour-grid" class="colour-grid"></div>
+
+
+        <div class="answers">
+
+            <button onclick="answer(0)">1</button>
+            <button onclick="answer(1)">2</button>
+            <button onclick="answer(2)">3</button>
+            <button onclick="answer(3)">4</button>
+            <button onclick="answer(4)">5</button>
+            <button onclick="answer(5)">6</button>
+
+        </div>
+
+
+        <p id="progress">
+            Question 1 of 5
+        </p>
+
+    </div>
+
+
+    <!-- RESULTS -->
+
+    <div id="results" style="display:none;">
+
+        <p class="small-title">
+            TEST COMPLETE
+        </p>
+
+        <h1 id="final-score"></h1>
+
+        <p>
+            Your result has been recorded anonymously.
+        </p>
+
+        <p>
+            This experiment is a research screening task and
+            cannot diagnose colour vision deficiency.
+        </p>
+
+    </div>
+
+</section>
+
+</main>
 
 
 <script>
+
+/* --------------------------------
+   POWER AUTOMATE URL
+   --------------------------------
+
+   REPLACE THE TEXT BETWEEN THE
+   QUOTATION MARKS WITH YOUR
+   POWER AUTOMATE HTTP URL.
+*/
+
+const POWER_AUTOMATE_URL = "https://formspree.io/f/mgavrdvg";
+
+
+/* --------------------------------
+   TEST QUESTIONS
+   -------------------------------- */
 
 const questions = [
 
@@ -108,28 +201,101 @@ let question = 0;
 let score = 0;
 
 
+/* --------------------------------
+   PARTICIPANT INFORMATION
+   -------------------------------- */
+
+let participantData = {};
+
+
+function startTest() {
+
+    const ageGroup =
+        document.getElementById("ageGroup").value;
+
+    const sex =
+        document.getElementById("sex").value;
+
+    const diagnosis =
+        document.getElementById("diagnosis").value;
+
+
+    if (!ageGroup || !sex || !diagnosis) {
+
+        document.getElementById("info-error").innerText =
+            "Please complete all three questions before starting.";
+
+        return;
+    }
+
+
+    /* Create an anonymous participant ID */
+
+    const participantID =
+        "CVS-" +
+        Date.now().toString(36).toUpperCase();
+
+
+    participantData = {
+
+        participant: participantID,
+
+        ageGroup: ageGroup,
+
+        sex: sex,
+
+        previousDiagnosis: diagnosis
+
+    };
+
+
+    document.getElementById("participant-info").style.display =
+        "none";
+
+    document.getElementById("colour-test").style.display =
+        "block";
+
+
+    showQuestion();
+
+}
+
+
+/* --------------------------------
+   SHOW QUESTION
+   -------------------------------- */
+
 function showQuestion() {
 
     document.getElementById("question-number").innerText =
         "Question " + (question + 1);
 
+
     document.getElementById("progress").innerText =
-        "Question " + (question + 1) + " of " + questions.length;
+        "Question " + (question + 1) +
+        " of " + questions.length;
 
 
-    const grid = document.getElementById("colour-grid");
+    const grid =
+        document.getElementById("colour-grid");
+
 
     grid.innerHTML = "";
 
 
-    const current = questions[question];
+    const current =
+        questions[question];
 
 
     for (let i = 0; i < 6; i++) {
 
-        const circle = document.createElement("div");
+        const circle =
+            document.createElement("div");
 
-        circle.className = "colour-circle-test";
+
+        circle.className =
+            "colour-circle-test";
+
 
         if (i === current.position) {
 
@@ -143,6 +309,7 @@ function showQuestion() {
 
         }
 
+
         grid.appendChild(circle);
 
     }
@@ -150,9 +317,14 @@ function showQuestion() {
 }
 
 
+/* --------------------------------
+   RECORD ANSWER
+   -------------------------------- */
+
 function answer(choice) {
 
-    const current = questions[question];
+    const current =
+        questions[question];
 
 
     if (choice === current.position) {
@@ -167,18 +339,7 @@ function answer(choice) {
 
     if (question >= questions.length) {
 
-        document.getElementById("colour-grid").innerHTML = "";
-
-        document.getElementById("instruction").innerText =
-            "Test complete!";
-
-        document.getElementById("question-number").innerText =
-            "Your score: " + score + "/" + questions.length;
-
-        document.querySelector(".answers").innerHTML = "";
-
-        document.getElementById("progress").innerText =
-            "Well done!";
+        finishTest();
 
         return;
 
@@ -190,9 +351,98 @@ function answer(choice) {
 }
 
 
-showQuestion();
+/* --------------------------------
+   FINISH TEST
+   -------------------------------- */
+
+async function finishTest() {
+
+    document.getElementById("colour-test").style.display =
+        "none";
+
+
+    document.getElementById("results").style.display =
+        "block";
+
+
+    document.getElementById("final-score").innerText =
+        "Your score: " +
+        score +
+        "/" +
+        questions.length;
+
+
+    /* Data that will be sent to Power Automate */
+
+    const resultData = {
+
+        participant:
+            participantData.participant,
+
+        ageGroup:
+            participantData.ageGroup,
+
+        sex:
+            participantData.sex,
+
+        previousDiagnosis:
+            participantData.previousDiagnosis,
+
+        score:
+            score,
+
+        date:
+            new Date().toISOString()
+
+    };
+
+
+    /* Send the result to Power Automate */
+
+    try {
+
+        const response =
+            await fetch(
+                POWER_AUTOMATE_URL,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify(resultData)
+                }
+            );
+
+
+        if (!response.ok) {
+
+            console.log(
+                "The result could not be sent."
+            );
+
+        } else {
+
+            console.log(
+                "Result successfully sent."
+            );
+
+        }
+
+    } catch (error) {
+
+        console.log(
+            "Connection error:",
+            error
+        );
+
+    }
+
+}
 
 </script>
+
 </body>
 
 </html>
