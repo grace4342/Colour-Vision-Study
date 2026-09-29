@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Colour Vision Test</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">Colour Vision Study</div>
+
+            <a href="index.html">← Home</a>
+        </nav>
+    </header>
+
+
+    <main>
+
+        <section class="test-page">
+
+            <p class="small-title">
+                COLOUR VISION TEST
+            </p>
+
+            <h1 id="question-number">
+                Question 1
+            </h1>
+
+            <p id="instruction">
+                Look carefully at the image and select the answer you see.
+            </p>
+
+
+            <!-- TEST IMAGE WILL GO HERE -->
+
+            <div class="test-image">
+
+                <div class="placeholder">
+                    TEST IMAGE
+                </div>
+
+            </div>
+
+
+            <div class="answers">
+
+                <button onclick="answer('A')">
+                    A
+                </button>
+
+                <button onclick="answer('B')">
+                    B
+                </button>
+
+                <button onclick="answer('C')">
+                    C
+                </button>
+
+                <button onclick="answer('D')">
+                    D
+                </button>
+
+            </div>
+
+
+            <p id="progress">
+                Question 1 of 10
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        let question = 1;
+
+        function answer(choice) {
+
+            question++;
+
+            if (question > 10) {
+
+                alert("Test complete!");
+
+                window.location.href = "index.html";
+
+                return;
+            }
+
+            document.getElementById("question-number").innerText =
+                "Question " + question;
+
+            document.getElementById("progress").innerText =
+                "Question " + question + " of 10";
+
+        }
+
+    </script>
+
+</body>
+
+</html>
