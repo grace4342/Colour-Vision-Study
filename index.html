@@ -1,35 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Colour Vision Study</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <h1>Colour Vision Study</h1>
+    <header>
+        <nav>
+            <div class="logo">Colour Vision Study</div>
 
-    <h2>How well can you distinguish colours?</h2>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#science">The Science</a>
+                <a href="#test">Take the Test</a>
+            </div>
+        </nav>
+    </header>
 
-    <p>
-        We are investigating colour vision and how people
-        distinguish between different colours.
-    </p>
 
-    <p>
-        This test is part of a student science project.
-        It is anonymous and is not a medical diagnosis.
-    </p>
+    <main>
 
-    <button onclick="startTest()">Start the Test</button>
+        <section class="hero">
+
+            <div class="hero-text">
+
+                <p class="small-title">
+                    STUDENT SCIENCE RESEARCH
+                </p>
+
+                <h1>
+                    How well can you<br>
+                    <span>really see colour?</span>
+                </h1>
+
+                <p>
+                    We are investigating how people distinguish between
+                    colours and how colour vision varies between individuals.
+                </p>
+
+                <button onclick="startTest()">
+                    Take the Test →
+                </button>
+
+            </div>
+
+            <div class="colour-circle">
+                <div class="circle circle1"></div>
+                <div class="circle circle2"></div>
+                <div class="circle circle3"></div>
+            </div>
+
+        </section>
+
+
+        <section id="about" class="section">
+
+            <p class="small-title">
+                ABOUT THE STUDY
+            </p>
+
+            <h2>
+                Why are we studying colour vision?
+            </h2>
+
+            <p>
+                Colour vision allows us to distinguish between different
+                wavelengths of light. Some people have colour vision
+                deficiencies that make certain colours more difficult
+                to distinguish.
+            </p>
+
+            <p>
+                Our study investigates colour discrimination using a series
+                of increasingly difficult visual tests.
+            </p>
+
+        </section>
+
+
+        <section id="science" class="section cards">
+
+            <div class="card">
+
+                <h3>🧬 Genetics</h3>
+
+                <p>
+                    Some forms of colour vision deficiency are inherited
+                    through genes involved in the development of
+                    colour-sensitive photoreceptors.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>👁️ Colour Vision</h3>
+
+                <p>
+                    Different types of colour vision deficiency can affect
+                    how people distinguish particular ranges of colour.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>📊 Our Research</h3>
+
+                <p>
+                    We collect anonymous results and investigate patterns
+                    in colour discrimination performance.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <section id="test" class="test-section">
+
+            <p class="small-title">
+                READY?
+            </p>
+
+            <h2>
+                Take the colour vision test
+            </h2>
+
+            <p>
+                The test takes approximately 5 minutes.
+            </p>
+
+            <button onclick="startTest()">
+                Start Test
+            </button>
+
+            <p class="disclaimer">
+                This is a student research experiment and is not
+                a medical diagnosis.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            Colour Vision Study · Student Science Research
+        </p>
+
+    </footer>
+
 
     <script>
+
         function startTest() {
-            alert("The colour vision test will begin soon!");
+
+            alert(
+                "The colour vision test will be added next!"
+            );
+
         }
+
     </script>
 
 </body>
+
 </html>
