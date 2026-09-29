@@ -354,16 +354,13 @@ function answer(choice) {
 /* --------------------------------
    FINISH TEST
    -------------------------------- */
-
 async function finishTest() {
 
     document.getElementById("colour-test").style.display =
         "none";
 
-
     document.getElementById("results").style.display =
         "block";
-
 
     document.getElementById("final-score").innerText =
         "Your score: " +
@@ -371,8 +368,6 @@ async function finishTest() {
         "/" +
         questions.length;
 
-
-    /* Data that will be sent to Power Automate */
 
     const resultData = {
 
@@ -389,53 +384,44 @@ async function finishTest() {
             participantData.previousDiagnosis,
 
         score:
-            score,
+            score + "/" + questions.length,
 
         date:
-            new Date().toISOString()
+            new Date().toLocaleString()
 
     };
 
 
-    /* Send the result to Power Automate */
-
     try {
 
-        const response =
-            await fetch(
-                POWER_AUTOMATE_URL,
-                {
-                    method: "POST",
+        const response = await fetch(
+            FORMSPREE_ENDPOINT,
+            {
+                method: "POST",
 
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
 
-                    body: JSON.stringify(resultData)
-                }
-            );
+                body: JSON.stringify(resultData)
+            }
+        );
 
 
-        if (!response.ok) {
+        if (response.ok) {
 
-            console.log(
-                "The result could not be sent."
-            );
+            console.log("Result sent successfully.");
 
         } else {
 
-            console.log(
-                "Result successfully sent."
-            );
+            console.log("There was a problem sending the result.");
 
         }
 
     } catch (error) {
 
-        console.log(
-            "Connection error:",
-            error
-        );
+        console.log("Error sending result:", error);
 
     }
 
