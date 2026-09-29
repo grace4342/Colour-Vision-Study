@@ -286,3 +286,24 @@ footer p {
     font-size: 14px;
     color: #64748b;
 }
+.colour-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 60px);
+    gap: 15px;
+    justify-content: center;
+    margin: 40px auto;
+}
+
+.colour-circle-test {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+@media (max-width: 600px) {
+
+    .colour-grid {
+        grid-template-columns: repeat(3, 60px);
+    }
+
+}
