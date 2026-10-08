@@ -1815,7 +1815,330 @@ function submitAnswer(correct) {
 
 }
 
+/* =====================================================
+   CALCULATE DETAILED RESEARCH RESULTS
+   ===================================================== */
 
+function calculateDetailedResults() {
+
+    const axes = {
+        protan: { correct: 0, total: 0 },
+        deutan: { correct: 0, total: 0 },
+        tritan: { correct: 0, total: 0 }
+    };
+
+    const difficulties = {
+        easy: { correct: 0, total: 0 },
+        medium: { correct: 0, total: 0 },
+        hard: { correct: 0, total: 0 },
+        veryHard: { correct: 0, total: 0 }
+    };
+
+    const exerciseTypes = {
+        circle: { correct: 0, total: 0 },
+        squares: { correct: 0, total: 0 },
+        match: { correct: 0, total: 0 },
+        grid: { correct: 0, total: 0 }
+    };
+
+
+    /* -----------------------------
+       GO THROUGH EVERY QUESTION
+       ----------------------------- */
+
+    questionResults.forEach(function(result) {
+
+        /* AXIS */
+
+        if (axes[result.axis]) {
+
+            axes[result.axis].total++;
+
+            if (result.correct) {
+                axes[result.axis].correct++;
+            }
+
+        }
+
+
+        /* DIFFICULTY */
+
+        if (difficulties[result.difficulty]) {
+
+            difficulties[result.difficulty].total++;
+
+            if (result.correct) {
+                difficulties[result.difficulty].correct++;
+            }
+
+        }
+
+
+        /* EXERCISE TYPE */
+
+        if (exerciseTypes[result.exercise]) {
+
+            exerciseTypes[result.exercise].total++;
+
+            if (result.correct) {
+                exerciseTypes[result.exercise].correct++;
+            }
+
+        }
+
+    });
+
+
+    /* -----------------------------
+       PERCENTAGE FUNCTION
+       ----------------------------- */
+
+    function percentage(correct, total) {
+
+        if (total === 0) {
+            return "0%";
+        }
+
+        return Math.round(
+            (correct / total) * 100
+        ) + "%";
+
+    }
+
+
+    /* -----------------------------
+       WEAKEST AXIS
+       ----------------------------- */
+
+    let weakestAxis = "None";
+
+    let weakestPercentage = 100;
+
+    Object.keys(axes).forEach(function(axis) {
+
+        const result = axes[axis];
+
+        const score =
+
+            result.total > 0
+
+                ? (result.correct / result.total) * 100
+
+                : 100;
+
+
+        if (score < weakestPercentage) {
+
+            weakestPercentage = score;
+
+            weakestAxis = axis;
+
+        }
+
+    });
+
+
+    /* -----------------------------
+       DIFFICULTY TREND
+       ----------------------------- */
+
+    const easyPercentage =
+        difficulties.easy.total > 0
+            ? (difficulties.easy.correct /
+                difficulties.easy.total) * 100
+            : 0;
+
+    const mediumPercentage =
+        difficulties.medium.total > 0
+            ? (difficulties.medium.correct /
+                difficulties.medium.total) * 100
+            : 0;
+
+    const hardPercentage =
+        difficulties.hard.total > 0
+            ? (difficulties.hard.correct /
+                difficulties.hard.total) * 100
+            : 0;
+
+
+    let difficultyTrend = "";
+
+
+    if (
+        easyPercentage > mediumPercentage &&
+        mediumPercentage > hardPercentage
+    ) {
+
+        difficultyTrend =
+            "Performance decreased as difficulty increased.";
+
+    }
+
+    else if (
+        easyPercentage < mediumPercentage &&
+        mediumPercentage < hardPercentage
+    ) {
+
+        difficultyTrend =
+            "Performance improved as difficulty increased.";
+
+    }
+
+    else {
+
+        difficultyTrend =
+            "No clear difficulty trend.";
+
+    }
+
+
+    /* -----------------------------
+       RETURN EVERYTHING
+       ----------------------------- */
+
+    return {
+
+        /* AXES */
+
+        protanScore:
+            axes.protan.correct +
+            "/" +
+            axes.protan.total,
+
+        protanPercentage:
+            percentage(
+                axes.protan.correct,
+                axes.protan.total
+            ),
+
+        deutanScore:
+            axes.deutan.correct +
+            "/" 
+            axes.deutan.total,
+
+        deutanPercentage:
+            percentage(
+                axes.deutan.correct,
+                axes.deutan.total
+            ),
+
+        tritanScore:
+            axes.tritan.correct +
+            "/" +
+            axes.tritan.total,
+
+        tritanPercentage:
+            percentage(
+                axes.tritan.correct,
+                axes.tritan.total
+            ),
+
+        weakestAxis:
+            weakestAxis,
+
+        weakestAxisPercentage:
+            Math.round(weakestPercentage) + "%",
+
+
+        /* DIFFICULTY */
+
+        easyScore:
+            difficulties.easy.correct +
+            "/" +
+            difficulties.easy.total,
+
+        easyPercentage:
+            percentage(
+                difficulties.easy.correct,
+                difficulties.easy.total
+            ),
+
+        mediumScore:
+            difficulties.medium.correct +
+            "/" +
+            difficulties.medium.total,
+
+        mediumPercentage:
+            percentage(
+                difficulties.medium.correct,
+                difficulties.medium.total
+            ),
+
+        hardScore:
+            difficulties.hard.correct +
+            "/" +
+            difficulties.hard.total,
+
+        hardPercentage:
+            percentage(
+                difficulties.hard.correct,
+                difficulties.hard.total
+            ),
+
+        veryHardScore:
+            difficulties.veryHard.correct +
+            "/" +
+            difficulties.veryHard.total,
+
+        veryHardPercentage:
+            percentage(
+                difficulties.veryHard.correct,
+                difficulties.veryHard.total
+            ),
+
+        difficultyTrend:
+            difficultyTrend,
+
+
+        /* EXERCISE TYPES */
+
+        circleScore:
+            exerciseTypes.circle.correct +
+            "/" +
+            exerciseTypes.circle.total,
+
+        circlePercentage:
+            percentage(
+                exerciseTypes.circle.correct,
+                exerciseTypes.circle.total
+            ),
+
+        squareScore:
+            exerciseTypes.squares.correct +
+            "/" +
+            exerciseTypes.squares.total,
+
+        squarePercentage:
+            percentage(
+                exerciseTypes.squares.correct,
+                exerciseTypes.squares.total
+            ),
+
+        matchScore:
+            exerciseTypes.match.correct +
+            "/" +
+            exerciseTypes.match.total,
+
+        matchPercentage:
+            percentage(
+                exerciseTypes.match.correct,
+                exerciseTypes.match.total
+            ),
+
+        gridScore:
+            exerciseTypes.grid.correct +
+            "/" +
+            exerciseTypes.grid.total,
+
+        gridPercentage:
+            percentage(
+                exerciseTypes.grid.correct,
+                exerciseTypes.grid.total
+            )
+
+    };
+
+}
 /* =====================================================
    FINISH TEST
    ===================================================== */
@@ -1844,42 +2167,127 @@ async function finishTest() {
     });
 
 
-    const resultData = {
+const resultData = {
 
-        participant:
-            participantData.participant,
+    /* PARTICIPANT */
 
-        ageGroup:
-            participantData.ageGroup,
+    participant:
+        participantData.participant,
 
-        sex:
-            participantData.sex,
+    ageGroup:
+        participantData.ageGroup,
 
-        previousDiagnosis:
-            participantData.previousDiagnosis,
+    sex:
+        participantData.sex,
 
-        overallScore:
-            overallScore + "/12",
+    previousDiagnosis:
+        participantData.previousDiagnosis,
 
-        protanScore:
-            protanScore + "/4",
 
-        deutanScore:
-            deutanScore + "/4",
+    /* OVERALL */
 
-        tritanScore:
-            tritanScore + "/4",
+    overallScore:
+        overallScore + "/12",
 
-        trialResults:
-            JSON.stringify(
-                questionResults
-            ),
 
-        date:
-            new Date().toISOString()
+    /* AXES */
 
-    };
+    protanScore:
+        detailedResults.protanScore,
 
+    protanPercentage:
+        detailedResults.protanPercentage,
+
+    deutanScore:
+        detailedResults.deutanScore,
+
+    deutanPercentage:
+        detailedResults.deutanPercentage,
+
+    tritanScore:
+        detailedResults.tritanScore,
+
+    tritanPercentage:
+        detailedResults.tritanPercentage,
+
+    weakestAxis:
+        detailedResults.weakestAxis,
+
+    weakestAxisPercentage:
+        detailedResults.weakestAxisPercentage,
+
+
+    /* DIFFICULTY */
+
+    easyScore:
+        detailedResults.easyScore,
+
+    easyPercentage:
+        detailedResults.easyPercentage,
+
+    mediumScore:
+        detailedResults.mediumScore,
+
+    mediumPercentage:
+        detailedResults.mediumPercentage,
+
+    hardScore:
+        detailedResults.hardScore,
+
+    hardPercentage:
+        detailedResults.hardPercentage,
+
+    veryHardScore:
+        detailedResults.veryHardScore,
+
+    veryHardPercentage:
+        detailedResults.veryHardPercentage,
+
+    difficultyTrend:
+        detailedResults.difficultyTrend,
+
+
+    /* EXERCISE TYPE */
+
+    circleScore:
+        detailedResults.circleScore,
+
+    circlePercentage:
+        detailedResults.circlePercentage,
+
+    squareScore:
+        detailedResults.squareScore,
+
+    squarePercentage:
+        detailedResults.squarePercentage,
+
+    matchScore:
+        detailedResults.matchScore,
+
+    matchPercentage:
+        detailedResults.matchPercentage,
+
+    gridScore:
+        detailedResults.gridScore,
+
+    gridPercentage:
+        detailedResults.gridPercentage,
+
+
+    /* INDIVIDUAL QUESTIONS */
+
+    trialResults:
+        JSON.stringify(
+            questionResults
+        ),
+
+
+    /* DATE */
+
+    date:
+        new Date().toISOString()
+
+};
 
     const status =
         document.getElementById(
