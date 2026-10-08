@@ -1893,19 +1893,6 @@ async function finishTest() {
        send the data.
     */
 
-    if (
-        FORMSPREE_ENDPOINT ===
-    "https://formspree.io/f/mgavrdvg"
-    ) {
-
-        status.innerText =
-            "Test complete. Formspree has not been connected yet.";
-
-        return;
-
-    }
-
-
     try {
 
         const response =
