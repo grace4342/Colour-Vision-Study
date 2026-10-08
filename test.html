@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Colour Vision Test</title>
+    <title>Colour Vision Study</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -23,9 +23,7 @@
 
 <section class="test-page">
 
-    <!-- =========================
-         PARTICIPANT INFORMATION
-         ========================= -->
+    <!-- PARTICIPANT INFORMATION -->
 
     <div id="participant-info">
 
@@ -34,14 +32,9 @@
         <h1>Before we begin</h1>
 
         <p>
-            This anonymous research experiment investigates
-            colour discrimination.
-        </p>
-
-        <p>
-            It is not a medical diagnosis. Different screens can
-            display colours differently, so results should be
-            interpreted as research data rather than a clinical test.
+            This anonymous experiment investigates colour discrimination
+            using several different visual tasks.
+            It is not a medical diagnosis.
         </p>
 
         <label for="ageGroup">Age group</label>
@@ -56,7 +49,7 @@
         </select>
 
 
-        <label for="sex">Sex assigned at birth</label>
+        <label for="sex">Sex</label>
 
         <select id="sex">
             <option value="">Select an option</option>
@@ -87,9 +80,7 @@
     </div>
 
 
-    <!-- =========================
-         COLOUR TEST
-         ========================= -->
+    <!-- COLOUR TEST -->
 
     <div id="colour-test" style="display:none;">
 
@@ -101,34 +92,29 @@
             Question 1
         </h1>
 
-        <p id="instruction">
-            Look carefully at the circles and select the one
-            that looks different.
-        </p>
+        <p id="instruction"></p>
 
-        <div id="colour-grid" class="colour-grid"></div>
 
-        <div class="answers">
+        <div id="question-area">
 
-            <button onclick="answer(0)">1</button>
-            <button onclick="answer(1)">2</button>
-            <button onclick="answer(2)">3</button>
-            <button onclick="answer(3)">4</button>
-            <button onclick="answer(4)">5</button>
-            <button onclick="answer(5)">6</button>
+            <div id="target-area"></div>
+
+            <div id="colour-grid" class="colour-grid"></div>
 
         </div>
 
+
+        <div class="answers" id="answers"></div>
+
+
         <p id="progress">
-            Question 1 of 18
+            Question 1 of 12
         </p>
 
     </div>
 
 
-    <!-- =========================
-         RESULTS
-         ========================= -->
+    <!-- RESULTS -->
 
     <div id="results" style="display:none;">
 
@@ -139,16 +125,12 @@
         <h1 id="final-score"></h1>
 
         <p>
-            Thank you for taking part in the Colour Vision Study.
+            Your result has been recorded anonymously.
         </p>
 
         <p>
-            Your anonymous response has been recorded.
-        </p>
-
-        <p>
-            This research screening task cannot diagnose
-            colour vision deficiency.
+            This experiment is a research screening task and
+            cannot diagnose colour vision deficiency.
         </p>
 
     </div>
@@ -160,226 +142,210 @@
 
 <script>
 
-/* ==========================================
+/* =========================================
    FORMSPREE
-   ========================================== */
+   ========================================= */
 
 const FORMSPREE_ENDPOINT =
     "https://formspree.io/f/mgavrdvg";
 
 
-/* ==========================================
-   EXPERIMENT DESIGN
-
-   IMPORTANT:
-   These are research-oriented experimental
-   conditions, NOT clinical diagnostic plates.
-
-   We record the experimental axis privately
-   so the researcher can analyse error patterns.
-   Participants never see these labels.
-   ========================================== */
+/* =========================================
+   TEST QUESTIONS
+   ========================================= */
 
 const questions = [
 
-    /* --------------------------------------
-       RED-GREEN FAMILY
-       -------------------------------------- */
-
     {
-        axis: "red-green",
-        condition: "RG-A",
+        axis: "protan",
+        type: "oddity",
         difficulty: "easy",
-        base: "#4FA58F",
-        different: "#4FA18F"
+        base: "#D98278",
+        different: "#C96F67",
+        position: 2
     },
 
     {
-        axis: "red-green",
-        condition: "RG-A",
-        difficulty: "medium",
-        base: "#4FA58F",
-        different: "#4F9C8F"
-    },
-
-    {
-        axis: "red-green",
-        condition: "RG-A",
-        difficulty: "hard",
-        base: "#4FA58F",
-        different: "#4F978F"
-    },
-
-
-    {
-        axis: "red-green",
-        condition: "RG-B",
+        axis: "deutan",
+        type: "match",
         difficulty: "easy",
-        base: "#628F75",
-        different: "#668F75"
+        target: "#78A85D",
+        choices: [
+            "#72A457",
+            "#789F62",
+            "#6E9854",
+            "#88AA72"
+        ],
+        answer: 1
     },
 
     {
-        axis: "red-green",
-        condition: "RG-B",
-        difficulty: "medium",
-        base: "#628F75",
-        different: "#6A8F75"
-    },
-
-    {
-        axis: "red-green",
-        condition: "RG-B",
-        difficulty: "hard",
-        base: "#628F75",
-        different: "#6E8F75"
-    },
-
-
-    /* --------------------------------------
-       BLUE-YELLOW FAMILY
-       -------------------------------------- */
-
-    {
-        axis: "blue-yellow",
-        condition: "BY-A",
+        axis: "tritan",
+        type: "oddity",
         difficulty: "easy",
-        base: "#637FAD",
-        different: "#637FAB"
+        base: "#6399C5",
+        different: "#5489B7",
+        position: 4
     },
 
+
     {
-        axis: "blue-yellow",
-        condition: "BY-A",
+        axis: "protan",
+        type: "match",
         difficulty: "medium",
-        base: "#637FAD",
-        different: "#637FA8"
+        target: "#B8757D",
+        choices: [
+            "#B06E76",
+            "#B9777E",
+            "#A96770",
+            "#C4878D"
+        ],
+        answer: 1
     },
 
     {
-        axis: "blue-yellow",
-        condition: "BY-A",
-        difficulty: "hard",
-        base: "#637FAD",
-        different: "#637FA5"
-    },
-
-
-    {
-        axis: "blue-yellow",
-        condition: "BY-B",
-        difficulty: "easy",
-        base: "#8B8A55",
-        different: "#8B8955"
-    },
-
-    {
-        axis: "blue-yellow",
-        condition: "BY-B",
+        axis: "deutan",
+        type: "oddity",
         difficulty: "medium",
-        base: "#8B8A55",
-        different: "#8B8755"
+        base: "#7E9A68",
+        different: "#728E5E",
+        position: 0
     },
 
     {
-        axis: "blue-yellow",
-        condition: "BY-B",
-        difficulty: "hard",
-        base: "#8B8A55",
-        different: "#8B8555"
-    },
-
-
-    /* --------------------------------------
-       MIXED CONTROL TRIALS
-       -------------------------------------- */
-
-    {
-        axis: "control",
-        condition: "CONTROL-A",
-        difficulty: "easy",
-        base: "#A36B62",
-        different: "#A36B62"
-    },
-
-    {
-        axis: "control",
-        condition: "CONTROL-B",
-        difficulty: "easy",
-        base: "#708A70",
-        different: "#708A70"
-    },
-
-    {
-        axis: "control",
-        condition: "CONTROL-C",
+        axis: "tritan",
+        type: "match",
         difficulty: "medium",
-        base: "#7D7194",
-        different: "#7D7194"
+        target: "#718EA9",
+        choices: [
+            "#6685A2",
+            "#7893AA",
+            "#607B98",
+            "#829BB0"
+        ],
+        answer: 1
     },
 
+
     {
-        axis: "control",
-        condition: "CONTROL-D",
+        axis: "protan",
+        type: "comparison",
         difficulty: "medium",
-        base: "#9A8062",
-        different: "#9A8062"
+        base: "#C47A7F",
+        choices: [
+            "#C0757B",
+            "#CA8084",
+            "#B96F76",
+            "#D08A8E"
+        ],
+        answer: 0
     },
 
     {
-        axis: "control",
-        condition: "CONTROL-E",
-        difficulty: "hard",
-        base: "#667F78",
-        different: "#667F78"
+        axis: "deutan",
+        type: "comparison",
+        difficulty: "medium",
+        base: "#789661",
+        choices: [
+            "#728E5B",
+            "#7D9D67",
+            "#6A8654",
+            "#83A46C"
+        ],
+        answer: 0
     },
 
     {
-        axis: "control",
-        condition: "CONTROL-F",
+        axis: "tritan",
+        type: "comparison",
+        difficulty: "medium",
+        base: "#718FA9",
+        choices: [
+            "#6887A1",
+            "#7795AE",
+            "#5E7D97",
+            "#82A0B8"
+        ],
+        answer: 0
+    },
+
+
+    {
+        axis: "protan",
+        type: "oddity",
         difficulty: "hard",
-        base: "#88726F",
-        different: "#88726F"
+        base: "#B87880",
+        different: "#B1737B",
+        position: 5
+    },
+
+    {
+        axis: "deutan",
+        type: "match",
+        difficulty: "hard",
+        target: "#789260",
+        choices: [
+            "#738B5C",
+            "#7C965F",
+            "#6D8554",
+            "#839D68"
+        ],
+        answer: 1
+    },
+
+    {
+        axis: "tritan",
+        type: "oddity",
+        difficulty: "hard",
+        base: "#6F8FA9",
+        different: "#6A8AA5",
+        position: 1
     }
 
 ];
 
 
-/* ==========================================
-   RANDOMISE QUESTION ORDER
-   ========================================== */
-
-const shuffledQuestions = [...questions].sort(
-    () => Math.random() - 0.5
-);
-
-
-/* ==========================================
-   TEST VARIABLES
-   ========================================== */
+/* =========================================
+   VARIABLES
+   ========================================= */
 
 let question = 0;
 
 let score = 0;
 
-let redGreenErrors = 0;
-
-let blueYellowErrors = 0;
-
-let controlErrors = 0;
-
-let easyErrors = 0;
-
-let mediumErrors = 0;
-
-let hardErrors = 0;
-
 let participantData = {};
 
 
-/* ==========================================
+/* =========================================
+   AXIS RESULTS
+   ========================================= */
+
+let axisResults = {
+
+    protan: {
+        correct: 0,
+        wrong: 0,
+        total: 0
+    },
+
+    deutan: {
+        correct: 0,
+        wrong: 0,
+        total: 0
+    },
+
+    tritan: {
+        correct: 0,
+        wrong: 0,
+        total: 0
+    }
+
+};
+
+
+/* =========================================
    START TEST
-   ========================================== */
+   ========================================= */
 
 function startTest() {
 
@@ -399,22 +365,13 @@ function startTest() {
             "Please complete all three questions before starting.";
 
         return;
+
     }
 
 
-    /*
-       Anonymous research ID.
-
-       This does NOT contain the participant's name,
-       email or other identifying information.
-    */
-
     const participantID =
         "CVS-" +
-        Math.random()
-            .toString(36)
-            .substring(2, 10)
-            .toUpperCase();
+        Date.now().toString(36).toUpperCase();
 
 
     participantData = {
@@ -442,14 +399,14 @@ function startTest() {
 }
 
 
-/* ==========================================
+/* =========================================
    SHOW QUESTION
-   ========================================== */
+   ========================================= */
 
 function showQuestion() {
 
     const current =
-        shuffledQuestions[question];
+        questions[question];
 
 
     document.getElementById("question-number").innerText =
@@ -460,120 +417,284 @@ function showQuestion() {
         "Question " +
         (question + 1) +
         " of " +
-        shuffledQuestions.length;
+        questions.length;
+
+
+    const instruction =
+        document.getElementById("instruction");
 
 
     const grid =
         document.getElementById("colour-grid");
 
 
+    const targetArea =
+        document.getElementById("target-area");
+
+
+    const answers =
+        document.getElementById("answers");
+
+
     grid.innerHTML = "";
 
+    targetArea.innerHTML = "";
 
-    /*
-       Randomise the position of the different
-       circle every single question.
-    */
-
-    const differentPosition =
-        Math.floor(Math.random() * 6);
+    answers.innerHTML = "";
 
 
-    current.position =
-        differentPosition;
+    /* =========================================
+       ODDITY TASK
+       ========================================= */
+
+    if (current.type === "oddity") {
+
+        instruction.innerText =
+            "Look carefully at the circles and select the one that looks different.";
 
 
-    for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < 6; i++) {
 
-        const circle =
-            document.createElement("div");
-
-
-        circle.className =
-            "colour-circle-test";
+            const circle =
+                document.createElement("div");
 
 
-        if (i === differentPosition) {
+            circle.className =
+                "colour-circle-test";
 
-            circle.style.backgroundColor =
-                current.different;
 
-        } else {
+            if (i === current.position) {
 
-            circle.style.backgroundColor =
-                current.base;
+                circle.style.backgroundColor =
+                    current.different;
+
+            } else {
+
+                circle.style.backgroundColor =
+                    current.base;
+
+            }
+
+
+            grid.appendChild(circle);
 
         }
 
 
-        grid.appendChild(circle);
+        for (let i = 0; i < 6; i++) {
+
+            const button =
+                document.createElement("button");
+
+            button.innerText =
+                i + 1;
+
+            button.onclick = function () {
+
+                answer(i);
+
+            };
+
+            answers.appendChild(button);
+
+        }
+
+    }
+
+
+    /* =========================================
+       MATCH TASK
+       ========================================= */
+
+    if (current.type === "match") {
+
+        instruction.innerText =
+            "Choose the colour that most closely matches the target.";
+
+
+        const target =
+            document.createElement("div");
+
+
+        target.className =
+            "colour-circle-test";
+
+
+        target.style.margin =
+            "0 auto";
+
+
+        target.style.backgroundColor =
+            current.target;
+
+
+        targetArea.appendChild(target);
+
+
+        current.choices.forEach(
+            function (colour, index) {
+
+                const button =
+                    document.createElement("button");
+
+
+                button.innerText =
+                    index + 1;
+
+
+                button.style.backgroundColor =
+                    colour;
+
+
+                button.style.color =
+                    "transparent";
+
+
+                button.style.width =
+                    "70px";
+
+
+                button.style.height =
+                    "70px";
+
+
+                button.style.borderRadius =
+                    "50%";
+
+
+                button.onclick =
+                    function () {
+
+                        answer(index);
+
+                    };
+
+
+                answers.appendChild(button);
+
+            }
+        );
+
+    }
+
+
+    /* =========================================
+       COMPARISON TASK
+       ========================================= */
+
+    if (current.type === "comparison") {
+
+        instruction.innerText =
+            "Choose the colour that looks most different from the reference.";
+
+
+        const reference =
+            document.createElement("div");
+
+
+        reference.className =
+            "colour-circle-test";
+
+
+        reference.style.margin =
+            "0 auto";
+
+
+        reference.style.backgroundColor =
+            current.base;
+
+
+        targetArea.appendChild(reference);
+
+
+        current.choices.forEach(
+            function (colour, index) {
+
+                const button =
+                    document.createElement("button");
+
+
+                button.innerText =
+                    index + 1;
+
+
+                button.style.backgroundColor =
+                    colour;
+
+
+                button.style.color =
+                    "transparent";
+
+
+                button.style.width =
+                    "70px";
+
+
+                button.style.height =
+                    "70px";
+
+
+                button.style.borderRadius =
+                    "50%";
+
+
+                button.onclick =
+                    function () {
+
+                        answer(index);
+
+                    };
+
+
+                answers.appendChild(button);
+
+            }
+        );
 
     }
 
 }
 
 
-/* ==========================================
+/* =========================================
    RECORD ANSWER
-   ========================================== */
+   ========================================= */
 
 function answer(choice) {
 
     const current =
-        shuffledQuestions[question];
+        questions[question];
 
 
-    const correct =
-        choice === current.position;
+    axisResults[current.axis].total++;
+
+
+    let correct =
+        false;
+
+
+    if (current.type === "oddity") {
+
+        correct =
+            choice === current.position;
+
+    } else {
+
+        correct =
+            choice === current.answer;
+
+    }
 
 
     if (correct) {
 
         score++;
 
+        axisResults[current.axis].correct++;
+
     } else {
 
-        /*
-           Record the error privately.
-           Participants never see these categories.
-        */
-
-        if (current.axis === "red-green") {
-
-            redGreenErrors++;
-
-        }
-
-        if (current.axis === "blue-yellow") {
-
-            blueYellowErrors++;
-
-        }
-
-        if (current.axis === "control") {
-
-            controlErrors++;
-
-        }
-
-
-        if (current.difficulty === "easy") {
-
-            easyErrors++;
-
-        }
-
-        if (current.difficulty === "medium") {
-
-            mediumErrors++;
-
-        }
-
-        if (current.difficulty === "hard") {
-
-            hardErrors++;
-
-        }
+        axisResults[current.axis].wrong++;
 
     }
 
@@ -581,7 +702,7 @@ function answer(choice) {
     question++;
 
 
-    if (question >= shuffledQuestions.length) {
+    if (question >= questions.length) {
 
         finishTest();
 
@@ -595,9 +716,9 @@ function answer(choice) {
 }
 
 
-/* ==========================================
+/* =========================================
    FINISH TEST
-   ========================================== */
+   ========================================= */
 
 async function finishTest() {
 
@@ -612,14 +733,8 @@ async function finishTest() {
         "Your score: " +
         score +
         "/" +
-        shuffledQuestions.length;
+        questions.length;
 
-
-    /*
-       DATA SENT TO FORMSPREE
-
-       Participants do NOT see these fields.
-    */
 
     const resultData = {
 
@@ -635,32 +750,42 @@ async function finishTest() {
         previousDiagnosis:
             participantData.previousDiagnosis,
 
-        totalScore:
-            score + "/" + shuffledQuestions.length,
+        score:
+            score + "/" + questions.length,
 
-        redGreenErrors:
-            redGreenErrors,
 
-        blueYellowErrors:
-            blueYellowErrors,
+        protanCorrect:
+            axisResults.protan.correct,
 
-        controlErrors:
-            controlErrors,
+        protanWrong:
+            axisResults.protan.wrong,
 
-        easyErrors:
-            easyErrors,
+        protanTotal:
+            axisResults.protan.total,
 
-        mediumErrors:
-            mediumErrors,
 
-        hardErrors:
-            hardErrors,
+        deutanCorrect:
+            axisResults.deutan.correct,
 
-        completedQuestions:
-            shuffledQuestions.length,
+        deutanWrong:
+            axisResults.deutan.wrong,
+
+        deutanTotal:
+            axisResults.deutan.total,
+
+
+        tritanCorrect:
+            axisResults.tritan.correct,
+
+        tritanWrong:
+            axisResults.tritan.wrong,
+
+        tritanTotal:
+            axisResults.tritan.total,
+
 
         date:
-            new Date().toISOString()
+            new Date().toLocaleString()
 
     };
 
@@ -671,15 +796,22 @@ async function finishTest() {
             await fetch(
                 FORMSPREE_ENDPOINT,
                 {
+
                     method: "POST",
 
                     headers: {
-                        "Content-Type": "application/json",
-                        "Accept": "application/json"
+
+                        "Content-Type":
+                            "application/json",
+
+                        "Accept":
+                            "application/json"
+
                     },
 
                     body:
                         JSON.stringify(resultData)
+
                 }
             );
 
@@ -687,13 +819,13 @@ async function finishTest() {
         if (response.ok) {
 
             console.log(
-                "Research result sent successfully."
+                "Result sent successfully."
             );
 
         } else {
 
             console.log(
-                "There was a problem sending the research result."
+                "There was a problem sending the result."
             );
 
         }
@@ -701,7 +833,7 @@ async function finishTest() {
     } catch (error) {
 
         console.log(
-            "Error sending research result:",
+            "Error sending result:",
             error
         );
 
