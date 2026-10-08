@@ -2,265 +2,457 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Colour Vision Study | Test</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
+
+<!-- =========================================
+     NAVIGATION
+     ========================================= -->
+
 <header>
+
     <nav>
-        <div class="logo">COLOUR VISION STUDY</div>
-        <a href="index.html">Home</a>
+
+        <div class="logo">
+
+            <span class="logo-dot"></span>
+
+            COLOUR VISION STUDY
+
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+        </div>
+
     </nav>
+
 </header>
+
 
 
 <main>
 
-    <!-- ========================= -->
-    <!-- PARTICIPANT INFORMATION -->
-    <!-- ========================= -->
 
-    <section id="participant-section" class="research-card">
+<!-- =========================================
+     PARTICIPANT INFORMATION
+     ========================================= -->
 
-        <div class="eyebrow">COLOUR VISION STUDY</div>
+<section
+    id="participant-section"
+    class="research-card"
+>
 
-        <h1>Participant information</h1>
 
-        <p class="intro">
-            Before beginning the colour-discrimination test, please answer
-            the following questions.
+    <div class="study-label">
+        COLOUR VISION STUDY
+    </div>
+
+
+    <h1>
+        Participant information
+    </h1>
+
+
+    <p class="intro">
+
+        Before beginning the study, please answer
+        the following questions.
+
+    </p>
+
+
+    <div class="research-note">
+
+        <strong>
+            Anonymous participation
+        </strong>
+
+        <p>
+
+            Please do not enter your name, email address
+            or other identifying information. Your responses
+            are recorded using an anonymous participant ID.
+
         </p>
 
-        <div class="research-note">
-            <strong>Privacy</strong>
-            <p>
-                Do not enter your name, email address or other identifying
-                information. Your responses are recorded using an anonymous
-                participant ID.
-            </p>
+    </div>
+
+
+
+    <!-- AGE -->
+
+    <label for="ageGroup">
+
+        Age group
+
+    </label>
+
+
+    <select id="ageGroup">
+
+        <option value="">
+            Select your age group
+        </option>
+
+        <option value="Under 13">
+            Under 13
+        </option>
+
+        <option value="13-15">
+            13–15
+        </option>
+
+        <option value="16-18">
+            16–18
+        </option>
+
+        <option value="19-25">
+            19–25
+        </option>
+
+        <option value="26-40">
+            26–40
+        </option>
+
+        <option value="41-60">
+            41–60
+        </option>
+
+        <option value="60+">
+            60+
+        </option>
+
+    </select>
+
+
+
+    <!-- SEX -->
+
+    <label for="sex">
+
+        Sex
+
+    </label>
+
+
+    <select id="sex">
+
+        <option value="">
+            Select
+        </option>
+
+        <option value="Male">
+            Male
+        </option>
+
+        <option value="Female">
+            Female
+        </option>
+
+        <option value="Prefer not to say">
+            Prefer not to say
+        </option>
+
+    </select>
+
+
+
+    <!-- PREVIOUS DIAGNOSIS -->
+
+    <label for="previousDiagnosis">
+
+        Have you previously been diagnosed
+        with colour vision deficiency?
+
+    </label>
+
+
+    <select id="previousDiagnosis">
+
+        <option value="">
+            Select
+        </option>
+
+        <option value="No">
+            No
+        </option>
+
+        <option value="Yes">
+            Yes
+        </option>
+
+        <option value="Unsure">
+            Unsure
+        </option>
+
+        <option value="Prefer not to say">
+            Prefer not to say
+        </option>
+
+    </select>
+
+
+
+    <button
+        class="primary-button"
+        onclick="startTest()"
+    >
+
+        Begin the study
+
+    </button>
+
+
+</section>
+
+
+
+<!-- =========================================
+     TEST
+     ========================================= -->
+
+<section
+    id="colour-test"
+    class="test-page"
+    style="display:none;"
+>
+
+
+    <!-- TEST HEADER -->
+
+    <div class="test-header">
+
+
+        <div>
+
+            <div class="study-label">
+
+                COLOUR VISION STUDY
+
+            </div>
+
+
+            <h1 id="question-number">
+
+                Question 1 of 12
+
+            </h1>
+
         </div>
 
 
-        <label for="ageGroup">Age group</label>
+        <div
+            class="participant-badge"
+            id="participant-id"
+        >
 
-        <select id="ageGroup">
-            <option value="">Select your age group</option>
-            <option value="Under 13">Under 13</option>
-            <option value="13-15">13–15</option>
-            <option value="16-18">16–18</option>
-            <option value="19-25">19–25</option>
-            <option value="26-40">26–40</option>
-            <option value="41-60">41–60</option>
-            <option value="60+">60+</option>
-        </select>
-
-
-        <label for="sex">Sex</label>
-
-        <select id="sex">
-            <option value="">Select</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Prefer not to say">Prefer not to say</option>
-        </select>
-
-
-        <label for="previousDiagnosis">
-            Have you previously been diagnosed with colour vision deficiency?
-        </label>
-
-        <select id="previousDiagnosis">
-            <option value="">Select</option>
-            <option value="No">No</option>
-            <option value="Yes">Yes</option>
-            <option value="Unsure">Unsure</option>
-            <option value="Prefer not to say">
-                Prefer not to say
-            </option>
-        </select>
-
-
-        <button class="primary-button" onclick="startTest()">
-            Begin colour vision test
-        </button>
-
-    </section>
-
-
-
-    <!-- ========================= -->
-    <!-- TEST -->
-    <!-- ========================= -->
-
-    <section id="colour-test" class="test-page" style="display:none;">
-
-        <div class="test-header">
-
-            <div>
-                <div class="eyebrow">COLOUR VISION STUDY</div>
-
-                <h1 id="trial-number">
-                    Trial 01 / 12
-                </h1>
-            </div>
-
-            <div class="participant-badge" id="participant-id">
-                Participant
-            </div>
+            Participant
 
         </div>
 
 
-        <div class="progress-container">
-
-            <div class="progress-bar">
-                <div id="progress-bar-fill"></div>
-            </div>
-
-        </div>
+    </div>
 
 
-        <div class="question-card">
 
-            <p class="instruction">
-                Which circle is different from the others?
-            </p>
+    <!-- PROGRESS -->
 
-            <p class="sub-instruction">
-                Select the circle that appears different in colour.
-            </p>
+    <div class="progress-container">
 
+        <div class="progress-bar">
 
-            <div id="colour-grid" class="colour-grid">
-            </div>
-
-
-            <p class="test-warning">
-                Try to keep your screen at normal brightness and turn off
-                night mode or colour filters.
-            </p>
+            <div id="progress-bar-fill"></div>
 
         </div>
 
-    </section>
+    </div>
 
 
 
-    <!-- ========================= -->
-    <!-- RESULTS -->
-    <!-- ========================= -->
+    <!-- QUESTION -->
 
-    <section id="results" class="results-page" style="display:none;">
+    <div class="question-card">
 
-        <div class="eyebrow">COLOUR VISION STUDY</div>
 
-        <h1>Screening result</h1>
+        <p
+            id="instruction"
+            class="instruction"
+        >
 
-        <p class="results-intro">
-            Your colour-discrimination test is complete.
+            Choose the colour that looks different.
+
         </p>
 
 
-        <div class="overall-result">
+        <p
+            id="sub-instruction"
+            class="sub-instruction"
+        >
 
-            <span class="result-label">
-                OVERALL SCORE
-            </span>
+            Take your time and choose the answer
+            that looks most different.
 
-            <span id="final-score" class="big-score">
-                0/12
-            </span>
-
-        </div>
-
-
-        <div class="axis-results">
-
-            <div class="axis-card">
-
-                <span class="axis-name">
-                    PROTAN AXIS
-                </span>
-
-                <span id="protan-score">
-                    0/4
-                </span>
-
-                <p>
-                    Red–green colour-confusion axis associated primarily
-                    with L-cone responses.
-                </p>
-
-            </div>
-
-
-            <div class="axis-card">
-
-                <span class="axis-name">
-                    DEUTAN AXIS
-                </span>
-
-                <span id="deutan-score">
-                    0/4
-                </span>
-
-                <p>
-                    Red–green colour-confusion axis associated primarily
-                    with M-cone responses.
-                </p>
-
-            </div>
-
-
-            <div class="axis-card">
-
-                <span class="axis-name">
-                    TRITAN AXIS
-                </span>
-
-                <span id="tritan-score">
-                    0/4
-                </span>
-
-                <p>
-                    Blue–yellow colour-confusion axis associated primarily
-                    with S-cone responses.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="research-note">
-
-            <strong>Important</strong>
-
-            <p>
-                This is an experimental research screening tool and is
-                not a clinical diagnosis of colour vision deficiency.
-                Screen characteristics and lighting can affect results.
-            </p>
-
-        </div>
-
-
-        <p class="submission-status" id="submission-status">
-            Recording your anonymous result...
         </p>
 
 
-        <a href="index.html" class="secondary-button">
-            Return to study
-        </a>
 
-    </section>
+        <!--
+            DIFFERENT EXERCISE TYPES ARE INSERTED HERE
+        -->
+
+        <div
+            id="exercise-area"
+            class="exercise-area"
+        >
+
+        </div>
+
+
+
+        <p class="test-warning">
+
+            For the most consistent results, use normal
+            screen brightness and turn off night mode
+            or colour filters.
+
+        </p>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================
+     RESULTS
+     ========================================= -->
+
+<section
+    id="results"
+    class="results-page"
+    style="display:none;"
+>
+
+
+    <div class="study-label">
+
+        COLOUR VISION STUDY
+
+    </div>
+
+
+    <h1>
+        Study complete
+    </h1>
+
+
+    <p class="results-intro">
+
+        Thank you for taking part.
+
+    </p>
+
+
+
+    <!-- OVERALL SCORE -->
+
+    <div class="overall-result">
+
+        <span class="result-label">
+
+            YOUR SCORE
+
+        </span>
+
+
+        <span
+            id="final-score"
+            class="big-score"
+        >
+
+            0/12
+
+        </span>
+
+    </div>
+
+
+
+    <!--
+        The participant only sees the overall score.
+
+        The three research-axis scores are NOT displayed
+        to the participant.
+    -->
+
+
+
+    <div class="research-note">
+
+        <strong>
+            About your result
+        </strong>
+
+        <p>
+
+            This experimental colour-discrimination task
+            is designed for student research. Your score
+            represents your performance in this particular
+            test and is not a clinical diagnosis of colour
+            vision deficiency.
+
+        </p>
+
+    </div>
+
+
+
+    <p
+        class="submission-status"
+        id="submission-status"
+    >
+
+        Recording anonymous result...
+
+    </p>
+
+
+
+    <a
+        href="index.html"
+        class="secondary-button"
+    >
+
+        Return to study
+
+    </a>
+
+
+</section>
+
 
 </main>
 
@@ -268,186 +460,358 @@
 
 <script>
 
-/* =========================================
+
+/* =====================================================
    FORMSPREE
-   ========================================= */
+   =====================================================
+
+   KEEP YOUR EXISTING WORKING FORMSPREE ENDPOINT HERE.
+*/
 
 const FORMSPREE_ENDPOINT =
     "YOUR-FORMSPREE-ENDPOINT";
 
 
-/* =========================================
+
+/* =====================================================
    PARTICIPANT INFORMATION
-   ========================================= */
+   ===================================================== */
 
 let participantData = {
 
     participant: "",
+
     ageGroup: "",
+
     sex: "",
+
     previousDiagnosis: ""
 
 };
 
 
 
-/* =========================================
-   TEST QUESTIONS
-   =========================================
+/* =====================================================
+   RESEARCH QUESTIONS
+   =====================================================
 
-   12 trials:
+   IMPORTANT:
 
-   1–4   PROTAN
-   5–8   DEUTAN
-   9–12  TRITAN
+   The participant does NOT see the research axis.
 
-   Each axis contains:
-   easy → moderate → difficult → very difficult
+   Each question has:
 
-   These are experimental screen-based stimuli,
-   not clinically validated colourimetric stimuli.
+   axis:
+       protan / deutan / tritan
+
+   type:
+       circle
+       squares
+       match
+       grid
+
+   difficulty:
+       easy
+       medium
+       hard
+       veryHard
+
+   The order deliberately alternates between
+   different exercise types.
+
 */
 
 
 const questions = [
 
-    /* =========================
-       PROTAN AXIS
-       ========================= */
+
+    /* =========================================
+       QUESTION 1
+       CIRCLE
+       PROTAN
+       ========================================= */
 
     {
         axis: "protan",
+
+        type: "circle",
+
         difficulty: "easy",
 
-        base: "#D46A68",
-        different: "#C85E68"
-    },
+        base: "#D66C68",
 
-    {
-        axis: "protan",
-        difficulty: "moderate",
+        different: "#C95F67"
 
-        base: "#D76A63",
-        different: "#C95C64"
-    },
-
-    {
-        axis: "protan",
-        difficulty: "difficult",
-
-        base: "#C96561",
-        different: "#C05E64"
-    },
-
-    {
-        axis: "protan",
-        difficulty: "very difficult",
-
-        base: "#C86462",
-        different: "#BE5E64"
     },
 
 
-    /* =========================
-       DEUTAN AXIS
-       ========================= */
+    /* =========================================
+       QUESTION 2
+       MATCHING SQUARES
+       DEUTAN
+       ========================================= */
 
     {
         axis: "deutan",
+
+        type: "match",
+
         difficulty: "easy",
 
-        base: "#72A66D",
-        different: "#67A06D"
-    },
+        colours: [
+            "#78A96F",
+            "#78A96F",
+            "#6FA26F",
+            "#78A96F"
+        ]
 
-    {
-        axis: "deutan",
-        difficulty: "moderate",
-
-        base: "#71A06A",
-        different: "#659A6D"
-    },
-
-    {
-        axis: "deutan",
-        difficulty: "difficult",
-
-        base: "#6B9968",
-        different: "#63926B"
-    },
-
-    {
-        axis: "deutan",
-        difficulty: "very difficult",
-
-        base: "#699267",
-        different: "#62906A"
     },
 
 
-    /* =========================
-       TRITAN AXIS
-       ========================= */
+    /* =========================================
+       QUESTION 3
+       GRID
+       TRITAN
+       ========================================= */
 
     {
         axis: "tritan",
+
+        type: "grid",
+
         difficulty: "easy",
 
-        base: "#5F9CB7",
-        different: "#6B91B7"
+        base: "#649CB7",
+
+        different: "#7294B7"
+
     },
+
+
+    /* =========================================
+       QUESTION 4
+       SQUARES
+       DEUTAN
+       ========================================= */
+
+    {
+        axis: "deutan",
+
+        type: "squares",
+
+        difficulty: "medium",
+
+        base: "#70A06C",
+
+        different: "#64996D"
+
+    },
+
+
+    /* =========================================
+       QUESTION 5
+       CIRCLE
+       PROTAN
+       ========================================= */
+
+    {
+        axis: "protan",
+
+        type: "circle",
+
+        difficulty: "medium",
+
+        base: "#CF6663",
+
+        different: "#C35D65"
+
+    },
+
+
+    /* =========================================
+       QUESTION 6
+       MATCH
+       TRITAN
+       ========================================= */
 
     {
         axis: "tritan",
-        difficulty: "moderate",
 
-        base: "#6298B2",
-        different: "#6C8FB2"
+        type: "match",
+
+        difficulty: "medium",
+
+        colours: [
+            "#6399B3",
+            "#6A91B3",
+            "#6399B3",
+            "#6399B3"
+        ]
+
     },
+
+
+    /* =========================================
+       QUESTION 7
+       GRID
+       DEUTAN
+       ========================================= */
+
+    {
+        axis: "deutan",
+
+        type: "grid",
+
+        difficulty: "hard",
+
+        base: "#6A9868",
+
+        different: "#62916B"
+
+    },
+
+
+    /* =========================================
+       QUESTION 8
+       MATCH
+       PROTAN
+       ========================================= */
+
+    {
+        axis: "protan",
+
+        type: "match",
+
+        difficulty: "medium",
+
+        colours: [
+            "#C96462",
+            "#BE5E64",
+            "#C96462",
+            "#C96462"
+        ]
+
+    },
+
+
+    /* =========================================
+       QUESTION 9
+       SQUARES
+       TRITAN
+       ========================================= */
 
     {
         axis: "tritan",
-        difficulty: "difficult",
 
-        base: "#6492AB",
-        different: "#6D8AAA"
+        type: "squares",
+
+        difficulty: "hard",
+
+        base: "#6591AB",
+
+        different: "#6D89AA"
+
     },
+
+
+    /* =========================================
+       QUESTION 10
+       CIRCLE
+       PROTAN
+       ========================================= */
+
+    {
+        axis: "protan",
+
+        type: "circle",
+
+        difficulty: "hard",
+
+        base: "#C76462",
+
+        different: "#BD5E64"
+
+    },
+
+
+    /* =========================================
+       QUESTION 11
+       GRID
+       DEUTAN
+       ========================================= */
+
+    {
+        axis: "deutan",
+
+        type: "grid",
+
+        difficulty: "hard",
+
+        base: "#689268",
+
+        different: "#618B69"
+
+    },
+
+
+    /* =========================================
+       QUESTION 12
+       CIRCLE
+       TRITAN
+       ========================================= */
 
     {
         axis: "tritan",
-        difficulty: "very difficult",
 
-        base: "#668EA5",
-        different: "#6D87A5"
+        type: "circle",
+
+        difficulty: "veryHard",
+
+        base: "#668DA5",
+
+        different: "#6D86A5"
+
     }
 
 ];
 
 
 
-/* =========================================
+/* =====================================================
    TEST VARIABLES
-   ========================================= */
+   ===================================================== */
 
 let question = 0;
 
 let overallScore = 0;
 
 let protanScore = 0;
+
 let deutanScore = 0;
+
 let tritanScore = 0;
+
+
+/*
+   Stores every response.
+
+   This is useful for your research analysis because
+   you can see which individual questions participants
+   found difficult.
+*/
 
 let questionResults = [];
 
 
 
-/* =========================================
-   GENERATE ANONYMOUS ID
-   ========================================= */
+/* =====================================================
+   ANONYMOUS PARTICIPANT ID
+   ===================================================== */
 
 function generateParticipantID() {
 
     return "CVS-" +
+
         Math.random()
             .toString(36)
             .substring(2, 8)
@@ -457,20 +821,26 @@ function generateParticipantID() {
 
 
 
-/* =========================================
+/* =====================================================
    START TEST
-   ========================================= */
+   ===================================================== */
 
 function startTest() {
+
 
     const ageGroup =
         document.getElementById("ageGroup").value;
 
+
     const sex =
         document.getElementById("sex").value;
 
+
     const previousDiagnosis =
-        document.getElementById("previousDiagnosis").value;
+        document.getElementById(
+            "previousDiagnosis"
+        ).value;
+
 
 
     if (
@@ -480,7 +850,7 @@ function startTest() {
     ) {
 
         alert(
-            "Please answer all questions before starting the test."
+            "Please answer all questions before beginning."
         );
 
         return;
@@ -488,29 +858,40 @@ function startTest() {
     }
 
 
+
     participantData.ageGroup =
         ageGroup;
+
 
     participantData.sex =
         sex;
 
+
     participantData.previousDiagnosis =
         previousDiagnosis;
+
 
     participantData.participant =
         generateParticipantID();
 
 
-    document.getElementById("participant-section")
-        .style.display = "none";
 
-    document.getElementById("colour-test")
-        .style.display = "block";
+    document.getElementById(
+        "participant-section"
+    ).style.display = "none";
 
 
-    document.getElementById("participant-id")
-        .innerText =
+    document.getElementById(
+        "colour-test"
+    ).style.display = "block";
+
+
+
+    document.getElementById(
+        "participant-id"
+    ).innerText =
         participantData.participant;
+
 
 
     showQuestion();
@@ -519,72 +900,279 @@ function startTest() {
 
 
 
-/* =========================================
+/* =====================================================
    SHOW QUESTION
-   ========================================= */
+   ===================================================== */
 
 function showQuestion() {
+
 
     const current =
         questions[question];
 
 
-    document.getElementById("trial-number")
-        .innerText =
-        "Trial " +
-        String(question + 1).padStart(2, "0") +
-        " / " +
+
+    /*
+       Participant sees ONLY:
+       Question X of 12
+
+       They do not see the research axis.
+    */
+
+    document.getElementById(
+        "question-number"
+    ).innerText =
+        "Question " +
+        (question + 1) +
+        " of " +
         questions.length;
 
 
+
+    /*
+       Progress bar
+    */
+
     const progress =
-        ((question) / questions.length) * 100;
+        ((question) /
+        questions.length) *
+        100;
 
 
-    document.getElementById("progress-bar-fill")
-        .style.width =
+    document.getElementById(
+        "progress-bar-fill"
+    ).style.width =
         progress + "%";
 
 
-    const grid =
-        document.getElementById("colour-grid");
 
+    /*
+       Change instructions depending on
+       exercise type.
+    */
 
-    grid.innerHTML = "";
+    updateInstructions(
+        current.type
+    );
+
 
 
     /*
-       Randomise the position of the
-       different circle.
-
-       This prevents participants learning
-       that the answer is always in the
-       same position.
+       Clear previous exercise.
     */
 
-    const differentPosition =
-        Math.floor(Math.random() * 6);
+    const area =
+        document.getElementById(
+            "exercise-area"
+        );
 
 
-    for (let i = 0; i < 6; i++) {
+    area.innerHTML = "";
+
+
+
+    /*
+       Create the appropriate exercise.
+    */
+
+    if (
+        current.type === "circle"
+    ) {
+
+        createCircleExercise(
+            current
+        );
+
+    }
+
+
+    if (
+        current.type === "squares"
+    ) {
+
+        createSquareExercise(
+            current
+        );
+
+    }
+
+
+    if (
+        current.type === "match"
+    ) {
+
+        createMatchExercise(
+            current
+        );
+
+    }
+
+
+    if (
+        current.type === "grid"
+    ) {
+
+        createGridExercise(
+            current
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   INSTRUCTIONS
+   ===================================================== */
+
+function updateInstructions(type) {
+
+
+    const instruction =
+        document.getElementById(
+            "instruction"
+        );
+
+
+    const subInstruction =
+        document.getElementById(
+            "sub-instruction"
+        );
+
+
+
+    if (type === "circle") {
+
+        instruction.innerText =
+            "Which circle is different?";
+
+
+        subInstruction.innerText =
+            "Choose the circle that looks different from the others.";
+
+    }
+
+
+
+    if (type === "squares") {
+
+        instruction.innerText =
+            "Which square is different?";
+
+
+        subInstruction.innerText =
+            "Choose the square that looks different from the others.";
+
+    }
+
+
+
+    if (type === "match") {
+
+        instruction.innerText =
+            "Which colour matches the target?";
+
+
+        subInstruction.innerText =
+            "Choose the option that looks most similar to the target.";
+
+    }
+
+
+
+    if (type === "grid") {
+
+        instruction.innerText =
+            "Which tile is different?";
+
+
+        subInstruction.innerText =
+            "Choose the tile that looks different from the others.";
+
+    }
+
+}
+
+
+
+/* =====================================================
+   RANDOM POSITION
+   ===================================================== */
+
+function randomPosition(number) {
+
+    return Math.floor(
+        Math.random() * number
+    );
+
+}
+
+
+
+/* =====================================================
+   CIRCLE EXERCISE
+   ===================================================== */
+
+function createCircleExercise(current) {
+
+
+    const area =
+        document.getElementById(
+            "exercise-area"
+        );
+
+
+    const container =
+        document.createElement("div");
+
+
+    container.className =
+        "colour-grid";
+
+
+
+    const correctPosition =
+        randomPosition(6);
+
+
+    current.correctPosition =
+        correctPosition;
+
+
+
+    for (
+        let i = 0;
+        i < 6;
+        i++
+    ) {
+
 
         const circle =
-            document.createElement("button");
+            document.createElement(
+                "button"
+            );
+
+
+        circle.type =
+            "button";
 
 
         circle.className =
             "colour-circle-test";
 
 
-        circle.type = "button";
 
-
-        if (i === differentPosition) {
+        if (
+            i === correctPosition
+        ) {
 
             circle.style.backgroundColor =
                 current.different;
 
-        } else {
+        }
+
+        else {
 
             circle.style.backgroundColor =
                 current.base;
@@ -592,78 +1180,434 @@ function showQuestion() {
         }
 
 
+
         circle.onclick =
             function() {
 
-                answer(
-                    i === differentPosition
+                submitAnswer(
+                    i === correctPosition
                 );
 
             };
 
 
-        grid.appendChild(circle);
+
+        container.appendChild(
+            circle
+        );
 
     }
 
 
-    /*
-       Save which position contained
-       the correct answer.
-    */
 
-    current.correctPosition =
-        differentPosition;
+    area.appendChild(
+        container
+    );
 
 }
 
 
 
-/* =========================================
-   ANSWER
-   ========================================= */
+/* =====================================================
+   SQUARE EXERCISE
+   ===================================================== */
 
-function answer(correct) {
+function createSquareExercise(current) {
+
+
+    const area =
+        document.getElementById(
+            "exercise-area"
+        );
+
+
+    const container =
+        document.createElement("div");
+
+
+    container.className =
+        "colour-grid";
+
+
+
+    const correctPosition =
+        randomPosition(6);
+
+
+    current.correctPosition =
+        correctPosition;
+
+
+
+    for (
+        let i = 0;
+        i < 6;
+        i++
+    ) {
+
+
+        const square =
+            document.createElement(
+                "button"
+            );
+
+
+        square.type =
+            "button";
+
+
+        square.className =
+            "colour-square-test";
+
+
+
+        if (
+            i === correctPosition
+        ) {
+
+            square.style.backgroundColor =
+                current.different;
+
+        }
+
+        else {
+
+            square.style.backgroundColor =
+                current.base;
+
+        }
+
+
+
+        square.onclick =
+            function() {
+
+                submitAnswer(
+                    i === correctPosition
+                );
+
+            };
+
+
+
+        container.appendChild(
+            square
+        );
+
+    }
+
+
+
+    area.appendChild(
+        container
+    );
+
+}
+
+
+
+/* =====================================================
+   MATCHING EXERCISE
+   ===================================================== */
+
+function createMatchExercise(current) {
+
+
+    const area =
+        document.getElementById(
+            "exercise-area"
+        );
+
+
+    /*
+       Pick the correct answer position
+       randomly.
+    */
+
+    const correctPosition =
+        randomPosition(
+            current.colours.length
+        );
+
+
+    current.correctPosition =
+        correctPosition;
+
+
+
+    /*
+       Target colour
+    */
+
+    const target =
+        document.createElement(
+            "div"
+        );
+
+
+    target.className =
+        "target-colour";
+
+
+    target.style.backgroundColor =
+        current.colours[
+            correctPosition
+        ];
+
+
+
+    const targetLabel =
+        document.createElement(
+            "p"
+        );
+
+
+    targetLabel.className =
+        "target-label";
+
+
+    targetLabel.innerText =
+        "TARGET";
+
+
+
+    area.appendChild(
+        targetLabel
+    );
+
+
+    area.appendChild(
+        target
+    );
+
+
+
+    /*
+       Answer choices
+    */
+
+    const answers =
+        document.createElement(
+            "div"
+        );
+
+
+    answers.className =
+        "match-options";
+
+
+
+    /*
+       Shuffle the colours.
+
+       We keep track of which one is
+       actually the correct answer.
+    */
+
+    let options =
+        current.colours.map(
+            function(colour, index) {
+
+                return {
+
+                    colour:
+                        colour,
+
+                    correct:
+                        index ===
+                        correctPosition
+
+                };
+
+            }
+        );
+
+
+
+    options.sort(
+        () =>
+            Math.random() - 0.5
+    );
+
+
+
+    options.forEach(
+        function(option) {
+
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+
+            button.type =
+                "button";
+
+
+            button.className =
+                "match-colour";
+
+
+            button.style.backgroundColor =
+                option.colour;
+
+
+
+            button.onclick =
+                function() {
+
+                    submitAnswer(
+                        option.correct
+                    );
+
+                };
+
+
+
+            answers.appendChild(
+                button
+            );
+
+        }
+    );
+
+
+
+    area.appendChild(
+        answers
+    );
+
+}
+
+
+
+/* =====================================================
+   GRID EXERCISE
+   ===================================================== */
+
+function createGridExercise(current) {
+
+
+    const area =
+        document.getElementById(
+            "exercise-area"
+        );
+
+
+    const grid =
+        document.createElement(
+            "div"
+        );
+
+
+    grid.className =
+        "small-colour-grid";
+
+
+
+    const correctPosition =
+        randomPosition(9);
+
+
+    current.correctPosition =
+        correctPosition;
+
+
+
+    for (
+        let i = 0;
+        i < 9;
+        i++
+    ) {
+
+
+        const tile =
+            document.createElement(
+                "button"
+            );
+
+
+        tile.type =
+            "button";
+
+
+        tile.className =
+            "small-colour-tile";
+
+
+
+        if (
+            i === correctPosition
+        ) {
+
+            tile.style.backgroundColor =
+                current.different;
+
+        }
+
+        else {
+
+            tile.style.backgroundColor =
+                current.base;
+
+        }
+
+
+
+        tile.onclick =
+            function() {
+
+                submitAnswer(
+                    i === correctPosition
+                );
+
+            };
+
+
+
+        grid.appendChild(
+            tile
+        );
+
+    }
+
+
+
+    area.appendChild(
+        grid
+    );
+
+}
+
+
+
+/* =====================================================
+   SUBMIT ANSWER
+   ===================================================== */
+
+function submitAnswer(correct) {
+
 
     const current =
         questions[question];
 
 
-    if (correct) {
 
-        overallScore++;
-
-
-        if (current.axis === "protan") {
-
-            protanScore++;
-
-        }
-
-
-        if (current.axis === "deutan") {
-
-            deutanScore++;
-
-        }
-
-
-        if (current.axis === "tritan") {
-
-            tritanScore++;
-
-        }
-
-    }
-
+    /*
+       Record result.
+    */
 
     questionResults.push({
 
-        trial:
+        question:
             question + 1,
 
         axis:
             current.axis,
+
+        exercise:
+            current.type,
 
         difficulty:
             current.difficulty,
@@ -674,7 +1618,61 @@ function answer(correct) {
     });
 
 
+
+    /*
+       Update overall score.
+    */
+
+    if (correct) {
+
+        overallScore++;
+
+
+
+        /*
+           Update hidden research
+           axis scores.
+        */
+
+        if (
+            current.axis ===
+            "protan"
+        ) {
+
+            protanScore++;
+
+        }
+
+
+        if (
+            current.axis ===
+            "deutan"
+        ) {
+
+            deutanScore++;
+
+        }
+
+
+        if (
+            current.axis ===
+            "tritan"
+        ) {
+
+            tritanScore++;
+
+        }
+
+    }
+
+
+
+    /*
+       Move to next question.
+    */
+
     question++;
+
 
 
     if (
@@ -689,79 +1687,119 @@ function answer(correct) {
     }
 
 
+
     showQuestion();
 
 }
 
 
 
-/* =========================================
+/* =====================================================
    FINISH TEST
-   ========================================= */
+   ===================================================== */
 
 async function finishTest() {
 
-    document.getElementById("colour-test")
-        .style.display = "none";
+
+    /*
+       Hide test.
+    */
+
+    document.getElementById(
+        "colour-test"
+    ).style.display = "none";
 
 
-    document.getElementById("results")
-        .style.display = "block";
+
+    /*
+       Show results.
+    */
+
+    document.getElementById(
+        "results"
+    ).style.display = "block";
 
 
-    document.getElementById("final-score")
-        .innerText =
+
+    /*
+       Participant sees ONLY overall result.
+    */
+
+    document.getElementById(
+        "final-score"
+    ).innerText =
         overallScore +
-        "/" +
-        questions.length;
+        "/12";
 
 
-    document.getElementById("protan-score")
-        .innerText =
-        protanScore +
-        "/4";
+
+    /*
+       Complete progress bar.
+    */
+
+    document.getElementById(
+        "progress-bar-fill"
+    ).style.width =
+        "100%";
 
 
-    document.getElementById("deutan-score")
-        .innerText =
-        deutanScore +
-        "/4";
 
+    /*
+       Prepare research data.
 
-    document.getElementById("tritan-score")
-        .innerText =
-        tritanScore +
-        "/4";
-
+       These detailed scores are sent to
+       Formspree but are NOT displayed
+       to participants.
+    */
 
     const resultData = {
+
 
         participant:
             participantData.participant,
 
+
         ageGroup:
             participantData.ageGroup,
+
 
         sex:
             participantData.sex,
 
+
         previousDiagnosis:
             participantData.previousDiagnosis,
+
 
         overallScore:
             overallScore + "/12",
 
+
+        /*
+           Hidden research scores
+        */
+
         protanScore:
             protanScore + "/4",
+
 
         deutanScore:
             deutanScore + "/4",
 
+
         tritanScore:
             tritanScore + "/4",
 
+
+        /*
+           Individual question data
+        */
+
         trialResults:
-            JSON.stringify(questionResults),
+            JSON.stringify(
+                questionResults
+            ),
+
 
         date:
             new Date().toISOString()
@@ -769,24 +1807,35 @@ async function finishTest() {
     };
 
 
+
+    /*
+       Send to Formspree.
+    */
+
     try {
+
 
         const response =
             await fetch(
                 FORMSPREE_ENDPOINT,
                 {
 
-                    method: "POST",
+                    method:
+                        "POST",
 
-                    headers: {
 
-                        "Content-Type":
-                            "application/json",
+                    headers:
+                        {
 
-                        "Accept":
-                            "application/json"
+                            "Content-Type":
+                                "application/json",
 
-                    },
+
+                            "Accept":
+                                "application/json"
+
+                        },
+
 
                     body:
                         JSON.stringify(
@@ -797,39 +1846,55 @@ async function finishTest() {
             );
 
 
-        if (response.ok) {
+
+        if (
+            response.ok
+        ) {
+
 
             document.getElementById(
                 "submission-status"
             ).innerText =
-                "Anonymous research result recorded successfully.";
+                "Your anonymous result has been recorded successfully.";
 
-        } else {
-
-            document.getElementById(
-                "submission-status"
-            ).innerText =
-                "The test is complete, but the result could not be submitted.";
 
         }
+
+        else {
+
+
+            document.getElementById(
+                "submission-status"
+            ).innerText =
+                "Your test is complete, but the result could not be recorded.";
+
+
+        }
+
 
     }
 
     catch (error) {
 
-        console.error(error);
+
+        console.error(
+            "Submission error:",
+            error
+        );
 
 
         document.getElementById(
             "submission-status"
         ).innerText =
-            "The test is complete, but the result could not be submitted.";
+            "Your test is complete, but the result could not be recorded.";
 
     }
 
 }
 
+
 </script>
+
 
 </body>
 
