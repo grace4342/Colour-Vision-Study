@@ -1,485 +1,750 @@
 /* =========================================
-   COLOUR VISION STUDY
-   MODERN RESEARCH DESIGN
+   GLOBAL
    ========================================= */
 
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    scroll-behavior: smooth;
 }
 
 body {
-    font-family: Inter, Arial, Helvetica, sans-serif;
-    background:
-        radial-gradient(circle at 10% 10%, rgba(80, 140, 255, 0.10), transparent 30%),
-        radial-gradient(circle at 90% 20%, rgba(150, 90, 255, 0.08), transparent 30%),
-        #f7f9fc;
-    color: #182230;
-    line-height: 1.6;
+    margin: 0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f4f7f8;
+
+    color: #17252b;
 }
 
-/* =========================================
-   HEADER
-   ========================================= */
 
 header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    padding: 18px 6%;
-    background: rgba(255, 255, 255, 0.82);
-    backdrop-filter: blur(18px);
-    border-bottom: 1px solid rgba(20, 30, 50, 0.08);
+    background: #ffffff;
+
+    border-bottom:
+        1px solid #dfe6e8;
+
+    padding: 18px 7%;
 }
+
 
 nav {
     max-width: 1200px;
+
     margin: auto;
+
     display: flex;
-    align-items: center;
+
     justify-content: space-between;
+
+    align-items: center;
 }
+
 
 .logo {
-    font-size: 1.15rem;
-    font-weight: 800;
-    letter-spacing: -0.5px;
-    color: #172235;
+    font-size: 14px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color: #174c55;
 }
+
 
 nav a {
+    color: #174c55;
+
     text-decoration: none;
-    color: #536174;
+
+    font-size: 14px;
+
     font-weight: 600;
-    transition: 0.2s ease;
 }
+
 
 nav a:hover {
-    color: #4969e8;
+    text-decoration: underline;
 }
 
+
+
 /* =========================================
-   GENERAL
+   MAIN
    ========================================= */
 
 main {
-    width: 100%;
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 70px 25px;
 }
 
-section {
-    max-width: 1200px;
-    margin: auto;
-}
+
 
 /* =========================================
-   HERO
+   TEXT
    ========================================= */
 
-.hero {
-    min-height: 82vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 80px 6%;
-    text-align: center;
-}
+.eyebrow {
+    color: #24717b;
 
-.hero-content {
-    max-width: 900px;
-}
+    font-size: 12px;
 
-.small-title {
-    display: inline-block;
-    margin-bottom: 20px;
-    font-size: 0.75rem;
-    font-weight: 800;
-    letter-spacing: 2.5px;
-    color: #5670df;
-}
-
-.hero h1 {
-    font-size: clamp(3rem, 7vw, 6.5rem);
-    line-height: 0.98;
-    letter-spacing: -5px;
-    margin-bottom: 30px;
-    color: #111a2a;
-}
-
-.hero h1 span {
-    background: linear-gradient(
-        90deg,
-        #e85d75,
-        #e9a23b,
-        #55a86b,
-        #4d8edb,
-        #7957d5
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-.hero p {
-    max-width: 650px;
-    margin: auto;
-    font-size: 1.15rem;
-    color: #667387;
-}
-
-/* =========================================
-   BUTTONS
-   ========================================= */
-
-button,
-.primary-button {
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
-}
-
-.primary-button {
-    display: inline-block;
-    margin-top: 35px;
-    padding: 16px 30px;
-    border-radius: 14px;
-    background: #18263c;
-    color: white;
-    text-decoration: none;
     font-weight: 700;
-    box-shadow: 0 12px 30px rgba(24, 38, 60, 0.18);
-    transition: 0.25s ease;
-}
 
-.primary-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 18px 35px rgba(24, 38, 60, 0.25);
-}
-
-/* =========================================
-   RESEARCH CARDS
-   ========================================= */
-
-.cards-section {
-    padding: 80px 6%;
-}
-
-.section-heading {
-    max-width: 700px;
-    margin-bottom: 45px;
-}
-
-.section-heading h2 {
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    line-height: 1.05;
-    letter-spacing: -2px;
-    margin-bottom: 15px;
-}
-
-.section-heading p {
-    color: #687589;
-}
-
-.cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
-}
-
-.card {
-    padding: 32px;
-    background: rgba(255, 255, 255, 0.82);
-    border: 1px solid rgba(30, 40, 60, 0.08);
-    border-radius: 24px;
-    box-shadow: 0 15px 45px rgba(30, 45, 70, 0.06);
-    transition: 0.25s ease;
-}
-
-.card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 25px 55px rgba(30, 45, 70, 0.10);
-}
-
-.card-number {
-    font-size: 0.75rem;
-    font-weight: 800;
     letter-spacing: 2px;
-    color: #7081e5;
-    margin-bottom: 18px;
+
+    margin-bottom: 12px;
 }
 
-.card h3 {
-    font-size: 1.35rem;
-    margin-bottom: 10px;
-}
 
-.card p {
-    color: #687589;
-}
+h1 {
+    margin: 0 0 15px;
 
-/* =========================================
-   INFORMATION SECTION
-   ========================================= */
+    font-size: 42px;
 
-.info-section {
-    padding: 70px 6%;
-}
-
-.info-box {
-    padding: 55px;
-    border-radius: 30px;
-    background: #18263c;
-    color: white;
-    box-shadow: 0 25px 60px rgba(24, 38, 60, 0.18);
-}
-
-.info-box h2 {
-    font-size: 2.3rem;
-    margin-bottom: 18px;
-}
-
-.info-box p {
-    max-width: 760px;
-    color: #cbd4e2;
-}
-
-/* =========================================
-   TEST PAGE
-   ========================================= */
-
-.test-page {
-    width: min(850px, 92%);
-    margin: 70px auto;
-    padding: 50px;
-    background: rgba(255, 255, 255, 0.92);
-    border: 1px solid rgba(30, 40, 60, 0.08);
-    border-radius: 30px;
-    box-shadow: 0 25px 70px rgba(30, 45, 70, 0.10);
-}
-
-.test-page h1 {
-    font-size: 2.6rem;
     line-height: 1.1;
-    letter-spacing: -1.5px;
-    margin-bottom: 15px;
+
+    color: #15343b;
 }
 
-.test-page > p {
-    color: #687589;
+
+.intro,
+.results-intro {
+    font-size: 17px;
+
+    line-height: 1.7;
+
+    color: #5d6b70;
+
+    max-width: 700px;
 }
+
+
+
+/* =========================================
+   RESEARCH CARD
+   ========================================= */
+
+.research-card {
+
+    background: #ffffff;
+
+    border:
+        1px solid #dfe6e8;
+
+    border-radius: 18px;
+
+    padding: 50px;
+
+    max-width: 750px;
+
+    margin: auto;
+
+    box-shadow:
+        0 10px 35px
+        rgba(20, 50, 60, 0.06);
+}
+
+
 
 /* =========================================
    FORM
    ========================================= */
 
 label {
+
     display: block;
+
     margin-top: 25px;
+
     margin-bottom: 8px;
+
+    font-size: 14px;
+
     font-weight: 700;
-    color: #263449;
+
+    color: #33484e;
 }
+
 
 select {
+
     width: 100%;
-    padding: 14px 16px;
-    border: 1px solid #d9dfe8;
-    border-radius: 12px;
-    background: white;
-    color: #263449;
-    font-family: inherit;
-    font-size: 1rem;
-    outline: none;
-    transition: 0.2s ease;
+
+    padding: 14px;
+
+    border:
+        1px solid #cbd7da;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    font-size: 15px;
+
+    color: #26383d;
 }
+
 
 select:focus {
-    border-color: #7081e5;
-    box-shadow: 0 0 0 4px rgba(112, 129, 229, 0.12);
+
+    outline: none;
+
+    border-color: #24717b;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(36, 113, 123, 0.12);
 }
 
-#participant-info button {
+
+
+/* =========================================
+   RESEARCH NOTE
+   ========================================= */
+
+.research-note {
+
     margin-top: 30px;
-    padding: 15px 28px;
-    border-radius: 12px;
-    background: #18263c;
+
+    padding: 20px;
+
+    background: #f1f7f8;
+
+    border-left:
+        4px solid #24717b;
+
+    border-radius: 8px;
+
+    color: #53676c;
+
+    line-height: 1.6;
+
+    font-size: 14px;
+}
+
+
+.research-note strong {
+
+    color: #174c55;
+
+    display: block;
+
+    margin-bottom: 5px;
+}
+
+
+.research-note p {
+
+    margin: 0;
+}
+
+
+
+/* =========================================
+   BUTTONS
+   ========================================= */
+
+.primary-button {
+
+    margin-top: 35px;
+
+    width: 100%;
+
+    padding: 16px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #174c55;
+
     color: white;
+
+    font-size: 15px;
+
     font-weight: 700;
-    font-size: 1rem;
-    transition: 0.2s ease;
+
+    cursor: pointer;
+
+    transition: 0.2s;
 }
 
-#participant-info button:hover {
-    transform: translateY(-2px);
-    background: #253954;
+
+.primary-button:hover {
+
+    background: #236b75;
+
+    transform: translateY(-1px);
 }
 
-#info-error {
-    margin-top: 15px;
-    color: #d94d65;
+
+.secondary-button {
+
+    display: inline-block;
+
+    margin-top: 25px;
+
+    padding: 13px 22px;
+
+    border:
+        1px solid #cbd7da;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    color: #174c55;
+
+    background: white;
+
     font-weight: 600;
 }
 
+
+
 /* =========================================
-   COLOUR TEST
+   TEST
    ========================================= */
 
-#colour-test {
-    text-align: center;
+.test-page {
+
+    max-width: 900px;
+
+    margin: auto;
 }
 
-#instruction {
-    margin-bottom: 35px;
+
+.test-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
 }
+
+
+.test-header h1 {
+
+    font-size: 30px;
+
+    margin: 0;
+}
+
+
+.participant-badge {
+
+    background: #eaf2f3;
+
+    color: #174c55;
+
+    padding: 9px 13px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.5px;
+}
+
+
+
+/* =========================================
+   PROGRESS
+   ========================================= */
+
+.progress-container {
+
+    margin-bottom: 30px;
+}
+
+
+.progress-bar {
+
+    width: 100%;
+
+    height: 7px;
+
+    background: #dce5e7;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+
+#progress-bar-fill {
+
+    height: 100%;
+
+    width: 0%;
+
+    background: #24717b;
+
+    transition:
+        width 0.25s ease;
+}
+
+
+
+/* =========================================
+   QUESTION CARD
+   ========================================= */
+
+.question-card {
+
+    background: white;
+
+    border:
+        1px solid #dfe6e8;
+
+    border-radius: 18px;
+
+    padding: 55px 35px;
+
+    text-align: center;
+
+    box-shadow:
+        0 10px 35px
+        rgba(20, 50, 60, 0.06);
+}
+
+
+.instruction {
+
+    font-size: 24px;
+
+    font-weight: 700;
+
+    margin:
+        0 0 8px;
+
+    color: #19363d;
+}
+
+
+.sub-instruction {
+
+    margin:
+        0 0 40px;
+
+    color: #748286;
+
+    font-size: 15px;
+}
+
+
+
+/* =========================================
+   COLOUR CIRCLES
+   ========================================= */
 
 .colour-grid {
+
     display: grid;
-    grid-template-columns: repeat(3, 120px);
-    justify-content: center;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
     gap: 25px;
-    margin: 40px auto;
+
+    max-width: 540px;
+
+    margin:
+        0 auto 35px;
 }
+
 
 .colour-circle-test {
-    width: 120px;
-    height: 120px;
+
+    width: 145px;
+
+    height: 145px;
+
+    margin: auto;
+
+    border: none;
+
     border-radius: 50%;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+
     box-shadow:
-        inset 0 0 0 5px rgba(255, 255, 255, 0.35),
-        0 10px 25px rgba(30, 40, 60, 0.10);
-    transition: transform 0.2s ease;
+        0 5px 15px
+        rgba(0,0,0,0.08);
 }
+
 
 .colour-circle-test:hover {
-    transform: scale(1.04);
+
+    transform: scale(1.05);
+
+    box-shadow:
+        0 8px 20px
+        rgba(0,0,0,0.14);
 }
 
-/* =========================================
-   ANSWERS
-   ========================================= */
 
-.answers {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 30px;
+.colour-circle-test:focus {
+
+    outline:
+        4px solid
+        rgba(36,113,123,0.3);
+
+    outline-offset: 5px;
 }
 
-.answers button {
-    width: 52px;
-    height: 52px;
-    border-radius: 12px;
-    background: #eef1f6;
-    color: #263449;
-    font-weight: 800;
-    font-size: 1rem;
-    transition: 0.2s ease;
+
+.test-warning {
+
+    margin: 0;
+
+    color: #879397;
+
+    font-size: 12px;
+
+    line-height: 1.5;
 }
 
-.answers button:hover {
-    background: #18263c;
-    color: white;
-    transform: translateY(-2px);
-}
 
-#progress {
-    margin-top: 25px;
-    font-size: 0.9rem;
-    color: #8a95a5;
-}
 
 /* =========================================
    RESULTS
    ========================================= */
 
-#results {
+.results-page {
+
+    max-width: 850px;
+
+    margin: auto;
+
+    background: white;
+
+    border:
+        1px solid #dfe6e8;
+
+    border-radius: 18px;
+
+    padding: 50px;
+
+    box-shadow:
+        0 10px 35px
+        rgba(20, 50, 60, 0.06);
+}
+
+
+.overall-result {
+
+    margin-top: 30px;
+
+    padding: 35px;
+
+    background: #f1f7f8;
+
+    border-radius: 14px;
+
     text-align: center;
 }
 
-#final-score {
-    font-size: 3.5rem;
-    margin: 25px 0;
-    background: linear-gradient(90deg, #536fdf, #7a56d4);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+
+.result-label {
+
+    display: block;
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+    font-weight: 700;
+
+    color: #6b7c81;
+
+    margin-bottom: 10px;
 }
 
-/* =========================================
-   FOOTER
-   ========================================= */
 
-footer {
-    padding: 50px 6%;
-    text-align: center;
-    color: #8a95a5;
-    font-size: 0.9rem;
+.big-score {
+
+    display: block;
+
+    font-size: 55px;
+
+    font-weight: 800;
+
+    color: #174c55;
 }
 
+
+
 /* =========================================
-   RESPONSIVE
+   AXIS RESULTS
    ========================================= */
 
-@media (max-width: 800px) {
+.axis-results {
 
-    .cards {
-        grid-template-columns: 1fr;
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin-top: 20px;
+}
+
+
+.axis-card {
+
+    border:
+        1px solid #dfe6e8;
+
+    border-radius: 12px;
+
+    padding: 22px;
+
+    background: #ffffff;
+}
+
+
+.axis-name {
+
+    display: block;
+
+    font-size: 11px;
+
+    letter-spacing: 1.5px;
+
+    font-weight: 700;
+
+    color: #24717b;
+
+    margin-bottom: 8px;
+}
+
+
+.axis-card > span:nth-child(2) {
+
+    display: block;
+
+    font-size: 28px;
+
+    font-weight: 800;
+
+    color: #1c353b;
+
+    margin-bottom: 10px;
+}
+
+
+.axis-card p {
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    color: #758286;
+
+    margin: 0;
+}
+
+
+
+/* =========================================
+   SUBMISSION STATUS
+   ========================================= */
+
+.submission-status {
+
+    margin-top: 25px;
+
+    padding: 14px;
+
+    background: #f7f9fa;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+
+    color: #617176;
+}
+
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 700px) {
+
+    main {
+
+        padding:
+            40px 15px;
     }
 
-    .hero {
-        min-height: 70vh;
-        padding-top: 60px;
-    }
 
-    .hero h1 {
-        letter-spacing: -3px;
-    }
+    .research-card,
+    .results-page {
 
-    .test-page {
         padding: 30px 22px;
-        margin: 35px auto;
     }
 
-    .test-page h1 {
-        font-size: 2.1rem;
+
+    h1 {
+
+        font-size: 32px;
     }
 
-    .info-box {
-        padding: 35px 25px;
-    }
-}
-
-@media (max-width: 500px) {
-
-    header {
-        padding: 15px 5%;
-    }
-
-    .logo {
-        font-size: 1rem;
-    }
-
-    .hero h1 {
-        font-size: 3.2rem;
-    }
 
     .colour-grid {
-        grid-template-columns: repeat(2, 100px);
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
         gap: 18px;
     }
 
+
     .colour-circle-test {
-        width: 100px;
-        height: 100px;
+
+        width: 110px;
+
+        height: 110px;
     }
 
-    .answers button {
-        width: 46px;
-        height: 46px;
+
+    .axis-results {
+
+        grid-template-columns:
+            1fr;
     }
+
+
+    .test-header {
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+
+    .participant-badge {
+
+        font-size: 10px;
+    }
+
 }
