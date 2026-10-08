@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Colour Vision Study</title>
+    <title>Colour Vision Test</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -23,117 +23,151 @@
 
 <section class="test-page">
 
-    <!-- PARTICIPANT INFORMATION -->
+<div id="participant-info">
 
-    <div id="participant-info">
+<div class="test-intro">
 
-        <p class="small-title">COLOUR VISION STUDY</p>
+<p class="small-title">
+COLOUR VISION STUDY · PARTICIPANT SETUP
+</p>
 
-        <h1>Before we begin</h1>
+<h1>Ready to begin?</h1>
 
-        <p>
-            This anonymous experiment investigates colour discrimination
-            using several different visual tasks.
-            It is not a medical diagnosis.
-        </p>
-
-        <label for="ageGroup">Age group</label>
-
-        <select id="ageGroup">
-            <option value="">Select an age group</option>
-            <option value="12-15">12–15</option>
-            <option value="16-18">16–18</option>
-            <option value="19-25">19–25</option>
-            <option value="26-40">26–40</option>
-            <option value="41+">41+</option>
-        </select>
+<p>
+This anonymous experiment investigates colour discrimination.
+It is not a medical diagnosis.
+</p>
 
 
-        <label for="sex">Sex</label>
+<label>Age group</label>
 
-        <select id="sex">
-            <option value="">Select an option</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Prefer not to say">Prefer not to say</option>
-        </select>
+<select id="ageGroup">
 
+<option value="">
+Select an age group
+</option>
 
-        <label for="diagnosis">
-            Have you previously been diagnosed with colour vision deficiency?
-        </label>
+<option>12-15</option>
+<option>16-18</option>
+<option>19-25</option>
+<option>26-40</option>
+<option>41+</option>
 
-        <select id="diagnosis">
-            <option value="">Select an option</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-            <option value="Don't know">Don't know</option>
-        </select>
+</select>
 
 
-        <button onclick="startTest()">
-            Start Test
-        </button>
+<label>Sex</label>
 
-        <p id="info-error"></p>
+<select id="sex">
 
-    </div>
+<option value="">
+Select an option
+</option>
 
+<option>Male</option>
+<option>Female</option>
+<option>Prefer not to say</option>
 
-    <!-- COLOUR TEST -->
-
-    <div id="colour-test" style="display:none;">
-
-        <p class="small-title">
-            COLOUR VISION TEST
-        </p>
-
-        <h1 id="question-number">
-            Question 1
-        </h1>
-
-        <p id="instruction"></p>
+</select>
 
 
-        <div id="question-area">
+<label>
+Previous colour vision diagnosis
+</label>
 
-            <div id="target-area"></div>
+<select id="diagnosis">
 
-            <div id="colour-grid" class="colour-grid"></div>
+<option value="">
+Select an option
+</option>
 
-        </div>
+<option>Yes</option>
+<option>No</option>
+<option>Don't know</option>
 
-
-        <div class="answers" id="answers"></div>
-
-
-        <p id="progress">
-            Question 1 of 12
-        </p>
-
-    </div>
+</select>
 
 
-    <!-- RESULTS -->
+<button
+    class="primary"
+    onclick="startTest()"
+>
 
-    <div id="results" style="display:none;">
+Start Test <span>→</span>
 
-        <p class="small-title">
-            TEST COMPLETE
-        </p>
+</button>
 
-        <h1 id="final-score"></h1>
+<p id="info-error"></p>
 
-        <p>
-            Your result has been recorded anonymously.
-        </p>
+</div>
 
-        <p>
-            This experiment is a research screening task and
-            cannot diagnose colour vision deficiency.
-        </p>
+</div>
 
-    </div>
+
+<!-- TEST -->
+
+<div
+    id="colour-test"
+    style="display:none"
+>
+
+<p class="small-title">
+COLOUR VISION TEST
+</p>
+
+<h1 id="question-number">
+Question 1
+</h1>
+
+<p
+    class="task"
+    id="task"
+></p>
+
+<p
+    id="instruction"
+    class="instruction-note"
+></p>
+
+
+<div id="test-area"></div>
+
+
+<p
+    id="progress"
+    class="instruction-note"
+></p>
+
+</div>
+
+
+<!-- RESULTS -->
+
+<div
+    id="results"
+    style="display:none"
+>
+
+<div class="result-mark">
+✓
+</div>
+
+<p class="small-title">
+TEST COMPLETE
+</p>
+
+<h1 id="final-score"></h1>
+
+<p class="results-copy">
+Thank you for taking part.
+Your result has been recorded for the student research project.
+</p>
+
+<p class="results-copy">
+This experiment is not a medical diagnosis.
+</p>
+
+</div>
 
 </section>
 
@@ -142,226 +176,298 @@
 
 <script>
 
+
 /* =========================================
    FORMSPREE
    ========================================= */
 
 const FORMSPREE_ENDPOINT =
-    "https://formspree.io/f/mgavrdvg";
+"https://formspree.io/f/mgavrdvg";
 
 
-/* =========================================
-   TEST QUESTIONS
-   ========================================= */
+/*
+Experimental design:
+
+4 trials per axis = 12 total.
+
+Axis labels are NOT shown
+to participants.
+
+These are research categories,
+not diagnoses.
+*/
+
 
 const questions = [
 
-    {
-        axis: "protan",
-        type: "oddity",
-        difficulty: "easy",
-        base: "#D98278",
-        different: "#C96F67",
-        position: 2
-    },
+/* PROTAN */
 
-    {
-        axis: "deutan",
-        type: "match",
-        difficulty: "easy",
-        target: "#78A85D",
-        choices: [
-            "#72A457",
-            "#789F62",
-            "#6E9854",
-            "#88AA72"
-        ],
-        answer: 1
-    },
+{
+    axis:"protan",
+    type:"oddity",
+    difficulty:"easy",
 
-    {
-        axis: "tritan",
-        type: "oddity",
-        difficulty: "easy",
-        base: "#6399C5",
-        different: "#5489B7",
-        position: 4
-    },
+    base:"#D98278",
+    different:"#C96F67",
+
+    position:2
+},
 
 
-    {
-        axis: "protan",
-        type: "match",
-        difficulty: "medium",
-        target: "#B8757D",
-        choices: [
-            "#B06E76",
-            "#B9777E",
-            "#A96770",
-            "#C4878D"
-        ],
-        answer: 1
-    },
+/* DEUTAN */
 
-    {
-        axis: "deutan",
-        type: "oddity",
-        difficulty: "medium",
-        base: "#7E9A68",
-        different: "#728E5E",
-        position: 0
-    },
+{
+    axis:"deutan",
+    type:"match",
+    difficulty:"easy",
 
-    {
-        axis: "tritan",
-        type: "match",
-        difficulty: "medium",
-        target: "#718EA9",
-        choices: [
-            "#6685A2",
-            "#7893AA",
-            "#607B98",
-            "#829BB0"
-        ],
-        answer: 1
-    },
+    target:"#78A85D",
+
+    choices:[
+        "#72A457",
+        "#789F62",
+        "#6E9854",
+        "#88AA72"
+    ],
+
+    answer:1
+},
 
 
-    {
-        axis: "protan",
-        type: "comparison",
-        difficulty: "medium",
-        base: "#C47A7F",
-        choices: [
-            "#C0757B",
-            "#CA8084",
-            "#B96F76",
-            "#D08A8E"
-        ],
-        answer: 0
-    },
+/* TRITAN */
 
-    {
-        axis: "deutan",
-        type: "comparison",
-        difficulty: "medium",
-        base: "#789661",
-        choices: [
-            "#728E5B",
-            "#7D9D67",
-            "#6A8654",
-            "#83A46C"
-        ],
-        answer: 0
-    },
+{
+    axis:"tritan",
+    type:"oddity",
+    difficulty:"easy",
 
-    {
-        axis: "tritan",
-        type: "comparison",
-        difficulty: "medium",
-        base: "#718FA9",
-        choices: [
-            "#6887A1",
-            "#7795AE",
-            "#5E7D97",
-            "#82A0B8"
-        ],
-        answer: 0
-    },
+    base:"#6399C5",
+    different:"#5489B7",
+
+    position:4
+},
 
 
-    {
-        axis: "protan",
-        type: "oddity",
-        difficulty: "hard",
-        base: "#B87880",
-        different: "#B1737B",
-        position: 5
-    },
 
-    {
-        axis: "deutan",
-        type: "match",
-        difficulty: "hard",
-        target: "#789260",
-        choices: [
-            "#738B5C",
-            "#7C965F",
-            "#6D8554",
-            "#839D68"
-        ],
-        answer: 1
-    },
+/* PROTAN */
 
-    {
-        axis: "tritan",
-        type: "oddity",
-        difficulty: "hard",
-        base: "#6F8FA9",
-        different: "#6A8AA5",
-        position: 1
-    }
+{
+    axis:"protan",
+    type:"match",
+    difficulty:"medium",
+
+    target:"#B8757D",
+
+    choices:[
+        "#B06E76",
+        "#B9777E",
+        "#A96770",
+        "#C4878D"
+    ],
+
+    answer:1
+},
+
+
+/* DEUTAN */
+
+{
+    axis:"deutan",
+    type:"oddity",
+    difficulty:"medium",
+
+    base:"#7E9A68",
+    different:"#728E5E",
+
+    position:0
+},
+
+
+/* TRITAN */
+
+{
+    axis:"tritan",
+    type:"match",
+    difficulty:"medium",
+
+    target:"#718EA9",
+
+    choices:[
+        "#6685A2",
+        "#7893AA",
+        "#607B98",
+        "#829BB0"
+    ],
+
+    answer:1
+},
+
+
+
+/* PROTAN */
+
+{
+    axis:"protan",
+    type:"comparison",
+    difficulty:"medium",
+
+    base:"#C47A7F",
+
+    choices:[
+        "#C0757B",
+        "#CA8084",
+        "#B96F76",
+        "#D08A8E"
+    ],
+
+    answer:0
+},
+
+
+/* DEUTAN */
+
+{
+    axis:"deutan",
+    type:"comparison",
+    difficulty:"medium",
+
+    base:"#789661",
+
+    choices:[
+        "#728E5B",
+        "#7D9D67",
+        "#6A8654",
+        "#83A46C"
+    ],
+
+    answer:0
+},
+
+
+/* TRITAN */
+
+{
+    axis:"tritan",
+    type:"comparison",
+    difficulty:"medium",
+
+    base:"#718FA9",
+
+    choices:[
+        "#6887A1",
+        "#7795AE",
+        "#5E7D97",
+        "#82A0B8"
+    ],
+
+    answer:0
+},
+
+
+
+/* PROTAN */
+
+{
+    axis:"protan",
+    type:"oddity",
+    difficulty:"hard",
+
+    base:"#B87880",
+    different:"#B1737B",
+
+    position:5
+},
+
+
+/* DEUTAN */
+
+{
+    axis:"deutan",
+    type:"match",
+    difficulty:"hard",
+
+    target:"#789260",
+
+    choices:[
+        "#738B5C",
+        "#7C965F",
+        "#6D8554",
+        "#839D68"
+    ],
+
+    answer:1
+},
+
+
+/* TRITAN */
+
+{
+    axis:"tritan",
+    type:"oddity",
+    difficulty:"hard",
+
+    base:"#6F8FA9",
+    different:"#6A8AA5",
+
+    position:1
+}
 
 ];
+
 
 
 /* =========================================
    VARIABLES
    ========================================= */
 
-let question = 0;
+let q = 0;
 
 let score = 0;
 
-let participantData = {};
 
+let answers = {
 
-/* =========================================
-   AXIS RESULTS
-   ========================================= */
-
-let axisResults = {
-
-    protan: {
-        correct: 0,
-        wrong: 0,
-        total: 0
-    },
-
-    deutan: {
-        correct: 0,
-        wrong: 0,
-        total: 0
-    },
-
-    tritan: {
-        correct: 0,
-        wrong: 0,
-        total: 0
-    }
+    protan:0,
+    deutan:0,
+    tritan:0
 
 };
+
+
+let correct = {
+
+    protan:0,
+    deutan:0,
+    tritan:0
+
+};
+
+
+let participantData = {};
+
 
 
 /* =========================================
    START TEST
    ========================================= */
 
-function startTest() {
+function startTest(){
 
-    const ageGroup =
+    const age =
         document.getElementById("ageGroup").value;
 
     const sex =
         document.getElementById("sex").value;
 
-    const diagnosis =
+    const diag =
         document.getElementById("diagnosis").value;
 
 
-    if (!ageGroup || !sex || !diagnosis) {
+    if(!age || !sex || !diag){
 
-        document.getElementById("info-error").innerText =
+        document.getElementById(
+            "info-error"
+        ).innerText =
             "Please complete all three questions before starting.";
 
         return;
@@ -369,28 +475,35 @@ function startTest() {
     }
 
 
-    const participantID =
-        "CVS-" +
-        Date.now().toString(36).toUpperCase();
-
-
     participantData = {
 
-        participant: participantID,
+        participant:
+            "CVS-" +
+            Date.now()
+                .toString(36)
+                .toUpperCase(),
 
-        ageGroup: ageGroup,
+        ageGroup:
+            age,
 
-        sex: sex,
+        sex:
+            sex,
 
-        previousDiagnosis: diagnosis
+        previousDiagnosis:
+            diag
 
     };
 
 
-    document.getElementById("participant-info").style.display =
+    document.getElementById(
+        "participant-info"
+    ).style.display =
         "none";
 
-    document.getElementById("colour-test").style.display =
+
+    document.getElementById(
+        "colour-test"
+    ).style.display =
         "block";
 
 
@@ -399,117 +512,123 @@ function startTest() {
 }
 
 
+
 /* =========================================
    SHOW QUESTION
    ========================================= */
 
-function showQuestion() {
+function showQuestion(){
 
-    const current =
-        questions[question];
-
-
-    document.getElementById("question-number").innerText =
-        "Question " + (question + 1);
+    const x =
+        questions[q];
 
 
-    document.getElementById("progress").innerText =
+    document.getElementById(
+        "question-number"
+    ).innerText =
+        "Question " + (q + 1);
+
+
+    document.getElementById(
+        "progress"
+    ).innerText =
         "Question " +
-        (question + 1) +
+        (q + 1) +
         " of " +
         questions.length;
 
 
-    const instruction =
-        document.getElementById("instruction");
+    const area =
+        document.getElementById(
+            "test-area"
+        );
 
 
-    const grid =
-        document.getElementById("colour-grid");
+    area.innerHTML = "";
 
 
-    const targetArea =
-        document.getElementById("target-area");
+
+    /* =====================================
+       ODDITY
+       ===================================== */
+
+    if(x.type === "oddity"){
+
+        document.getElementById(
+            "task"
+        ).innerText =
+            "Find the different colour";
 
 
-    const answers =
-        document.getElementById("answers");
+        document.getElementById(
+            "instruction"
+        ).innerText =
+            "One circle is different. Click the number inside that circle.";
 
 
-    grid.innerHTML = "";
-
-    targetArea.innerHTML = "";
-
-    answers.innerHTML = "";
+        const row =
+            document.createElement("div");
 
 
-    /* =========================================
-       ODDITY TASK
-       ========================================= */
-
-    if (current.type === "oddity") {
-
-        instruction.innerText =
-            "Look carefully at the circles and select the one that looks different.";
+        row.className =
+            "palette";
 
 
-        for (let i = 0; i < 6; i++) {
+        for(
+            let i = 0;
+            i < 6;
+            i++
+        ){
 
-            const circle =
+            const d =
                 document.createElement("div");
 
 
-            circle.className =
-                "colour-circle-test";
+            d.className =
+                "swatch";
 
 
-            if (i === current.position) {
-
-                circle.style.backgroundColor =
-                    current.different;
-
-            } else {
-
-                circle.style.backgroundColor =
-                    current.base;
-
-            }
-
-
-            grid.appendChild(circle);
-
-        }
-
-
-        for (let i = 0; i < 6; i++) {
-
-            const button =
-                document.createElement("button");
-
-            button.innerText =
+            d.innerText =
                 i + 1;
 
-            button.onclick = function () {
 
-                answer(i);
+            d.style.background =
+                i === x.position
+                ? x.different
+                : x.base;
 
-            };
 
-            answers.appendChild(button);
+            d.onclick =
+                () => answer(i);
+
+
+            row.appendChild(d);
 
         }
+
+
+        area.appendChild(row);
 
     }
 
 
-    /* =========================================
-       MATCH TASK
-       ========================================= */
 
-    if (current.type === "match") {
+    /* =====================================
+       MATCH
+       ===================================== */
 
-        instruction.innerText =
-            "Choose the colour that most closely matches the target.";
+    if(x.type === "match"){
+
+        document.getElementById(
+            "task"
+        ).innerText =
+            "Find the closest match";
+
+
+        document.getElementById(
+            "instruction"
+        ).innerText =
+            "Look at the target colour, then choose the numbered colour that looks most similar.";
 
 
         const target =
@@ -517,192 +636,182 @@ function showQuestion() {
 
 
         target.className =
-            "colour-circle-test";
+            "target";
 
 
-        target.style.margin =
-            "0 auto";
+        target.style.background =
+            x.target;
 
 
-        target.style.backgroundColor =
-            current.target;
+        area.appendChild(target);
 
 
-        targetArea.appendChild(target);
+        const row =
+            document.createElement("div");
 
 
-        current.choices.forEach(
-            function (colour, index) {
-
-                const button =
-                    document.createElement("button");
+        row.className =
+            "match-row";
 
 
-                button.innerText =
-                    index + 1;
+        x.choices.forEach(
+            function(c,i){
+
+                const d =
+                    document.createElement("div");
 
 
-                button.style.backgroundColor =
-                    colour;
+                d.className =
+                    "choice";
 
 
-                button.style.color =
-                    "transparent";
+                d.innerText =
+                    i + 1;
 
 
-                button.style.width =
-                    "70px";
+                d.style.background =
+                    c;
 
 
-                button.style.height =
-                    "70px";
+                d.onclick =
+                    () => answer(i);
 
 
-                button.style.borderRadius =
-                    "50%";
-
-
-                button.onclick =
-                    function () {
-
-                        answer(index);
-
-                    };
-
-
-                answers.appendChild(button);
+                row.appendChild(d);
 
             }
         );
+
+
+        area.appendChild(row);
 
     }
 
 
-    /* =========================================
-       COMPARISON TASK
-       ========================================= */
 
-    if (current.type === "comparison") {
+    /* =====================================
+       COMPARISON
+       ===================================== */
 
-        instruction.innerText =
-            "Choose the colour that looks most different from the reference.";
+    if(x.type === "comparison"){
+
+        document.getElementById(
+            "task"
+        ).innerText =
+            "Choose the closest colour";
 
 
-        const reference =
+        document.getElementById(
+            "instruction"
+        ).innerText =
+            "Compare each option with the reference colour. Pick the option that is closest.";
+
+
+        const target =
             document.createElement("div");
 
 
-        reference.className =
-            "colour-circle-test";
+        target.className =
+            "target";
 
 
-        reference.style.margin =
-            "0 auto";
+        target.style.background =
+            x.base;
 
 
-        reference.style.backgroundColor =
-            current.base;
+        area.appendChild(target);
 
 
-        targetArea.appendChild(reference);
+        const row =
+            document.createElement("div");
 
 
-        current.choices.forEach(
-            function (colour, index) {
-
-                const button =
-                    document.createElement("button");
+        row.className =
+            "match-row";
 
 
-                button.innerText =
-                    index + 1;
+        x.choices.forEach(
+            function(c,i){
+
+                const d =
+                    document.createElement("div");
 
 
-                button.style.backgroundColor =
-                    colour;
+                d.className =
+                    "choice";
 
 
-                button.style.color =
-                    "transparent";
+                d.innerText =
+                    i + 1;
 
 
-                button.style.width =
-                    "70px";
+                d.style.background =
+                    c;
 
 
-                button.style.height =
-                    "70px";
+                d.onclick =
+                    () => answer(i);
 
 
-                button.style.borderRadius =
-                    "50%";
-
-
-                button.onclick =
-                    function () {
-
-                        answer(index);
-
-                    };
-
-
-                answers.appendChild(button);
+                row.appendChild(d);
 
             }
         );
+
+
+        area.appendChild(row);
 
     }
 
 }
 
 
+
 /* =========================================
-   RECORD ANSWER
+   ANSWER
    ========================================= */
 
-function answer(choice) {
+function answer(choice){
 
-    const current =
-        questions[question];
-
-
-    axisResults[current.axis].total++;
+    const x =
+        questions[q];
 
 
-    let correct =
+    answers[x.axis]++;
+
+
+    let isCorrect =
         false;
 
 
-    if (current.type === "oddity") {
+    if(x.type === "oddity"){
 
-        correct =
-            choice === current.position;
+        isCorrect =
+            choice === x.position;
 
-    } else {
+    }
 
-        correct =
-            choice === current.answer;
+    else{
+
+        isCorrect =
+            choice === x.answer;
 
     }
 
 
-    if (correct) {
+    if(isCorrect){
 
         score++;
 
-        axisResults[current.axis].correct++;
-
-    } else {
-
-        axisResults[current.axis].wrong++;
+        correct[x.axis]++;
 
     }
 
 
-    question++;
+    q++;
 
 
-    if (question >= questions.length) {
+    if(q >= questions.length){
 
         finishTest();
 
@@ -716,24 +825,33 @@ function answer(choice) {
 }
 
 
+
 /* =========================================
    FINISH TEST
    ========================================= */
 
-async function finishTest() {
+async function finishTest(){
 
-    document.getElementById("colour-test").style.display =
+    document.getElementById(
+        "colour-test"
+    ).style.display =
         "none";
 
-    document.getElementById("results").style.display =
+
+    document.getElementById(
+        "results"
+    ).style.display =
         "block";
 
 
-    document.getElementById("final-score").innerText =
+    document.getElementById(
+        "final-score"
+    ).innerText =
         "Your score: " +
         score +
         "/" +
         questions.length;
+
 
 
     const resultData = {
@@ -750,38 +868,44 @@ async function finishTest() {
         previousDiagnosis:
             participantData.previousDiagnosis,
 
+
         score:
-            score + "/" + questions.length,
+            score +
+            "/" +
+            questions.length,
 
 
         protanCorrect:
-            axisResults.protan.correct,
+            correct.protan,
 
         protanWrong:
-            axisResults.protan.wrong,
+            answers.protan -
+            correct.protan,
 
         protanTotal:
-            axisResults.protan.total,
+            answers.protan,
 
 
         deutanCorrect:
-            axisResults.deutan.correct,
+            correct.deutan,
 
         deutanWrong:
-            axisResults.deutan.wrong,
+            answers.deutan -
+            correct.deutan,
 
         deutanTotal:
-            axisResults.deutan.total,
+            answers.deutan,
 
 
         tritanCorrect:
-            axisResults.tritan.correct,
+            correct.tritan,
 
         tritanWrong:
-            axisResults.tritan.wrong,
+            answers.tritan -
+            correct.tritan,
 
         tritanTotal:
-            axisResults.tritan.total,
+            answers.tritan,
 
 
         date:
@@ -790,52 +914,37 @@ async function finishTest() {
     };
 
 
-    try {
+    try{
 
-        const response =
-            await fetch(
-                FORMSPREE_ENDPOINT,
-                {
+        await fetch(
+            FORMSPREE_ENDPOINT,
+            {
 
-                    method: "POST",
+                method:"POST",
 
-                    headers: {
+                headers:{
 
-                        "Content-Type":
-                            "application/json",
+                    "Content-Type":
+                        "application/json",
 
-                        "Accept":
-                            "application/json"
+                    "Accept":
+                        "application/json"
 
-                    },
+                },
 
-                    body:
-                        JSON.stringify(resultData)
+                body:
+                    JSON.stringify(
+                        resultData
+                    )
 
-                }
-            );
-
-
-        if (response.ok) {
-
-            console.log(
-                "Result sent successfully."
-            );
-
-        } else {
-
-            console.log(
-                "There was a problem sending the result."
-            );
-
-        }
-
-    } catch (error) {
-
-        console.log(
-            "Error sending result:",
-            error
+            }
         );
+
+    }
+
+    catch(error){
+
+        console.log(error);
 
     }
 
