@@ -2,17 +2,598 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Colour Vision Study | Test</title>
 
     <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* =========================================
+           TEST PAGE
+           ========================================= */
+
+        .test-main {
+            max-width: 1050px;
+            margin: 0 auto;
+            padding: 70px 30px 100px;
+        }
+
+
+        /* =========================================
+           INTRODUCTION
+           ========================================= */
+
+        .intro-card {
+            max-width: 850px;
+            margin: 40px auto 0;
+            background: white;
+            border: 1px solid #e0e8e9;
+            border-radius: 20px;
+            padding: 55px;
+            box-shadow: 0 20px 60px rgba(20,60,70,0.06);
+        }
+
+
+        .intro-card h1 {
+            font-size: clamp(38px, 5vw, 58px);
+            line-height: 1.05;
+            letter-spacing: -2px;
+            color: #153b43;
+            margin-bottom: 20px;
+        }
+
+
+        .intro-text {
+            max-width: 680px;
+            font-size: 17px;
+            line-height: 1.8;
+            color: #687a7f;
+            margin-bottom: 35px;
+        }
+
+
+        .study-overview {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin: 30px 0 38px;
+        }
+
+
+        .overview-item {
+            padding: 22px;
+            background: #f7f9fa;
+            border: 1px solid #e3eaeb;
+            border-radius: 12px;
+        }
+
+
+        .overview-number {
+            display: block;
+            font-size: 22px;
+            font-weight: 800;
+            color: #174c55;
+            margin-bottom: 5px;
+        }
+
+
+        .overview-label {
+            display: block;
+            font-size: 11px;
+            color: #7d8c90;
+            letter-spacing: 0.5px;
+        }
+
+
+        .participant-note {
+            padding: 22px 24px;
+            background: #edf5f4;
+            border-left: 3px solid #57969a;
+            border-radius: 8px;
+            margin-bottom: 38px;
+        }
+
+
+        .participant-note strong {
+            display: block;
+            color: #194d55;
+            font-size: 14px;
+            margin-bottom: 7px;
+        }
+
+
+        .participant-note p {
+            color: #65777b;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+
+        /* =========================================
+           FORM
+           ========================================= */
+
+        .form-heading {
+            font-size: 20px;
+            color: #193e46;
+            margin-bottom: 22px;
+        }
+
+
+        .form-group {
+            margin-bottom: 23px;
+        }
+
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            color: #294b52;
+            margin-bottom: 9px;
+        }
+
+
+        .form-group select {
+            width: 100%;
+            padding: 14px 15px;
+            border: 1px solid #d7e1e3;
+            border-radius: 8px;
+            background: white;
+            color: #405b61;
+            font-size: 14px;
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+
+        .form-group select:focus {
+            outline: none;
+            border-color: #57969a;
+            box-shadow: 0 0 0 3px rgba(87,150,154,0.12);
+        }
+
+
+        .start-test-button {
+            width: 100%;
+            border: none;
+            border-radius: 9px;
+            padding: 16px 22px;
+            background: #123f47;
+            color: white;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+
+        .start-test-button:hover {
+            background: #1c646e;
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================================
+           TEST HEADER
+           ========================================= */
+
+        .test-wrapper {
+            display: none;
+        }
+
+
+        .test-top {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 25px;
+        }
+
+
+        .test-top h1 {
+            font-size: clamp(32px, 4vw, 48px);
+            line-height: 1;
+            letter-spacing: -1.5px;
+            color: #153b43;
+        }
+
+
+        .participant-badge {
+            padding: 9px 13px;
+            background: white;
+            border: 1px solid #dce5e6;
+            border-radius: 7px;
+            color: #718186;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+
+        /* =========================================
+           PROGRESS
+           ========================================= */
+
+        .progress-track {
+            height: 5px;
+            width: 100%;
+            background: #e3e9ea;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 35px;
+        }
+
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: #397d83;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+
+        /* =========================================
+           QUESTION CARD
+           ========================================= */
+
+        .question-card-new {
+            background: white;
+            border: 1px solid #e0e8e9;
+            border-radius: 20px;
+            padding: 55px 40px 35px;
+            box-shadow: 0 20px 60px rgba(20,60,70,0.06);
+        }
+
+
+        .question-label {
+            text-align: center;
+            color: #23717a;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 13px;
+        }
+
+
+        .question-title {
+            text-align: center;
+            color: #153b43;
+            font-size: clamp(25px, 4vw, 35px);
+            letter-spacing: -1px;
+            margin-bottom: 9px;
+        }
+
+
+        .question-subtitle {
+            text-align: center;
+            color: #849296;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 35px;
+        }
+
+
+        .exercise-area {
+            width: 100%;
+            min-height: 310px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+
+        /* =========================================
+           CIRCLE / SQUARE OPTIONS
+           ========================================= */
+
+        .colour-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 105px);
+            gap: 22px;
+            justify-content: center;
+        }
+
+
+        .colour-circle-test,
+        .colour-square-test {
+            width: 105px;
+            height: 105px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 7px 18px rgba(0,0,0,0.09);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+
+        .colour-circle-test {
+            border-radius: 50%;
+        }
+
+
+        .colour-square-test {
+            border-radius: 10px;
+        }
+
+
+        .colour-circle-test:hover,
+        .colour-square-test:hover {
+            transform: scale(1.07);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+
+        .colour-circle-test:focus,
+        .colour-square-test:focus,
+        .match-colour:focus,
+        .small-colour-tile:focus {
+            outline: 4px solid rgba(36,113,123,0.25);
+            outline-offset: 5px;
+        }
+
+
+        /* =========================================
+           MATCHING
+           ========================================= */
+
+        .target-label {
+            color: #849296;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+
+        .target-colour {
+            width: 125px;
+            height: 125px;
+            border-radius: 12px;
+            box-shadow: 0 9px 25px rgba(0,0,0,0.1);
+        }
+
+
+        .match-options {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+
+        .match-colour {
+            width: 82px;
+            height: 82px;
+            border: none;
+            border-radius: 9px;
+            cursor: pointer;
+            box-shadow: 0 6px 17px rgba(0,0,0,0.08);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+
+        .match-colour:hover {
+            transform: scale(1.07);
+            box-shadow: 0 9px 22px rgba(0,0,0,0.14);
+        }
+
+
+        /* =========================================
+           GRID
+           ========================================= */
+
+        .small-colour-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 88px);
+            gap: 14px;
+        }
+
+
+        .small-colour-tile {
+            width: 88px;
+            height: 88px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 5px 14px rgba(0,0,0,0.07);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+
+        .small-colour-tile:hover {
+            transform: scale(1.06);
+            box-shadow: 0 8px 19px rgba(0,0,0,0.13);
+        }
+
+
+        /* =========================================
+           TEST FOOTER
+           ========================================= */
+
+        .test-warning-new {
+            max-width: 600px;
+            margin: 20px auto 0;
+            text-align: center;
+            color: #8b989b;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+
+        /* =========================================
+           RESULTS
+           ========================================= */
+
+        .results-wrapper {
+            display: none;
+            max-width: 700px;
+            margin: 50px auto;
+            text-align: center;
+        }
+
+
+        .results-wrapper h1 {
+            color: #153b43;
+            font-size: clamp(42px, 6vw, 62px);
+            letter-spacing: -2px;
+            margin-bottom: 12px;
+        }
+
+
+        .results-intro {
+            color: #718186;
+            font-size: 16px;
+            margin-bottom: 35px;
+        }
+
+
+        .score-box {
+            background: white;
+            border: 1px solid #e0e8e9;
+            border-radius: 18px;
+            padding: 38px;
+            box-shadow: 0 20px 60px rgba(20,60,70,0.06);
+            margin-bottom: 25px;
+        }
+
+
+        .score-label {
+            display: block;
+            color: #849296;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+
+        .score {
+            display: block;
+            color: #174c55;
+            font-size: 65px;
+            line-height: 1;
+            font-weight: 800;
+            letter-spacing: -3px;
+        }
+
+
+        .result-note {
+            background: #edf5f4;
+            border-radius: 10px;
+            padding: 22px;
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+
+        .result-note strong {
+            display: block;
+            color: #194d55;
+            font-size: 13px;
+            margin-bottom: 7px;
+        }
+
+
+        .result-note p {
+            color: #65777b;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+
+        .submission-status {
+            color: #718186;
+            font-size: 12px;
+            margin-bottom: 25px;
+        }
+
+
+        .return-button {
+            display: inline-block;
+            padding: 13px 20px;
+            background: #123f47;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 700px) {
+
+            .test-main {
+                padding: 45px 18px 70px;
+            }
+
+            .intro-card {
+                padding: 32px 23px;
+                margin-top: 20px;
+            }
+
+            .intro-card h1 {
+                font-size: 40px;
+            }
+
+            .study-overview {
+                grid-template-columns: 1fr;
+            }
+
+            .test-top {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .question-card-new {
+                padding: 40px 18px 28px;
+            }
+
+            .colour-grid {
+                grid-template-columns: repeat(3, 82px);
+                gap: 14px;
+            }
+
+            .colour-circle-test,
+            .colour-square-test {
+                width: 82px;
+                height: 82px;
+            }
+
+            .small-colour-grid {
+                grid-template-columns: repeat(3, 70px);
+                gap: 10px;
+            }
+
+            .small-colour-tile {
+                width: 70px;
+                height: 70px;
+            }
+
+            .match-colour {
+                width: 65px;
+                height: 65px;
+            }
+
+            .target-colour {
+                width: 100px;
+                height: 100px;
+            }
+
+        }
+
+    </style>
 
 </head>
 
@@ -20,22 +601,14 @@
 <body>
 
 
-<!-- =========================================
-     NAVIGATION
-     ========================================= -->
-
 <header>
 
     <nav>
 
         <div class="logo">
-
             <span class="logo-dot"></span>
-
             COLOUR VISION STUDY
-
         </div>
-
 
         <div class="nav-links">
 
@@ -50,412 +623,382 @@
 </header>
 
 
-
-<main>
-
-
-<!-- =========================================
-     PARTICIPANT INFORMATION
-     ========================================= -->
-
-<section
-    id="participant-section"
-    class="research-card"
->
+<main class="test-main">
 
 
-    <div class="study-label">
-        COLOUR VISION STUDY
-    </div>
+    <!-- =========================================
+         INTRODUCTION
+         ========================================= -->
+
+    <section id="participant-section" class="intro-card">
+
+        <div class="study-label">
+            STUDENT SCIENCE RESEARCH
+        </div>
 
 
-    <h1>
-        Participant information
-    </h1>
+        <h1>
+            Take part in the study.
+        </h1>
 
 
-    <p class="intro">
+        <p class="intro-text">
 
-        Before beginning the study, please answer
-        the following questions.
+            This short experiment explores how accurately
+            people can distinguish between colours that are
+            deliberately made similar.
 
-    </p>
-
-
-    <div class="research-note">
-
-        <strong>
-            Anonymous participation
-        </strong>
-
-        <p>
-
-            Please do not enter your name, email address
-            or other identifying information. Your responses
-            are recorded using an anonymous participant ID.
+            You will complete 12 different visual tasks.
+            Each task takes only a few seconds.
 
         </p>
 
-    </div>
 
+        <div class="study-overview">
 
+            <div class="overview-item">
 
-    <!-- AGE -->
+                <span class="overview-number">
+                    12
+                </span>
 
-    <label for="ageGroup">
-
-        Age group
-
-    </label>
-
-
-    <select id="ageGroup">
-
-        <option value="">
-            Select your age group
-        </option>
-
-        <option value="Under 13">
-            Under 13
-        </option>
-
-        <option value="13-15">
-            13–15
-        </option>
-
-        <option value="16-18">
-            16–18
-        </option>
-
-        <option value="19-25">
-            19–25
-        </option>
-
-        <option value="26-40">
-            26–40
-        </option>
-
-        <option value="41-60">
-            41–60
-        </option>
-
-        <option value="60+">
-            60+
-        </option>
-
-    </select>
-
-
-
-    <!-- SEX -->
-
-    <label for="sex">
-
-        Sex
-
-    </label>
-
-
-    <select id="sex">
-
-        <option value="">
-            Select
-        </option>
-
-        <option value="Male">
-            Male
-        </option>
-
-        <option value="Female">
-            Female
-        </option>
-
-        <option value="Prefer not to say">
-            Prefer not to say
-        </option>
-
-    </select>
-
-
-
-    <!-- PREVIOUS DIAGNOSIS -->
-
-    <label for="previousDiagnosis">
-
-        Have you previously been diagnosed
-        with colour vision deficiency?
-
-    </label>
-
-
-    <select id="previousDiagnosis">
-
-        <option value="">
-            Select
-        </option>
-
-        <option value="No">
-            No
-        </option>
-
-        <option value="Yes">
-            Yes
-        </option>
-
-        <option value="Unsure">
-            Unsure
-        </option>
-
-        <option value="Prefer not to say">
-            Prefer not to say
-        </option>
-
-    </select>
-
-
-
-    <button
-        class="primary-button"
-        onclick="startTest()"
-    >
-
-        Begin the study
-
-    </button>
-
-
-</section>
-
-
-
-<!-- =========================================
-     TEST
-     ========================================= -->
-
-<section
-    id="colour-test"
-    class="test-page"
-    style="display:none;"
->
-
-
-    <!-- TEST HEADER -->
-
-    <div class="test-header">
-
-
-        <div>
-
-            <div class="study-label">
-
-                COLOUR VISION STUDY
+                <span class="overview-label">
+                    visual trials
+                </span>
 
             </div>
 
 
-            <h1 id="question-number">
+            <div class="overview-item">
 
-                Question 1 of 12
+                <span class="overview-number">
+                    ~5
+                </span>
 
-            </h1>
+                <span class="overview-label">
+                    minutes
+                </span>
+
+            </div>
+
+
+            <div class="overview-item">
+
+                <span class="overview-number">
+                    Anonymous
+                </span>
+
+                <span class="overview-label">
+                    participation
+                </span>
+
+            </div>
 
         </div>
 
 
-        <div
-            class="participant-badge"
-            id="participant-id"
+        <div class="participant-note">
+
+            <strong>
+                Before you begin
+            </strong>
+
+            <p>
+
+                Please use your normal screen brightness.
+                Turn off night mode, blue-light filters or
+                colour-changing display settings if possible.
+                Try to complete the test without asking anyone
+                else for help.
+
+            </p>
+
+        </div>
+
+
+        <h2 class="form-heading">
+            About the participant
+        </h2>
+
+
+        <div class="form-group">
+
+            <label for="ageGroup">
+                Age group
+            </label>
+
+            <select id="ageGroup">
+
+                <option value="">
+                    Select your age group
+                </option>
+
+                <option value="Under 13">
+                    Under 13
+                </option>
+
+                <option value="13-15">
+                    13–15
+                </option>
+
+                <option value="16-18">
+                    16–18
+                </option>
+
+                <option value="19-25">
+                    19–25
+                </option>
+
+                <option value="26-40">
+                    26–40
+                </option>
+
+                <option value="41-60">
+                    41–60
+                </option>
+
+                <option value="60+">
+                    60+
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="sex">
+                Sex
+            </label>
+
+            <select id="sex">
+
+                <option value="">
+                    Select
+                </option>
+
+                <option value="Male">
+                    Male
+                </option>
+
+                <option value="Female">
+                    Female
+                </option>
+
+                <option value="Prefer not to say">
+                    Prefer not to say
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="previousDiagnosis">
+                Have you previously been diagnosed with colour vision deficiency?
+            </label>
+
+            <select id="previousDiagnosis">
+
+                <option value="">
+                    Select
+                </option>
+
+                <option value="No">
+                    No
+                </option>
+
+                <option value="Yes">
+                    Yes
+                </option>
+
+                <option value="Unsure">
+                    Unsure
+                </option>
+
+                <option value="Prefer not to say">
+                    Prefer not to say
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="start-test-button"
+            onclick="startTest()"
         >
+            Begin the colour test →
+        </button>
 
-            Participant
+    </section>
+
+
+    <!-- =========================================
+         TEST
+         ========================================= -->
+
+    <section id="test-wrapper" class="test-wrapper">
+
+        <div class="test-top">
+
+            <div>
+
+                <div class="study-label">
+                    COLOUR VISION STUDY
+                </div>
+
+                <h1 id="question-number">
+                    Question 1 of 12
+                </h1>
+
+            </div>
+
+
+            <div
+                class="participant-badge"
+                id="participant-id"
+            >
+                Participant
+            </div>
 
         </div>
 
 
-    </div>
+        <div class="progress-track">
 
-
-
-    <!-- PROGRESS -->
-
-    <div class="progress-container">
-
-        <div class="progress-bar">
-
-            <div id="progress-bar-fill"></div>
+            <div
+                id="progress-bar-fill"
+                class="progress-fill"
+            ></div>
 
         </div>
 
-    </div>
+
+        <div class="question-card-new">
+
+            <div class="question-label">
+                VISUAL TRIAL
+            </div>
 
 
+            <h2
+                id="instruction"
+                class="question-title"
+            >
+                Which circle is different?
+            </h2>
 
-    <!-- QUESTION -->
 
-    <div class="question-card">
+            <p
+                id="sub-instruction"
+                class="question-subtitle"
+            >
+                Choose the circle that looks different from the others.
+            </p>
+
+
+            <div
+                id="exercise-area"
+                class="exercise-area"
+            ></div>
+
+
+            <p class="test-warning-new">
+
+                There are no time limits.
+                Choose the option that looks most different to you.
+                Your answer will automatically move to the next trial.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         RESULTS
+         ========================================= -->
+
+    <section
+        id="results-wrapper"
+        class="results-wrapper"
+    >
+
+        <div class="study-label">
+            COLOUR VISION STUDY
+        </div>
+
+
+        <h1>
+            Study complete.
+        </h1>
+
+
+        <p class="results-intro">
+            Thank you for taking part in the experiment.
+        </p>
+
+
+        <div class="score-box">
+
+            <span class="score-label">
+                YOUR SCORE
+            </span>
+
+            <span
+                id="final-score"
+                class="score"
+            >
+                0/12
+            </span>
+
+        </div>
+
+
+        <div class="result-note">
+
+            <strong>
+                About your result
+            </strong>
+
+            <p>
+
+                This is an experimental student research task.
+                Your score describes your performance in this
+                particular test and should not be used as a
+                clinical diagnosis of colour vision deficiency.
+
+            </p>
+
+        </div>
 
 
         <p
-            id="instruction"
-            class="instruction"
+            id="submission-status"
+            class="submission-status"
         >
-
-            Choose the colour that looks different.
-
+            Recording anonymous result...
         </p>
 
 
-        <p
-            id="sub-instruction"
-            class="sub-instruction"
+        <a
+            href="index.html"
+            class="return-button"
         >
+            Return to the study
+        </a>
 
-            Take your time and choose the answer
-            that looks most different.
-
-        </p>
-
-
-
-        <!--
-            DIFFERENT EXERCISE TYPES ARE INSERTED HERE
-        -->
-
-        <div
-            id="exercise-area"
-            class="exercise-area"
-        >
-
-        </div>
-
-
-
-        <p class="test-warning">
-
-            For the most consistent results, use normal
-            screen brightness and turn off night mode
-            or colour filters.
-
-        </p>
-
-
-    </div>
-
-
-</section>
-
-
-
-<!-- =========================================
-     RESULTS
-     ========================================= -->
-
-<section
-    id="results"
-    class="results-page"
-    style="display:none;"
->
-
-
-    <div class="study-label">
-
-        COLOUR VISION STUDY
-
-    </div>
-
-
-    <h1>
-        Study complete
-    </h1>
-
-
-    <p class="results-intro">
-
-        Thank you for taking part.
-
-    </p>
-
-
-
-    <!-- OVERALL SCORE -->
-
-    <div class="overall-result">
-
-        <span class="result-label">
-
-            YOUR SCORE
-
-        </span>
-
-
-        <span
-            id="final-score"
-            class="big-score"
-        >
-
-            0/12
-
-        </span>
-
-    </div>
-
-
-
-    <!--
-        The participant only sees the overall score.
-
-        The three research-axis scores are NOT displayed
-        to the participant.
-    -->
-
-
-
-    <div class="research-note">
-
-        <strong>
-            About your result
-        </strong>
-
-        <p>
-
-            This experimental colour-discrimination task
-            is designed for student research. Your score
-            represents your performance in this particular
-            test and is not a clinical diagnosis of colour
-            vision deficiency.
-
-        </p>
-
-    </div>
-
-
-
-    <p
-        class="submission-status"
-        id="submission-status"
-    >
-
-        Recording anonymous result...
-
-    </p>
-
-
-
-    <a
-        href="index.html"
-        class="secondary-button"
-    >
-
-        Return to study
-
-    </a>
-
-
-</section>
+    </section>
 
 
 </main>
-
 
 
 <script>
@@ -465,316 +1008,145 @@
    FORMSPREE
    =====================================================
 
-   KEEP YOUR EXISTING WORKING FORMSPREE ENDPOINT HERE.
+   IMPORTANT:
+   Put your EXISTING working Formspree endpoint here.
+
+   Do not send the endpoint to me.
 */
 
 const FORMSPREE_ENDPOINT =
     "YOUR-FORMSPREE-ENDPOINT";
 
 
-
 /* =====================================================
-   PARTICIPANT INFORMATION
+   PARTICIPANT DATA
    ===================================================== */
 
 let participantData = {
 
     participant: "",
-
     ageGroup: "",
-
     sex: "",
-
     previousDiagnosis: ""
 
 };
 
 
-
 /* =====================================================
-   RESEARCH QUESTIONS
-   =====================================================
-
-   IMPORTANT:
-
-   The participant does NOT see the research axis.
-
-   Each question has:
-
-   axis:
-       protan / deutan / tritan
-
-   type:
-       circle
-       squares
-       match
-       grid
-
-   difficulty:
-       easy
-       medium
-       hard
-       veryHard
-
-   The order deliberately alternates between
-   different exercise types.
-
-*/
-
+   QUESTIONS
+   ===================================================== */
 
 const questions = [
 
-
-    /* =========================================
-       QUESTION 1
-       CIRCLE
-       PROTAN
-       ========================================= */
-
     {
         axis: "protan",
-
         type: "circle",
-
         difficulty: "easy",
-
         base: "#D66C68",
-
         different: "#C95F67"
-
     },
-
-
-    /* =========================================
-       QUESTION 2
-       MATCHING SQUARES
-       DEUTAN
-       ========================================= */
 
     {
         axis: "deutan",
-
         type: "match",
-
         difficulty: "easy",
-
         colours: [
             "#78A96F",
             "#78A96F",
             "#6FA26F",
             "#78A96F"
         ]
-
     },
-
-
-    /* =========================================
-       QUESTION 3
-       GRID
-       TRITAN
-       ========================================= */
 
     {
         axis: "tritan",
-
         type: "grid",
-
         difficulty: "easy",
-
         base: "#649CB7",
-
         different: "#7294B7"
-
     },
-
-
-    /* =========================================
-       QUESTION 4
-       SQUARES
-       DEUTAN
-       ========================================= */
 
     {
         axis: "deutan",
-
         type: "squares",
-
         difficulty: "medium",
-
         base: "#70A06C",
-
         different: "#64996D"
-
     },
-
-
-    /* =========================================
-       QUESTION 5
-       CIRCLE
-       PROTAN
-       ========================================= */
 
     {
         axis: "protan",
-
         type: "circle",
-
         difficulty: "medium",
-
         base: "#CF6663",
-
         different: "#C35D65"
-
     },
-
-
-    /* =========================================
-       QUESTION 6
-       MATCH
-       TRITAN
-       ========================================= */
 
     {
         axis: "tritan",
-
         type: "match",
-
         difficulty: "medium",
-
         colours: [
             "#6399B3",
             "#6A91B3",
             "#6399B3",
             "#6399B3"
         ]
-
     },
-
-
-    /* =========================================
-       QUESTION 7
-       GRID
-       DEUTAN
-       ========================================= */
 
     {
         axis: "deutan",
-
         type: "grid",
-
         difficulty: "hard",
-
         base: "#6A9868",
-
         different: "#62916B"
-
     },
-
-
-    /* =========================================
-       QUESTION 8
-       MATCH
-       PROTAN
-       ========================================= */
 
     {
         axis: "protan",
-
         type: "match",
-
         difficulty: "medium",
-
         colours: [
             "#C96462",
             "#BE5E64",
             "#C96462",
             "#C96462"
         ]
-
     },
-
-
-    /* =========================================
-       QUESTION 9
-       SQUARES
-       TRITAN
-       ========================================= */
 
     {
         axis: "tritan",
-
         type: "squares",
-
         difficulty: "hard",
-
         base: "#6591AB",
-
         different: "#6D89AA"
-
     },
-
-
-    /* =========================================
-       QUESTION 10
-       CIRCLE
-       PROTAN
-       ========================================= */
 
     {
         axis: "protan",
-
         type: "circle",
-
         difficulty: "hard",
-
         base: "#C76462",
-
         different: "#BD5E64"
-
     },
-
-
-    /* =========================================
-       QUESTION 11
-       GRID
-       DEUTAN
-       ========================================= */
 
     {
         axis: "deutan",
-
         type: "grid",
-
         difficulty: "hard",
-
         base: "#689268",
-
         different: "#618B69"
-
     },
-
-
-    /* =========================================
-       QUESTION 12
-       CIRCLE
-       TRITAN
-       ========================================= */
 
     {
         axis: "tritan",
-
         type: "circle",
-
         difficulty: "veryHard",
-
         base: "#668DA5",
-
         different: "#6D86A5"
-
     }
 
 ];
-
 
 
 /* =====================================================
@@ -791,34 +1163,22 @@ let deutanScore = 0;
 
 let tritanScore = 0;
 
-
-/*
-   Stores every response.
-
-   This is useful for your research analysis because
-   you can see which individual questions participants
-   found difficult.
-*/
-
 let questionResults = [];
 
 
-
 /* =====================================================
-   ANONYMOUS PARTICIPANT ID
+   PARTICIPANT ID
    ===================================================== */
 
 function generateParticipantID() {
 
     return "CVS-" +
-
         Math.random()
-            .toString(36)
-            .substring(2, 8)
-            .toUpperCase();
+        .toString(36)
+        .substring(2, 8)
+        .toUpperCase();
 
 }
-
 
 
 /* =====================================================
@@ -827,20 +1187,14 @@ function generateParticipantID() {
 
 function startTest() {
 
-
     const ageGroup =
         document.getElementById("ageGroup").value;
-
 
     const sex =
         document.getElementById("sex").value;
 
-
     const previousDiagnosis =
-        document.getElementById(
-            "previousDiagnosis"
-        ).value;
-
+        document.getElementById("previousDiagnosis").value;
 
 
     if (
@@ -850,7 +1204,7 @@ function startTest() {
     ) {
 
         alert(
-            "Please answer all questions before beginning."
+            "Please answer all three questions before beginning the study."
         );
 
         return;
@@ -858,22 +1212,17 @@ function startTest() {
     }
 
 
-
     participantData.ageGroup =
         ageGroup;
-
 
     participantData.sex =
         sex;
 
-
     participantData.previousDiagnosis =
         previousDiagnosis;
 
-
     participantData.participant =
         generateParticipantID();
-
 
 
     document.getElementById(
@@ -882,9 +1231,8 @@ function startTest() {
 
 
     document.getElementById(
-        "colour-test"
+        "test-wrapper"
     ).style.display = "block";
-
 
 
     document.getElementById(
@@ -893,11 +1241,15 @@ function startTest() {
         participantData.participant;
 
 
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
 
     showQuestion();
 
 }
-
 
 
 /* =====================================================
@@ -906,18 +1258,9 @@ function startTest() {
 
 function showQuestion() {
 
-
     const current =
         questions[question];
 
-
-
-    /*
-       Participant sees ONLY:
-       Question X of 12
-
-       They do not see the research axis.
-    */
 
     document.getElementById(
         "question-number"
@@ -928,15 +1271,8 @@ function showQuestion() {
         questions.length;
 
 
-
-    /*
-       Progress bar
-    */
-
     const progress =
-        ((question) /
-        questions.length) *
-        100;
+        (question / questions.length) * 100;
 
 
     document.getElementById(
@@ -944,22 +1280,6 @@ function showQuestion() {
     ).style.width =
         progress + "%";
 
-
-
-    /*
-       Change instructions depending on
-       exercise type.
-    */
-
-    updateInstructions(
-        current.type
-    );
-
-
-
-    /*
-       Clear previous exercise.
-    */
 
     const area =
         document.getElementById(
@@ -970,56 +1290,36 @@ function showQuestion() {
     area.innerHTML = "";
 
 
+    updateInstructions(
+        current.type
+    );
 
-    /*
-       Create the appropriate exercise.
-    */
 
-    if (
-        current.type === "circle"
-    ) {
+    if (current.type === "circle") {
 
-        createCircleExercise(
-            current
-        );
+        createCircleExercise(current);
 
     }
 
+    else if (current.type === "squares") {
 
-    if (
-        current.type === "squares"
-    ) {
-
-        createSquareExercise(
-            current
-        );
+        createSquareExercise(current);
 
     }
 
+    else if (current.type === "match") {
 
-    if (
-        current.type === "match"
-    ) {
-
-        createMatchExercise(
-            current
-        );
+        createMatchExercise(current);
 
     }
 
+    else if (current.type === "grid") {
 
-    if (
-        current.type === "grid"
-    ) {
-
-        createGridExercise(
-            current
-        );
+        createGridExercise(current);
 
     }
 
 }
-
 
 
 /* =====================================================
@@ -1028,12 +1328,10 @@ function showQuestion() {
 
 function updateInstructions(type) {
 
-
     const instruction =
         document.getElementById(
             "instruction"
         );
-
 
     const subInstruction =
         document.getElementById(
@@ -1041,12 +1339,10 @@ function updateInstructions(type) {
         );
 
 
-
     if (type === "circle") {
 
         instruction.innerText =
             "Which circle is different?";
-
 
         subInstruction.innerText =
             "Choose the circle that looks different from the others.";
@@ -1054,12 +1350,10 @@ function updateInstructions(type) {
     }
 
 
-
-    if (type === "squares") {
+    else if (type === "squares") {
 
         instruction.innerText =
             "Which square is different?";
-
 
         subInstruction.innerText =
             "Choose the square that looks different from the others.";
@@ -1067,12 +1361,10 @@ function updateInstructions(type) {
     }
 
 
-
-    if (type === "match") {
+    else if (type === "match") {
 
         instruction.innerText =
             "Which colour matches the target?";
-
 
         subInstruction.innerText =
             "Choose the option that looks most similar to the target.";
@@ -1080,12 +1372,10 @@ function updateInstructions(type) {
     }
 
 
-
-    if (type === "grid") {
+    else if (type === "grid") {
 
         instruction.innerText =
             "Which tile is different?";
-
 
         subInstruction.innerText =
             "Choose the tile that looks different from the others.";
@@ -1093,7 +1383,6 @@ function updateInstructions(type) {
     }
 
 }
-
 
 
 /* =====================================================
@@ -1109,13 +1398,11 @@ function randomPosition(number) {
 }
 
 
-
 /* =====================================================
-   CIRCLE EXERCISE
+   CIRCLE
    ===================================================== */
 
 function createCircleExercise(current) {
-
 
     const area =
         document.getElementById(
@@ -1126,19 +1413,12 @@ function createCircleExercise(current) {
     const container =
         document.createElement("div");
 
-
     container.className =
         "colour-grid";
 
 
-
     const correctPosition =
         randomPosition(6);
-
-
-    current.correctPosition =
-        correctPosition;
-
 
 
     for (
@@ -1147,38 +1427,26 @@ function createCircleExercise(current) {
         i++
     ) {
 
-
         const circle =
-            document.createElement(
-                "button"
-            );
+            document.createElement("button");
 
 
-        circle.type =
-            "button";
-
+        circle.type = "button";
 
         circle.className =
             "colour-circle-test";
 
 
-
-        if (
+        circle.style.backgroundColor =
             i === correctPosition
-        ) {
+                ? current.different
+                : current.base;
 
-            circle.style.backgroundColor =
-                current.different;
 
-        }
-
-        else {
-
-            circle.style.backgroundColor =
-                current.base;
-
-        }
-
+        circle.setAttribute(
+            "aria-label",
+            "Colour option " + (i + 1)
+        );
 
 
         circle.onclick =
@@ -1191,13 +1459,11 @@ function createCircleExercise(current) {
             };
 
 
-
         container.appendChild(
             circle
         );
 
     }
-
 
 
     area.appendChild(
@@ -1207,13 +1473,11 @@ function createCircleExercise(current) {
 }
 
 
-
 /* =====================================================
-   SQUARE EXERCISE
+   SQUARES
    ===================================================== */
 
 function createSquareExercise(current) {
-
 
     const area =
         document.getElementById(
@@ -1224,19 +1488,12 @@ function createSquareExercise(current) {
     const container =
         document.createElement("div");
 
-
     container.className =
         "colour-grid";
 
 
-
     const correctPosition =
         randomPosition(6);
-
-
-    current.correctPosition =
-        correctPosition;
-
 
 
     for (
@@ -1245,38 +1502,26 @@ function createSquareExercise(current) {
         i++
     ) {
 
-
         const square =
-            document.createElement(
-                "button"
-            );
+            document.createElement("button");
 
 
-        square.type =
-            "button";
-
+        square.type = "button";
 
         square.className =
             "colour-square-test";
 
 
-
-        if (
+        square.style.backgroundColor =
             i === correctPosition
-        ) {
+                ? current.different
+                : current.base;
 
-            square.style.backgroundColor =
-                current.different;
 
-        }
-
-        else {
-
-            square.style.backgroundColor =
-                current.base;
-
-        }
-
+        square.setAttribute(
+            "aria-label",
+            "Colour option " + (i + 1)
+        );
 
 
         square.onclick =
@@ -1289,13 +1534,11 @@ function createSquareExercise(current) {
             };
 
 
-
         container.appendChild(
             square
         );
 
     }
-
 
 
     area.appendChild(
@@ -1305,13 +1548,11 @@ function createSquareExercise(current) {
 }
 
 
-
 /* =====================================================
-   MATCHING EXERCISE
+   MATCH
    ===================================================== */
 
 function createMatchExercise(current) {
-
 
     const area =
         document.getElementById(
@@ -1319,131 +1560,77 @@ function createMatchExercise(current) {
         );
 
 
-    /*
-       Pick the correct answer position
-       randomly.
-    */
-
     const correctPosition =
         randomPosition(
             current.colours.length
         );
 
 
-    current.correctPosition =
-        correctPosition;
-
-
-
-    /*
-       Target colour
-    */
-
-    const target =
-        document.createElement(
-            "div"
-        );
-
-
-    target.className =
-        "target-colour";
-
-
-    target.style.backgroundColor =
-        current.colours[
-            correctPosition
-        ];
-
-
-
     const targetLabel =
-        document.createElement(
-            "p"
-        );
-
+        document.createElement("div");
 
     targetLabel.className =
         "target-label";
 
-
     targetLabel.innerText =
-        "TARGET";
+        "TARGET COLOUR";
 
+
+    const target =
+        document.createElement("div");
+
+    target.className =
+        "target-colour";
+
+    target.style.backgroundColor =
+        current.colours[correctPosition];
 
 
     area.appendChild(
         targetLabel
     );
 
-
     area.appendChild(
         target
     );
 
 
-
-    /*
-       Answer choices
-    */
-
     const answers =
-        document.createElement(
-            "div"
-        );
-
+        document.createElement("div");
 
     answers.className =
         "match-options";
 
-
-
-    /*
-       Shuffle the colours.
-
-       We keep track of which one is
-       actually the correct answer.
-    */
 
     let options =
         current.colours.map(
             function(colour, index) {
 
                 return {
-
-                    colour:
-                        colour,
-
+                    colour: colour,
                     correct:
-                        index ===
-                        correctPosition
-
+                        index === correctPosition
                 };
 
             }
         );
 
 
-
     options.sort(
-        () =>
-            Math.random() - 0.5
+        function() {
+            return Math.random() - 0.5;
+        }
     );
 
 
-
     options.forEach(
-        function(option) {
-
+        function(option, index) {
 
             const button =
-                document.createElement(
-                    "button"
-                );
+                document.createElement("button");
 
 
-            button.type =
-                "button";
-
+            button.type = "button";
 
             button.className =
                 "match-colour";
@@ -1452,6 +1639,11 @@ function createMatchExercise(current) {
             button.style.backgroundColor =
                 option.colour;
 
+
+            button.setAttribute(
+                "aria-label",
+                "Colour option " + (index + 1)
+            );
 
 
             button.onclick =
@@ -1464,14 +1656,12 @@ function createMatchExercise(current) {
                 };
 
 
-
             answers.appendChild(
                 button
             );
 
         }
     );
-
 
 
     area.appendChild(
@@ -1481,13 +1671,11 @@ function createMatchExercise(current) {
 }
 
 
-
 /* =====================================================
-   GRID EXERCISE
+   GRID
    ===================================================== */
 
 function createGridExercise(current) {
-
 
     const area =
         document.getElementById(
@@ -1496,23 +1684,14 @@ function createGridExercise(current) {
 
 
     const grid =
-        document.createElement(
-            "div"
-        );
-
+        document.createElement("div");
 
     grid.className =
         "small-colour-grid";
 
 
-
     const correctPosition =
         randomPosition(9);
-
-
-    current.correctPosition =
-        correctPosition;
-
 
 
     for (
@@ -1521,38 +1700,26 @@ function createGridExercise(current) {
         i++
     ) {
 
-
         const tile =
-            document.createElement(
-                "button"
-            );
+            document.createElement("button");
 
 
-        tile.type =
-            "button";
-
+        tile.type = "button";
 
         tile.className =
             "small-colour-tile";
 
 
-
-        if (
+        tile.style.backgroundColor =
             i === correctPosition
-        ) {
+                ? current.different
+                : current.base;
 
-            tile.style.backgroundColor =
-                current.different;
 
-        }
-
-        else {
-
-            tile.style.backgroundColor =
-                current.base;
-
-        }
-
+        tile.setAttribute(
+            "aria-label",
+            "Grid option " + (i + 1)
+        );
 
 
         tile.onclick =
@@ -1565,13 +1732,11 @@ function createGridExercise(current) {
             };
 
 
-
         grid.appendChild(
             tile
         );
 
     }
-
 
 
     area.appendChild(
@@ -1581,22 +1746,15 @@ function createGridExercise(current) {
 }
 
 
-
 /* =====================================================
    SUBMIT ANSWER
    ===================================================== */
 
 function submitAnswer(correct) {
 
-
     const current =
         questions[question];
 
-
-
-    /*
-       Record result.
-    */
 
     questionResults.push({
 
@@ -1618,61 +1776,27 @@ function submitAnswer(correct) {
     });
 
 
-
-    /*
-       Update overall score.
-    */
-
     if (correct) {
 
         overallScore++;
 
 
-
-        /*
-           Update hidden research
-           axis scores.
-        */
-
-        if (
-            current.axis ===
-            "protan"
-        ) {
-
+        if (current.axis === "protan") {
             protanScore++;
-
         }
 
-
-        if (
-            current.axis ===
-            "deutan"
-        ) {
-
+        else if (current.axis === "deutan") {
             deutanScore++;
-
         }
 
-
-        if (
-            current.axis ===
-            "tritan"
-        ) {
-
+        else if (current.axis === "tritan") {
             tritanScore++;
-
         }
 
     }
 
 
-
-    /*
-       Move to next question.
-    */
-
     question++;
-
 
 
     if (
@@ -1687,11 +1811,9 @@ function submitAnswer(correct) {
     }
 
 
-
     showQuestion();
 
 }
-
 
 
 /* =====================================================
@@ -1700,106 +1822,58 @@ function submitAnswer(correct) {
 
 async function finishTest() {
 
-
-    /*
-       Hide test.
-    */
-
     document.getElementById(
-        "colour-test"
+        "test-wrapper"
     ).style.display = "none";
 
 
-
-    /*
-       Show results.
-    */
-
     document.getElementById(
-        "results"
+        "results-wrapper"
     ).style.display = "block";
 
-
-
-    /*
-       Participant sees ONLY overall result.
-    */
 
     document.getElementById(
         "final-score"
     ).innerText =
-        overallScore +
-        "/12";
+        overallScore + "/12";
 
 
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 
-    /*
-       Complete progress bar.
-    */
-
-    document.getElementById(
-        "progress-bar-fill"
-    ).style.width =
-        "100%";
-
-
-
-    /*
-       Prepare research data.
-
-       These detailed scores are sent to
-       Formspree but are NOT displayed
-       to participants.
-    */
 
     const resultData = {
-
 
         participant:
             participantData.participant,
 
-
         ageGroup:
             participantData.ageGroup,
-
 
         sex:
             participantData.sex,
 
-
         previousDiagnosis:
             participantData.previousDiagnosis,
-
 
         overallScore:
             overallScore + "/12",
 
-
-        /*
-           Hidden research scores
-        */
-
         protanScore:
             protanScore + "/4",
-
 
         deutanScore:
             deutanScore + "/4",
 
-
         tritanScore:
             tritanScore + "/4",
-
-
-        /*
-           Individual question data
-        */
 
         trialResults:
             JSON.stringify(
                 questionResults
             ),
-
 
         date:
             new Date().toISOString()
@@ -1807,35 +1881,47 @@ async function finishTest() {
     };
 
 
+    const status =
+        document.getElementById(
+            "submission-status"
+        );
+
 
     /*
-       Send to Formspree.
+       If you have not yet inserted your
+       Formspree endpoint, don't try to
+       send the data.
     */
 
-    try {
+    if (
+        FORMSPREE_ENDPOINT ===
+        https://formspree.io/f/mgavrdvg
+    ) {
 
+        status.innerText =
+            "Test complete. Formspree has not been connected yet.";
+
+        return;
+
+    }
+
+
+    try {
 
         const response =
             await fetch(
                 FORMSPREE_ENDPOINT,
                 {
 
-                    method:
-                        "POST",
+                    method: "POST",
 
+                    headers: {
+                        "Content-Type":
+                            "application/json",
 
-                    headers:
-                        {
-
-                            "Content-Type":
-                                "application/json",
-
-
-                            "Accept":
-                                "application/json"
-
-                        },
-
+                        "Accept":
+                            "application/json"
+                    },
 
                     body:
                         JSON.stringify(
@@ -1846,52 +1932,35 @@ async function finishTest() {
             );
 
 
+        if (response.ok) {
 
-        if (
-            response.ok
-        ) {
-
-
-            document.getElementById(
-                "submission-status"
-            ).innerText =
+            status.innerText =
                 "Your anonymous result has been recorded successfully.";
-
 
         }
 
         else {
 
-
-            document.getElementById(
-                "submission-status"
-            ).innerText =
+            status.innerText =
                 "Your test is complete, but the result could not be recorded.";
 
-
         }
-
 
     }
 
     catch (error) {
 
-
         console.error(
-            "Submission error:",
+            "Formspree submission error:",
             error
         );
 
-
-        document.getElementById(
-            "submission-status"
-        ).innerText =
-            "Your test is complete, but the result could not be recorded.";
+        status.innerText =
+            "Your test is complete.";
 
     }
 
 }
-
 
 </script>
 
