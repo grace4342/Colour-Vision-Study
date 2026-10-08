@@ -1,178 +1,750 @@
-<!DOCTYPE html>
-<html lang="en">
+/* =========================================
+   GLOBAL
+   ========================================= */
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Colour Vision Study</title>
-
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-    <header>
-        <nav>
-            <div class="logo">Colour Vision Study</div>
-
-            <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#science">The Science</a>
-                <a href="#test">Take the Test</a>
-            </div>
-        </nav>
-    </header>
-
-
-    <main>
-
-        <section class="hero">
-
-            <div class="hero-text">
-
-                <p class="small-title">
-                    STUDENT SCIENCE RESEARCH
-                </p>
-
-                <h1>
-                    How well can you<br>
-                    <span>really see colour?</span>
-                </h1>
-
-                <p>
-                    We are investigating how people distinguish between
-                    colours and how colour vision varies between individuals.
-                </p>
-
-                <button onclick="startTest()">
-                    Take the Test →
-                </button>
-
-            </div>
-
-            <div class="colour-circle">
-                <div class="circle circle1"></div>
-                <div class="circle circle2"></div>
-                <div class="circle circle3"></div>
-            </div>
-
-        </section>
-
-
-        <section id="about" class="section">
-
-            <p class="small-title">
-                ABOUT THE STUDY
-            </p>
-
-            <h2>
-                Why are we studying colour vision?
-            </h2>
-
-            <p>
-                Colour vision allows us to distinguish between different
-                wavelengths of light. Some people have colour vision
-                deficiencies that make certain colours more difficult
-                to distinguish.
-            </p>
-
-            <p>
-                Our study investigates colour discrimination using a series
-                of increasingly difficult visual tests.
-            </p>
-
-        </section>
-
-
-        <section id="science" class="section cards">
-
-            <div class="card">
-
-                <h3>🧬 Genetics</h3>
-
-                <p>
-                    Some forms of colour vision deficiency are inherited
-                    through genes involved in the development of
-                    colour-sensitive photoreceptors.
-                </p>
-
-            </div>
-
-
-            <div class="card">
-
-                <h3>👁️ Colour Vision</h3>
-
-                <p>
-                    Different types of colour vision deficiency can affect
-                    how people distinguish particular ranges of colour.
-                </p>
-
-            </div>
-
-
-            <div class="card">
-
-                <h3>📊 Our Research</h3>
-
-                <p>
-                    We collect anonymous results and investigate patterns
-                    in colour discrimination performance.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <section id="test" class="test-section">
-
-            <p class="small-title">
-                READY?
-            </p>
-
-            <h2>
-                Take the colour vision test
-            </h2>
-
-            <p>
-                The test takes approximately 5 minutes.
-            </p>
-
-            <button onclick="startTest()">
-                Start Test
-            </button>
-
-            <p class="disclaimer">
-                This is a student research experiment and is not
-                a medical diagnosis.
-            </p>
-
-        </section>
-
-    </main>
-
-
-    <footer>
-
-        <p>
-            Colour Vision Study · Student Science Research
-        </p>
-
-    </footer>
-
-
-    <script>
-
-function startTest() {
-
-    window.location.href = "test.html";
-
+* {
+    box-sizing: border-box;
 }
 
-    </script>
+body {
+    margin: 0;
 
-</body>
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 
-</html>
+    background: #f4f7f8;
+
+    color: #17252b;
+}
+
+
+header {
+    background: #ffffff;
+
+    border-bottom:
+        1px solid #dfe6e8;
+
+    padding: 18px 7%;
+}
+
+
+nav {
+    max-width: 1200px;
+
+    margin: auto;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+
+.logo {
+    font-size: 14px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color: #174c55;
+}
+
+
+nav a {
+    color: #174c55;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+
+
+/* =========================================
+   MAIN
+   ========================================= */
+
+main {
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 70px 25px;
+}
+
+
+
+/* =========================================
+   TEXT
+   ========================================= */
+
+.eyebrow {
+    color: #24717b;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 12px;
+}
+
+
+h1 {
+    margin: 0 0 15px;
+
+    font-size: 42px;
+
+    line-height: 1.1;
+
+    color: #15343b;
+}
+
+
+.intro,
+.results-intro {
+    font-size: 17px;
+
+    line-height: 1.7;
+
+    color: #5d6b70;
+
+    max-width: 700px;
+}
+
+
+
+/* =========================================
+   RESEARCH CARD
+   ========================================= */
+
+.research-card {
+
+    background: #ffffff;
+
+    border:
+        1px solid #dfe6e8;
+
+    border-radius: 18px;
+
+    padding: 50px;
+
+    max-width: 750px;
+
+    margin: auto;
+
+    box-shadow:
+        0 10px 35px
+        rgba(20, 50, 60, 0.06);
+}
+
+
+
+/* =========================================
+   FORM
+   ========================================= */
+
+label {
+
+    display: block;
+
+    margin-top: 25px;
+
+    margin-bottom: 8px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #33484e;
+}
+
+
+select {
+
+    width: 100%;
+
+    padding: 14px;
+
+    border:
+        1px solid #cbd7da;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    font-size: 15px;
+
+    color: #26383d;
+}
+
+
+select:focus {
+
+    outline: none;
+
+    border-color: #24717b;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(36, 113, 123, 0.12);
+}
+
+
+
+/* =========================================
+   RESEARCH NOTE
+   ========================================= */
+
+.research-note {
+
+    margin-top: 30px;
+
+    padding: 20px;
+
+    background: #f1f7f8;
+
+    border-left:
+        4px solid #24717b;
+
+    border-radius: 8px;
+
+    color: #53676c;
+
+    line-height: 1.6;
+
+    font-size: 14px;
+}
+
+
+.research-note strong {
+
+    color: #174c55;
+
+    display: block;
+
+    margin-bottom: 5px;
+}
+
+
+.research-note p {
+
+    margin: 0;
+}
+
+
+
+/* =========================================
+   BUTTONS
+   ========================================= */
+
+.primary-button {
+
+    margin-top: 35px;
+
+    width: 100%;
+
+    padding: 16px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #174c55;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.primary-button:hover {
+
+    background: #236b75;
+
+    transform: translateY(-1px);
+}
+
+
+.secondary-button {
+
+    display: inline-block;
+
+    margin-top: 25px;
+
+    padding: 13px 22px;
+
+    border:
+        1px solid #cbd7da;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    color: #174c55;
+
+    background: white;
+
+    font-weight: 600;
+}
+
+
+
+/* =========================================
+   TEST
+   ========================================= */
+
+.test-page {
+
+    max-width: 900px;
+
+    margin: auto;
+}
+
+
+.test-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+
+.test-header h1 {
+
+    font-size: 30px;
+
+    margin: 0;
+}
+
+
+.participant-badge {
+
+    background: #eaf2f3;
+
+    color: #174c55;
+
+    padding: 9px 13px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.5px;
+}
+
+
+
+/* =========================================
+   PROGRESS
+   ========================================= */
+
+.progress-container {
+
+    margin-bottom: 30px;
+}
+
+
+.progress-bar {
+
+    width: 100%;
+
+    height: 7px;
+
+    background: #dce5e7;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+
+#progress-bar-fill {
+
+    height: 100%;
+
+    width: 0%;
+
+    background: #24717b;
+
+    transition:
+        width 0.25s ease;
+}
+
+
+
+/* =========================================
+   QUESTION CARD
+   ========================================= */
+
+.question-card {
+
+    background: white;
+
+    border:
+        1px solid #dfe6e8;
+
+    border-radius: 18px;
+
+    padding: 55px 35px;
+
+    text-align: center;
+
+    box-shadow:
+        0 10px 35px
+        rgba(20, 50, 60, 0.06);
+}
+
+
+.instruction {
+
+    font-size: 24px;
+
+    font-weight: 700;
+
+    margin:
+        0 0 8px;
+
+    color: #19363d;
+}
+
+
+.sub-instruction {
+
+    margin:
+        0 0 40px;
+
+    color: #748286;
+
+    font-size: 15px;
+}
+
+
+
+/* =========================================
+   COLOUR CIRCLES
+   ========================================= */
+
+.colour-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+
+    max-width: 540px;
+
+    margin:
+        0 auto 35px;
+}
+
+
+.colour-circle-test {
+
+    width: 145px;
+
+    height: 145px;
+
+    margin: auto;
+
+    border: none;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,0.08);
+}
+
+
+.colour-circle-test:hover {
+
+    transform: scale(1.05);
+
+    box-shadow:
+        0 8px 20px
+        rgba(0,0,0,0.14);
+}
+
+
+.colour-circle-test:focus {
+
+    outline:
+        4px solid
+        rgba(36,113,123,0.3);
+
+    outline-offset: 5px;
+}
+
+
+.test-warning {
+
+    margin: 0;
+
+    color: #879397;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+
+
+/* =========================================
+   RESULTS
+   ========================================= */
+
+.results-page {
+
+    max-width: 850px;
+
+    margin: auto;
+
+    background: white;
+
+    border:
+        1px solid #dfe6e8;
+
+    border-radius: 18px;
+
+    padding: 50px;
+
+    box-shadow:
+        0 10px 35px
+        rgba(20, 50, 60, 0.06);
+}
+
+
+.overall-result {
+
+    margin-top: 30px;
+
+    padding: 35px;
+
+    background: #f1f7f8;
+
+    border-radius: 14px;
+
+    text-align: center;
+}
+
+
+.result-label {
+
+    display: block;
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+    font-weight: 700;
+
+    color: #6b7c81;
+
+    margin-bottom: 10px;
+}
+
+
+.big-score {
+
+    display: block;
+
+    font-size: 55px;
+
+    font-weight: 800;
+
+    color: #174c55;
+}
+
+
+
+/* =========================================
+   AXIS RESULTS
+   ========================================= */
+
+.axis-results {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin-top: 20px;
+}
+
+
+.axis-card {
+
+    border:
+        1px solid #dfe6e8;
+
+    border-radius: 12px;
+
+    padding: 22px;
+
+    background: #ffffff;
+}
+
+
+.axis-name {
+
+    display: block;
+
+    font-size: 11px;
+
+    letter-spacing: 1.5px;
+
+    font-weight: 700;
+
+    color: #24717b;
+
+    margin-bottom: 8px;
+}
+
+
+.axis-card > span:nth-child(2) {
+
+    display: block;
+
+    font-size: 28px;
+
+    font-weight: 800;
+
+    color: #1c353b;
+
+    margin-bottom: 10px;
+}
+
+
+.axis-card p {
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    color: #758286;
+
+    margin: 0;
+}
+
+
+
+/* =========================================
+   SUBMISSION STATUS
+   ========================================= */
+
+.submission-status {
+
+    margin-top: 25px;
+
+    padding: 14px;
+
+    background: #f7f9fa;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+
+    color: #617176;
+}
+
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 700px) {
+
+    main {
+
+        padding:
+            40px 15px;
+    }
+
+
+    .research-card,
+    .results-page {
+
+        padding: 30px 22px;
+    }
+
+
+    h1 {
+
+        font-size: 32px;
+    }
+
+
+    .colour-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 18px;
+    }
+
+
+    .colour-circle-test {
+
+        width: 110px;
+
+        height: 110px;
+    }
+
+
+    .axis-results {
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .test-header {
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+
+    .participant-badge {
+
+        font-size: 10px;
+    }
+
+}
