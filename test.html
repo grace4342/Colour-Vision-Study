@@ -2013,7 +2013,7 @@ function calculateDetailedResults() {
 
         deutanScore:
             axes.deutan.correct +
-            "/" 
+            "/" +
             axes.deutan.total,
 
         deutanPercentage:
@@ -2162,10 +2162,15 @@ async function finishTest() {
 
 
     window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+    top: 0,
+    behavior: "smooth"
+});
 
+
+const detailedResults = calculateDetailedResults();
+
+
+const resultData = {
 
 const resultData = {
 
