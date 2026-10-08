@@ -1,750 +1,495 @@
-/* =========================================
-   GLOBAL
-   ========================================= */
+<!DOCTYPE html>
+<html lang="en">
 
-* {
-    box-sizing: border-box;
-}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-body {
-    margin: 0;
+    <title>Colour Vision Study</title>
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+    <link rel="stylesheet" href="style.css">
+</head>
 
-    background: #f4f7f8;
 
-    color: #17252b;
-}
+<body>
 
 
-header {
-    background: #ffffff;
+<!-- =========================
+     NAVIGATION
+     ========================= -->
 
-    border-bottom:
-        1px solid #dfe6e8;
+<header>
 
-    padding: 18px 7%;
-}
+    <nav>
 
+        <div class="logo">
+            <span class="logo-dot"></span>
+            COLOUR VISION STUDY
+        </div>
 
-nav {
-    max-width: 1200px;
+        <div class="nav-links">
 
-    margin: auto;
+            <a href="#about">
+                About
+            </a>
 
-    display: flex;
+            <a href="#research">
+                Research
+            </a>
 
-    justify-content: space-between;
+            <a href="test.html" class="nav-button">
+                Take the study
+            </a>
 
-    align-items: center;
-}
+        </div>
 
+    </nav>
 
-.logo {
-    font-size: 14px;
+</header>
 
-    font-weight: 700;
 
-    letter-spacing: 2px;
 
-    color: #174c55;
-}
+<!-- =========================
+     HERO
+     ========================= -->
 
+<main>
 
-nav a {
-    color: #174c55;
 
-    text-decoration: none;
+<section class="hero">
 
-    font-size: 14px;
 
-    font-weight: 600;
-}
+    <div class="hero-content">
 
+        <div class="study-label">
+            STUDENT SCIENCE RESEARCH
+        </div>
 
-nav a:hover {
-    text-decoration: underline;
-}
 
+        <h1>
+            The way we see
+            <span>colour</span>
+            isn't the same for everyone.
+        </h1>
 
 
-/* =========================================
-   MAIN
-   ========================================= */
+        <p class="hero-text">
 
-main {
-    max-width: 1100px;
+            An interactive research study investigating
+            differences in human colour discrimination
+            through a series of visual experiments.
 
-    margin: 0 auto;
+        </p>
 
-    padding: 70px 25px;
-}
 
+        <div class="hero-buttons">
 
+            <a href="test.html" class="start-button">
+                Begin the study
+                <span>→</span>
+            </a>
 
-/* =========================================
-   TEXT
-   ========================================= */
 
-.eyebrow {
-    color: #24717b;
+            <a href="#about" class="learn-button">
+                Learn about the research
+            </a>
 
-    font-size: 12px;
+        </div>
 
-    font-weight: 700;
 
-    letter-spacing: 2px;
+        <div class="study-meta">
 
-    margin-bottom: 12px;
-}
+            <div>
+                <strong>12</strong>
+                <span>visual trials</span>
+            </div>
 
+            <div class="meta-line"></div>
 
-h1 {
-    margin: 0 0 15px;
+            <div>
+                <strong>~5</strong>
+                <span>minutes</span>
+            </div>
 
-    font-size: 42px;
+            <div class="meta-line"></div>
 
-    line-height: 1.1;
+            <div>
+                <strong>Anonymous</strong>
+                <span>participation</span>
+            </div>
 
-    color: #15343b;
-}
+        </div>
 
+    </div>
 
-.intro,
-.results-intro {
-    font-size: 17px;
 
-    line-height: 1.7;
 
-    color: #5d6b70;
+    <!-- =========================
+         VISUAL
+         ========================= -->
 
-    max-width: 700px;
-}
+    <div class="hero-visual">
 
 
+        <div class="visual-glow"></div>
 
-/* =========================================
-   RESEARCH CARD
-   ========================================= */
 
-.research-card {
+        <div class="colour-orbit orbit-one">
+        </div>
 
-    background: #ffffff;
+        <div class="colour-orbit orbit-two">
+        </div>
 
-    border:
-        1px solid #dfe6e8;
 
-    border-radius: 18px;
+        <div class="colour-core">
 
-    padding: 50px;
+            <div class="core-circle circle-one"></div>
+            <div class="core-circle circle-two"></div>
+            <div class="core-circle circle-three"></div>
+            <div class="core-circle circle-four"></div>
+            <div class="core-circle circle-five"></div>
 
-    max-width: 750px;
+        </div>
 
-    margin: auto;
 
-    box-shadow:
-        0 10px 35px
-        rgba(20, 50, 60, 0.06);
-}
+        <div class="visual-label label-top">
+            COLOUR
+        </div>
 
+        <div class="visual-label label-bottom">
+            PERCEPTION
+        </div>
 
 
-/* =========================================
-   FORM
-   ========================================= */
+    </div>
 
-label {
+</section>
 
-    display: block;
 
-    margin-top: 25px;
 
-    margin-bottom: 8px;
+<!-- =========================
+     ABOUT
+     ========================= -->
 
-    font-size: 14px;
+<section id="about" class="section">
 
-    font-weight: 700;
 
-    color: #33484e;
-}
+    <div class="section-heading">
 
+        <div class="study-label">
+            THE STUDY
+        </div>
 
-select {
+        <h2>
+            What are we investigating?
+        </h2>
 
-    width: 100%;
+        <p>
+            Colour vision depends on the way light is detected
+            and processed by the visual system. This study
+            explores how accurately people can distinguish
+            between colours that are deliberately made similar.
+        </p>
 
-    padding: 14px;
+    </div>
 
-    border:
-        1px solid #cbd7da;
 
-    border-radius: 9px;
 
-    background: #ffffff;
+    <div class="info-grid">
 
-    font-size: 15px;
 
-    color: #26383d;
-}
+        <div class="info-card">
 
+            <div class="card-number">
+                01
+            </div>
 
-select:focus {
+            <h3>
+                Colour discrimination
+            </h3>
 
-    outline: none;
+            <p>
+                Participants complete a series of visual
+                tasks where they identify subtle differences
+                between colours.
+            </p>
 
-    border-color: #24717b;
+        </div>
 
-    box-shadow:
-        0 0 0 3px
-        rgba(36, 113, 123, 0.12);
-}
 
 
+        <div class="info-card">
 
-/* =========================================
-   RESEARCH NOTE
-   ========================================= */
+            <div class="card-number">
+                02
+            </div>
 
-.research-note {
+            <h3>
+                Human variation
+            </h3>
 
-    margin-top: 30px;
+            <p>
+                Results can be compared between participants
+                to investigate patterns in colour-discrimination
+                performance.
+            </p>
 
-    padding: 20px;
+        </div>
 
-    background: #f1f7f8;
 
-    border-left:
-        4px solid #24717b;
 
-    border-radius: 8px;
+        <div class="info-card">
 
-    color: #53676c;
+            <div class="card-number">
+                03
+            </div>
 
-    line-height: 1.6;
+            <h3>
+                Three colour axes
+            </h3>
 
-    font-size: 14px;
-}
+            <p>
+                The experiment contains stimuli designed around
+                three colour-confusion axes associated with
+                different cone responses.
+            </p>
 
+        </div>
 
-.research-note strong {
+    </div>
 
-    color: #174c55;
+</section>
 
-    display: block;
 
-    margin-bottom: 5px;
-}
 
+<!-- =========================
+     RESEARCH SECTION
+     ========================= -->
 
-.research-note p {
+<section id="research" class="research-section">
 
-    margin: 0;
-}
 
+    <div class="research-left">
 
+        <div class="study-label">
+            RESEARCH DESIGN
+        </div>
 
-/* =========================================
-   BUTTONS
-   ========================================= */
+        <h2>
+            Designed as an
+            <span>experiment.</span>
+        </h2>
 
-.primary-button {
+        <p>
 
-    margin-top: 35px;
+            The test does not simply ask whether someone can
+            identify colours. Different visual tasks are
+            mixed throughout the experiment so that participants
+            cannot predict which type of colour difference
+            will appear next.
 
-    width: 100%;
+        </p>
 
-    padding: 16px;
 
-    border: none;
+        <a href="test.html" class="research-button">
+            Take part →
+        </a>
 
-    border-radius: 9px;
+    </div>
 
-    background: #174c55;
 
-    color: white;
 
-    font-size: 15px;
+    <div class="research-right">
 
-    font-weight: 700;
 
-    cursor: pointer;
+        <div class="experiment-row">
 
-    transition: 0.2s;
-}
+            <span class="experiment-number">
+                01
+            </span>
 
+            <div>
+                <strong>
+                    Visual stimulus
+                </strong>
 
-.primary-button:hover {
+                <p>
+                    A controlled colour comparison is shown.
+                </p>
+            </div>
 
-    background: #236b75;
+        </div>
 
-    transform: translateY(-1px);
-}
 
 
-.secondary-button {
+        <div class="experiment-row">
 
-    display: inline-block;
+            <span class="experiment-number">
+                02
+            </span>
 
-    margin-top: 25px;
+            <div>
+                <strong>
+                    Participant response
+                </strong>
 
-    padding: 13px 22px;
+                <p>
+                    Select the colour or pattern that appears
+                    different.
+                </p>
 
-    border:
-        1px solid #cbd7da;
+            </div>
 
-    border-radius: 8px;
+        </div>
 
-    text-decoration: none;
 
-    color: #174c55;
 
-    background: white;
+        <div class="experiment-row">
 
-    font-weight: 600;
-}
+            <span class="experiment-number">
+                03
+            </span>
 
+            <div>
 
+                <strong>
+                    Anonymous result
+                </strong>
 
-/* =========================================
-   TEST
-   ========================================= */
+                <p>
+                    Your result is recorded using an anonymous
+                    participant ID.
+                </p>
 
-.test-page {
+            </div>
 
-    max-width: 900px;
+        </div>
 
-    margin: auto;
-}
 
+    </div>
 
-.test-header {
+</section>
 
-    display: flex;
 
-    justify-content: space-between;
 
-    align-items: center;
+<!-- =========================
+     BEFORE YOU BEGIN
+     ========================= -->
 
-    margin-bottom: 25px;
-}
+<section class="before-section">
 
 
-.test-header h1 {
+    <div class="before-box">
 
-    font-size: 30px;
 
-    margin: 0;
-}
+        <div>
 
+            <div class="study-label">
+                BEFORE YOU BEGIN
+            </div>
 
-.participant-badge {
+            <h2>
+                A few things to know.
+            </h2>
 
-    background: #eaf2f3;
+        </div>
 
-    color: #174c55;
 
-    padding: 9px 13px;
+        <div class="before-list">
 
-    border-radius: 20px;
 
-    font-size: 12px;
+            <div class="before-item">
 
-    font-weight: 700;
+                <span>✓</span>
 
-    letter-spacing: 0.5px;
-}
+                <p>
+                    The study takes approximately 5 minutes.
+                </p>
 
+            </div>
 
 
-/* =========================================
-   PROGRESS
-   ========================================= */
+            <div class="before-item">
 
-.progress-container {
+                <span>✓</span>
 
-    margin-bottom: 30px;
-}
+                <p>
+                    No name or email address is required.
+                </p>
 
+            </div>
 
-.progress-bar {
 
-    width: 100%;
+            <div class="before-item">
 
-    height: 7px;
+                <span>✓</span>
 
-    background: #dce5e7;
+                <p>
+                    Use normal screen brightness.
+                </p>
 
-    border-radius: 20px;
+            </div>
 
-    overflow: hidden;
-}
 
+            <div class="before-item">
 
-#progress-bar-fill {
+                <span>✓</span>
 
-    height: 100%;
+                <p>
+                    Turn off night mode or colour filters.
+                </p>
 
-    width: 0%;
+            </div>
 
-    background: #24717b;
+        </div>
 
-    transition:
-        width 0.25s ease;
-}
 
+    </div>
 
+</section>
 
-/* =========================================
-   QUESTION CARD
-   ========================================= */
 
-.question-card {
 
-    background: white;
+<!-- =========================
+     DISCLAIMER
+     ========================= -->
 
-    border:
-        1px solid #dfe6e8;
+<section class="disclaimer">
 
-    border-radius: 18px;
+    <p>
 
-    padding: 55px 35px;
+        <strong>Research notice:</strong>
+        This is an experimental student research study.
+        It is not a clinical colour vision test or medical
+        diagnosis. Screen settings and environmental
+        conditions may influence results.
 
-    text-align: center;
+    </p>
 
-    box-shadow:
-        0 10px 35px
-        rgba(20, 50, 60, 0.06);
-}
+</section>
 
 
-.instruction {
+</main>
 
-    font-size: 24px;
 
-    font-weight: 700;
 
-    margin:
-        0 0 8px;
+<!-- =========================
+     FOOTER
+     ========================= -->
 
-    color: #19363d;
-}
+<footer>
 
+    <div class="footer-logo">
+        COLOUR VISION STUDY
+    </div>
 
-.sub-instruction {
+    <p>
+        Student science research project
+    </p>
 
-    margin:
-        0 0 40px;
+</footer>
 
-    color: #748286;
 
-    font-size: 15px;
-}
+</body>
 
-
-
-/* =========================================
-   COLOUR CIRCLES
-   ========================================= */
-
-.colour-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 25px;
-
-    max-width: 540px;
-
-    margin:
-        0 auto 35px;
-}
-
-
-.colour-circle-test {
-
-    width: 145px;
-
-    height: 145px;
-
-    margin: auto;
-
-    border: none;
-
-    border-radius: 50%;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease;
-
-    box-shadow:
-        0 5px 15px
-        rgba(0,0,0,0.08);
-}
-
-
-.colour-circle-test:hover {
-
-    transform: scale(1.05);
-
-    box-shadow:
-        0 8px 20px
-        rgba(0,0,0,0.14);
-}
-
-
-.colour-circle-test:focus {
-
-    outline:
-        4px solid
-        rgba(36,113,123,0.3);
-
-    outline-offset: 5px;
-}
-
-
-.test-warning {
-
-    margin: 0;
-
-    color: #879397;
-
-    font-size: 12px;
-
-    line-height: 1.5;
-}
-
-
-
-/* =========================================
-   RESULTS
-   ========================================= */
-
-.results-page {
-
-    max-width: 850px;
-
-    margin: auto;
-
-    background: white;
-
-    border:
-        1px solid #dfe6e8;
-
-    border-radius: 18px;
-
-    padding: 50px;
-
-    box-shadow:
-        0 10px 35px
-        rgba(20, 50, 60, 0.06);
-}
-
-
-.overall-result {
-
-    margin-top: 30px;
-
-    padding: 35px;
-
-    background: #f1f7f8;
-
-    border-radius: 14px;
-
-    text-align: center;
-}
-
-
-.result-label {
-
-    display: block;
-
-    font-size: 12px;
-
-    letter-spacing: 2px;
-
-    font-weight: 700;
-
-    color: #6b7c81;
-
-    margin-bottom: 10px;
-}
-
-
-.big-score {
-
-    display: block;
-
-    font-size: 55px;
-
-    font-weight: 800;
-
-    color: #174c55;
-}
-
-
-
-/* =========================================
-   AXIS RESULTS
-   ========================================= */
-
-.axis-results {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 15px;
-
-    margin-top: 20px;
-}
-
-
-.axis-card {
-
-    border:
-        1px solid #dfe6e8;
-
-    border-radius: 12px;
-
-    padding: 22px;
-
-    background: #ffffff;
-}
-
-
-.axis-name {
-
-    display: block;
-
-    font-size: 11px;
-
-    letter-spacing: 1.5px;
-
-    font-weight: 700;
-
-    color: #24717b;
-
-    margin-bottom: 8px;
-}
-
-
-.axis-card > span:nth-child(2) {
-
-    display: block;
-
-    font-size: 28px;
-
-    font-weight: 800;
-
-    color: #1c353b;
-
-    margin-bottom: 10px;
-}
-
-
-.axis-card p {
-
-    font-size: 12px;
-
-    line-height: 1.5;
-
-    color: #758286;
-
-    margin: 0;
-}
-
-
-
-/* =========================================
-   SUBMISSION STATUS
-   ========================================= */
-
-.submission-status {
-
-    margin-top: 25px;
-
-    padding: 14px;
-
-    background: #f7f9fa;
-
-    border-radius: 8px;
-
-    font-size: 13px;
-
-    color: #617176;
-}
-
-
-
-/* =========================================
-   MOBILE
-   ========================================= */
-
-@media (max-width: 700px) {
-
-    main {
-
-        padding:
-            40px 15px;
-    }
-
-
-    .research-card,
-    .results-page {
-
-        padding: 30px 22px;
-    }
-
-
-    h1 {
-
-        font-size: 32px;
-    }
-
-
-    .colour-grid {
-
-        grid-template-columns:
-            repeat(2, 1fr);
-
-        gap: 18px;
-    }
-
-
-    .colour-circle-test {
-
-        width: 110px;
-
-        height: 110px;
-    }
-
-
-    .axis-results {
-
-        grid-template-columns:
-            1fr;
-    }
-
-
-    .test-header {
-
-        align-items: flex-start;
-
-        gap: 15px;
-    }
-
-
-    .participant-badge {
-
-        font-size: 10px;
-    }
-
-}
+</html>
