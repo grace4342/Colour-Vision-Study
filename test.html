@@ -23,7 +23,9 @@
 
 <section class="test-page">
 
-    <!-- PARTICIPANT INFORMATION -->
+    <!-- =========================
+         PARTICIPANT INFORMATION
+         ========================= -->
 
     <div id="participant-info">
 
@@ -32,8 +34,14 @@
         <h1>Before we begin</h1>
 
         <p>
-            This anonymous experiment investigates colour discrimination.
-            It is not a medical diagnosis.
+            This anonymous research experiment investigates
+            colour discrimination.
+        </p>
+
+        <p>
+            It is not a medical diagnosis. Different screens can
+            display colours differently, so results should be
+            interpreted as research data rather than a clinical test.
         </p>
 
         <label for="ageGroup">Age group</label>
@@ -48,7 +56,7 @@
         </select>
 
 
-        <label for="sex">Sex</label>
+        <label for="sex">Sex assigned at birth</label>
 
         <select id="sex">
             <option value="">Select an option</option>
@@ -79,7 +87,9 @@
     </div>
 
 
-    <!-- COLOUR TEST -->
+    <!-- =========================
+         COLOUR TEST
+         ========================= -->
 
     <div id="colour-test" style="display:none;">
 
@@ -92,12 +102,11 @@
         </h1>
 
         <p id="instruction">
-            Look carefully at the circles and select the one that looks different.
+            Look carefully at the circles and select the one
+            that looks different.
         </p>
 
-
         <div id="colour-grid" class="colour-grid"></div>
-
 
         <div class="answers">
 
@@ -110,15 +119,16 @@
 
         </div>
 
-
         <p id="progress">
-            Question 1 of 5
+            Question 1 of 18
         </p>
 
     </div>
 
 
-    <!-- RESULTS -->
+    <!-- =========================
+         RESULTS
+         ========================= -->
 
     <div id="results" style="display:none;">
 
@@ -129,12 +139,16 @@
         <h1 id="final-score"></h1>
 
         <p>
-            Your result has been recorded anonymously.
+            Thank you for taking part in the Colour Vision Study.
         </p>
 
         <p>
-            This experiment is a research screening task and
-            cannot diagnose colour vision deficiency.
+            Your anonymous response has been recorded.
+        </p>
+
+        <p>
+            This research screening task cannot diagnose
+            colour vision deficiency.
         </p>
 
     </div>
@@ -146,67 +160,226 @@
 
 <script>
 
-/* --------------------------------
-   POWER AUTOMATE URL
-   --------------------------------
+/* ==========================================
+   FORMSPREE
+   ========================================== */
 
-   REPLACE THE TEXT BETWEEN THE
-   QUOTATION MARKS WITH YOUR
-   POWER AUTOMATE HTTP URL.
-*/
-
-const POWER_AUTOMATE_URL = "https://formspree.io/f/mgavrdvg";
+const FORMSPREE_ENDPOINT =
+    "https://formspree.io/f/mgavrdvg";
 
 
-/* --------------------------------
-   TEST QUESTIONS
-   -------------------------------- */
+/* ==========================================
+   EXPERIMENT DESIGN
+
+   IMPORTANT:
+   These are research-oriented experimental
+   conditions, NOT clinical diagnostic plates.
+
+   We record the experimental axis privately
+   so the researcher can analyse error patterns.
+   Participants never see these labels.
+   ========================================== */
 
 const questions = [
 
+    /* --------------------------------------
+       RED-GREEN FAMILY
+       -------------------------------------- */
+
     {
-        base: "#3A9D8F",
-        different: "#3A9B8F",
-        position: 2
+        axis: "red-green",
+        condition: "RG-A",
+        difficulty: "easy",
+        base: "#4FA58F",
+        different: "#4FA18F"
     },
 
     {
-        base: "#3A9D8F",
-        different: "#3A998F",
-        position: 4
+        axis: "red-green",
+        condition: "RG-A",
+        difficulty: "medium",
+        base: "#4FA58F",
+        different: "#4F9C8F"
     },
 
     {
-        base: "#3A9D8F",
-        different: "#3A958F",
-        position: 1
+        axis: "red-green",
+        condition: "RG-A",
+        difficulty: "hard",
+        base: "#4FA58F",
+        different: "#4F978F"
+    },
+
+
+    {
+        axis: "red-green",
+        condition: "RG-B",
+        difficulty: "easy",
+        base: "#628F75",
+        different: "#668F75"
     },
 
     {
-        base: "#3A9D8F",
-        different: "#3A918F",
-        position: 5
+        axis: "red-green",
+        condition: "RG-B",
+        difficulty: "medium",
+        base: "#628F75",
+        different: "#6A8F75"
     },
 
     {
-        base: "#3A9D8F",
-        different: "#3A8D8F",
-        position: 3
+        axis: "red-green",
+        condition: "RG-B",
+        difficulty: "hard",
+        base: "#628F75",
+        different: "#6E8F75"
+    },
+
+
+    /* --------------------------------------
+       BLUE-YELLOW FAMILY
+       -------------------------------------- */
+
+    {
+        axis: "blue-yellow",
+        condition: "BY-A",
+        difficulty: "easy",
+        base: "#637FAD",
+        different: "#637FAB"
+    },
+
+    {
+        axis: "blue-yellow",
+        condition: "BY-A",
+        difficulty: "medium",
+        base: "#637FAD",
+        different: "#637FA8"
+    },
+
+    {
+        axis: "blue-yellow",
+        condition: "BY-A",
+        difficulty: "hard",
+        base: "#637FAD",
+        different: "#637FA5"
+    },
+
+
+    {
+        axis: "blue-yellow",
+        condition: "BY-B",
+        difficulty: "easy",
+        base: "#8B8A55",
+        different: "#8B8955"
+    },
+
+    {
+        axis: "blue-yellow",
+        condition: "BY-B",
+        difficulty: "medium",
+        base: "#8B8A55",
+        different: "#8B8755"
+    },
+
+    {
+        axis: "blue-yellow",
+        condition: "BY-B",
+        difficulty: "hard",
+        base: "#8B8A55",
+        different: "#8B8555"
+    },
+
+
+    /* --------------------------------------
+       MIXED CONTROL TRIALS
+       -------------------------------------- */
+
+    {
+        axis: "control",
+        condition: "CONTROL-A",
+        difficulty: "easy",
+        base: "#A36B62",
+        different: "#A36B62"
+    },
+
+    {
+        axis: "control",
+        condition: "CONTROL-B",
+        difficulty: "easy",
+        base: "#708A70",
+        different: "#708A70"
+    },
+
+    {
+        axis: "control",
+        condition: "CONTROL-C",
+        difficulty: "medium",
+        base: "#7D7194",
+        different: "#7D7194"
+    },
+
+    {
+        axis: "control",
+        condition: "CONTROL-D",
+        difficulty: "medium",
+        base: "#9A8062",
+        different: "#9A8062"
+    },
+
+    {
+        axis: "control",
+        condition: "CONTROL-E",
+        difficulty: "hard",
+        base: "#667F78",
+        different: "#667F78"
+    },
+
+    {
+        axis: "control",
+        condition: "CONTROL-F",
+        difficulty: "hard",
+        base: "#88726F",
+        different: "#88726F"
     }
 
 ];
 
 
+/* ==========================================
+   RANDOMISE QUESTION ORDER
+   ========================================== */
+
+const shuffledQuestions = [...questions].sort(
+    () => Math.random() - 0.5
+);
+
+
+/* ==========================================
+   TEST VARIABLES
+   ========================================== */
+
 let question = 0;
+
 let score = 0;
 
+let redGreenErrors = 0;
 
-/* --------------------------------
-   PARTICIPANT INFORMATION
-   -------------------------------- */
+let blueYellowErrors = 0;
+
+let controlErrors = 0;
+
+let easyErrors = 0;
+
+let mediumErrors = 0;
+
+let hardErrors = 0;
 
 let participantData = {};
 
+
+/* ==========================================
+   START TEST
+   ========================================== */
 
 function startTest() {
 
@@ -229,11 +402,19 @@ function startTest() {
     }
 
 
-    /* Create an anonymous participant ID */
+    /*
+       Anonymous research ID.
+
+       This does NOT contain the participant's name,
+       email or other identifying information.
+    */
 
     const participantID =
         "CVS-" +
-        Date.now().toString(36).toUpperCase();
+        Math.random()
+            .toString(36)
+            .substring(2, 10)
+            .toUpperCase();
 
 
     participantData = {
@@ -261,19 +442,25 @@ function startTest() {
 }
 
 
-/* --------------------------------
+/* ==========================================
    SHOW QUESTION
-   -------------------------------- */
+   ========================================== */
 
 function showQuestion() {
+
+    const current =
+        shuffledQuestions[question];
+
 
     document.getElementById("question-number").innerText =
         "Question " + (question + 1);
 
 
     document.getElementById("progress").innerText =
-        "Question " + (question + 1) +
-        " of " + questions.length;
+        "Question " +
+        (question + 1) +
+        " of " +
+        shuffledQuestions.length;
 
 
     const grid =
@@ -283,8 +470,17 @@ function showQuestion() {
     grid.innerHTML = "";
 
 
-    const current =
-        questions[question];
+    /*
+       Randomise the position of the different
+       circle every single question.
+    */
+
+    const differentPosition =
+        Math.floor(Math.random() * 6);
+
+
+    current.position =
+        differentPosition;
 
 
     for (let i = 0; i < 6; i++) {
@@ -297,7 +493,7 @@ function showQuestion() {
             "colour-circle-test";
 
 
-        if (i === current.position) {
+        if (i === differentPosition) {
 
             circle.style.backgroundColor =
                 current.different;
@@ -317,19 +513,67 @@ function showQuestion() {
 }
 
 
-/* --------------------------------
+/* ==========================================
    RECORD ANSWER
-   -------------------------------- */
+   ========================================== */
 
 function answer(choice) {
 
     const current =
-        questions[question];
+        shuffledQuestions[question];
 
 
-    if (choice === current.position) {
+    const correct =
+        choice === current.position;
+
+
+    if (correct) {
 
         score++;
+
+    } else {
+
+        /*
+           Record the error privately.
+           Participants never see these categories.
+        */
+
+        if (current.axis === "red-green") {
+
+            redGreenErrors++;
+
+        }
+
+        if (current.axis === "blue-yellow") {
+
+            blueYellowErrors++;
+
+        }
+
+        if (current.axis === "control") {
+
+            controlErrors++;
+
+        }
+
+
+        if (current.difficulty === "easy") {
+
+            easyErrors++;
+
+        }
+
+        if (current.difficulty === "medium") {
+
+            mediumErrors++;
+
+        }
+
+        if (current.difficulty === "hard") {
+
+            hardErrors++;
+
+        }
 
     }
 
@@ -337,7 +581,7 @@ function answer(choice) {
     question++;
 
 
-    if (question >= questions.length) {
+    if (question >= shuffledQuestions.length) {
 
         finishTest();
 
@@ -351,9 +595,10 @@ function answer(choice) {
 }
 
 
-/* --------------------------------
+/* ==========================================
    FINISH TEST
-   -------------------------------- */
+   ========================================== */
+
 async function finishTest() {
 
     document.getElementById("colour-test").style.display =
@@ -362,12 +607,19 @@ async function finishTest() {
     document.getElementById("results").style.display =
         "block";
 
+
     document.getElementById("final-score").innerText =
         "Your score: " +
         score +
         "/" +
-        questions.length;
+        shuffledQuestions.length;
 
+
+    /*
+       DATA SENT TO FORMSPREE
+
+       Participants do NOT see these fields.
+    */
 
     const resultData = {
 
@@ -383,45 +635,75 @@ async function finishTest() {
         previousDiagnosis:
             participantData.previousDiagnosis,
 
-        score:
-            score + "/" + questions.length,
+        totalScore:
+            score + "/" + shuffledQuestions.length,
+
+        redGreenErrors:
+            redGreenErrors,
+
+        blueYellowErrors:
+            blueYellowErrors,
+
+        controlErrors:
+            controlErrors,
+
+        easyErrors:
+            easyErrors,
+
+        mediumErrors:
+            mediumErrors,
+
+        hardErrors:
+            hardErrors,
+
+        completedQuestions:
+            shuffledQuestions.length,
 
         date:
-            new Date().toLocaleString()
+            new Date().toISOString()
 
     };
 
 
     try {
 
-        const response = await fetch(
-            FORMSPREE_ENDPOINT,
-            {
-                method: "POST",
+        const response =
+            await fetch(
+                FORMSPREE_ENDPOINT,
+                {
+                    method: "POST",
 
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
 
-                body: JSON.stringify(resultData)
-            }
-        );
+                    body:
+                        JSON.stringify(resultData)
+                }
+            );
 
 
         if (response.ok) {
 
-            console.log("Result sent successfully.");
+            console.log(
+                "Research result sent successfully."
+            );
 
         } else {
 
-            console.log("There was a problem sending the result.");
+            console.log(
+                "There was a problem sending the research result."
+            );
 
         }
 
     } catch (error) {
 
-        console.log("Error sending result:", error);
+        console.log(
+            "Error sending research result:",
+            error
+        );
 
     }
 
